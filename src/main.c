@@ -11,16 +11,14 @@ void ignore_signal(void)
 
 int main(int ac, char **av, char **env)
 {	
-	char* str;
+	char* input;
 	(void)ac;
 	(void)av;
 	(void)*env;
 	while (1)
 	{
 		ignore_signal();
-		str = readline("minishell$> ");
-		if (!str)
-			exit(0);
-	 	add_history(str);
+		input = readline(CYAN"minishell$ "BLANK);
+		minishellparser(input);
 	}
 }

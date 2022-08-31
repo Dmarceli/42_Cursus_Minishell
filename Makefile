@@ -4,29 +4,30 @@ RED			=	\033[0;31m
 RESET		=	\033[0m
 
 NAME			=	minishell
-
 CC				:=	gcc
-CFLAGS			:=  -lreadline -g -Wall -Wextra #-Werror 
+CFLAGS			:= -g -Wall -Wextra -Werror 
+LIBS			:=  -lreadline 
 
 PATH_SRC		:=	./src
 PATH_INCLUDES	:=	./incs
 PATH_BUILD		:= ./build
 PATH_OBJS		:= $(PATH_BUILD)/objs
 BIN				:=	./$(NAME)
-SRCS			:= $(PATH_SRC)/main.c \
+SRCS			= $(PATH_SRC)/main.c \
+					$(PATH_SRC)/msparser.c \
 					
 OBJ				:= $(subst .c,.o,$(subst $(PATH_SRC), $(PATH_OBJS), $(SRCS)))
 
 all:$(BIN)
 
 $(BIN): $(OBJ)
-		@$(CC) $(CFLAGS) $(INCS) -o $(@) $^ -I$(PATH_INCLUDES)
+		@$(CC) -o $(@) $^ -I$(PATH_INCLUDES) $(LIBS)
 		@printf "\033[44m[$(NAME) built!]\033[0m\n"
 
 
 
 $(PATH_OBJS)/%.o: $(PATH_SRC)/%.c | $(PATH_BUILD)
-		@$(CC) $(INCS) $(CFLAGS) -shared $(^) -o $@
+		@$(CC) $(CFLAGS) -c $(^) -o $@
 		@printf "\033[36m[Building ${@F}]\033[0m\n"
 
 
