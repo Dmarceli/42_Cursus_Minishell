@@ -1,6 +1,8 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+
+# include "../libft/libft.h"
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
@@ -17,8 +19,14 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <histedit.h>
+
 # define CYAN "\e[1;36m"
 # define BLANK "\e[0m"
+
+typedef struct s_data
+{
+	char	**env;
+}	t_data;
 
 
 int main(int ac, char **av, char **env);

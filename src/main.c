@@ -9,12 +9,36 @@ void ignore_signal(void)
     signal(SIGQUIT, SIG_IGN);
 }
 
-int main(int ac, char **av, char **env)
+char** initenv(char **envs)
+{
+	char **envcopy;
+	size_t i;
+	i = 0;
+
+	while (envs[i])
+		i++;
+	envcopy = (char **)malloc(sizeof(char *) * (i + 1));
+	i = 0;
+	while (envs[i])
+	{
+		envcopy[i] = ft_strdup(envs[i]);
+		i++;
+	}
+	envcopy[i] = 0;
+	return (envcopy);
+}
+
+int main(int ac, char **av, char **envs)
 {	
 	char* input;
+	t_data data;
+
 	(void)ac;
 	(void)av;
-	(void)*env;
+
+	data.env = initenv(envs);
+	printf("%s\n" , data.env[4]);
+
 	while (1)
 	{
 		ignore_signal();
