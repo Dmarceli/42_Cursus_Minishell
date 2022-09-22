@@ -1,13 +1,5 @@
 #include "../incs/minishell.h"
 
-void   (*SIGINT_handler)(int);
-
-void ignore_signal(void)
-{
-    SIGINT_handler = signal(SIGINT, SIG_IGN);
-    signal(SIGTSTP, SIG_IGN);
-    signal(SIGQUIT, SIG_IGN);
-}
 
 char** initenv(char **envs)
 {
@@ -37,8 +29,6 @@ int main(int ac, char **av, char **envs)
 	(void)av;
 
 	data.env = initenv(envs);
-	printf("%s\n" , data.env[4]);
-
 	while (1)
 	{
 		ignore_signal();
