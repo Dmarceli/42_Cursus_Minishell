@@ -23,6 +23,7 @@ BIN				:=	./$(NAME)
 SRCS			:= $(PATH_SRC)/main.c \
 					$(PATH_SRC)/msparser.c \
 					$(PATH_SRC)/signals.c \
+					$(PATH_SRC)/cmdhandler.c \
 
 
 OBJ				:= $(subst .c,.o,$(subst $(PATH_SRC), $(PATH_OBJS), $(SRCS)))

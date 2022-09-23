@@ -36,5 +36,7 @@ void	minishellparser(char* input);
 int		checkquotation(char *input);
 void	ignore_signal(void);
 void	ctrl_c_handler(int j);
+int		ms_pwd(void);
+int		is_builtin(char *value);
 
 #endif

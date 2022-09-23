@@ -51,8 +51,6 @@ void minishellparser(char* input)
 	char **cmds = NULL;
 	int i = -1;
 
-	if (!strcmp(input, "exit"))
-		exit(0);
 	if (input)
 		add_history(input);
 	if (!checkquotation(input))
@@ -63,7 +61,12 @@ void minishellparser(char* input)
 	else
 		cmds[0] = strdup(input);
 	while (cmds[++i])
+	{
 		cmds[i] = ft_strtrim(cmds[i], " ");
+		if (is_builtin(cmds[i]) != 1)
+			printf("not programmed yet!\n");
+			//execute_builtin(cmds[i]);
+	}
 		//handlespecialchars(cmds[i]);
 	i = -1;
 	while (cmds[++i])
