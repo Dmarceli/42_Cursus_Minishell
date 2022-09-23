@@ -8,6 +8,7 @@ CC				:=	gcc
 CFLAGS			:= -g -Wall -Wextra -Werror 
 LIBS			:=  -lreadline 
 
+
 INCS		=	-I .brew/opt/readline/include -I$(LIBFT_DIR)
 
 PATH_SRC		:=	./src
