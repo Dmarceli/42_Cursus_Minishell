@@ -27,48 +27,28 @@ int	checkquotation(char *input)
 		return (0);
 }
 
-// void handlespecialchars(char *com)
-// {	
-// 	t_data *data;
-// 	int i;
-// 	i = 0;
-
-// 	while (com[i])
-// 	{
-// 		// if (com[i] == '&')
-// 		// 	function to handle &
-// 		// if (com[i] == '<')
-// 		// 	function to handle <
-// 		// if (com[i] == '>')
-// 		// 	function to handle >
-// 		i++;
-// 	}
-
-// }
-
-void minishellparser(char* input)
+void minishellparser(char* input, t_data *data)
 {
-	char **cmds = NULL;
-	int i = -1;
+	char **cmds;
+	int i;
+
 
 	if (input)
 		add_history(input);
 	if (!checkquotation(input))
 		printf("%s%s\n", CYAN"minishell$ "BLANK, "Quotation incomplete");
-	cmds = malloc(sizeof *cmds);
+	cmds = malloc(sizeof(cmds));
 	if (ft_strchr(input, '|'))
 	 	cmds = ft_split(input,'|');
 	else
 		cmds[0] = strdup(input);
-	while (cmds[++i])
+	i = -1;
+	while (++i < (int)sizeof(**cmds))
 	{
 		cmds[i] = ft_strtrim(cmds[i], " ");
-		if (is_builtin(cmds[i]) != 1)
-			printf("not programmed yet!\n");
-			//execute_builtin(cmds[i]);
+		if (!is_builtin(cmds[i], data))
+			exec_cmd(data, cmds);
+			//continue;
 	}
-		//handlespecialchars(cmds[i]);
-	i = -1;
-	while (cmds[++i])
-		printf("|%s|\n",cmds[i]);
+	free (cmds);
 }

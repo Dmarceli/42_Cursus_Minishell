@@ -24,19 +24,35 @@
 # define BLANK "\e[0m"
 # define CLEAR_SCREEN "\033[?1049h\033[H"
 
+// # ifndef PATH_MAX
+// #  define PATH_MAX 2048 
+// # endif
+
 typedef struct s_data
 {
 	char	**env;
 	char 	**cmdtable;
+
 }	t_data;
 
 
 int		main(int ac, char **av, char **env);
-void	minishellparser(char* input);
+void	minishellparser(char* input, t_data *data);
+void	initenv(char **envs, t_data *data);
 int		checkquotation(char *input);
 void	ignore_signal(void);
 void	ctrl_c_handler(int j);
 int		ms_pwd(void);
-int		is_builtin(char *value);
+int		ms_cd(char *cmd);
+void	cdwithpath(char *cmd);
+int		is_builtin(char *value, t_data *data);
+int		execbuiltin(char *value, t_data *data);
+int		checkechoflag(char *cmd);
+int 	echo(char *cmd);
+int 	env(t_data *data);
+char 	*getpath(t_data *data);
+void 	exec_cmd(t_data *data, char **cmd);
+void	handle_cmd(t_data *data);
+
 
 #endif

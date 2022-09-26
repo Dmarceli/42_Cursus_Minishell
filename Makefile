@@ -24,6 +24,10 @@ SRCS			:= $(PATH_SRC)/main.c \
 					$(PATH_SRC)/msparser.c \
 					$(PATH_SRC)/signals.c \
 					$(PATH_SRC)/cmdhandler.c \
+					$(PATH_SRC)/echo.c \
+					$(PATH_SRC)/cd.c \
+					$(PATH_SRC)/env.c \
+					$(PATH_SRC)/exec.c \
 
 
 OBJ				:= $(subst .c,.o,$(subst $(PATH_SRC), $(PATH_OBJS), $(SRCS)))
