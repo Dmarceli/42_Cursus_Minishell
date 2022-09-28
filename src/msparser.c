@@ -47,8 +47,8 @@ void minishellparser(char* input, t_data *data)
 	{
 		cmds[i] = ft_strtrim(cmds[i], " ");
 		if (!is_builtin(cmds[i], data))
-			exec_cmd(data, cmds);
-			//continue;
+			continue;
+			//exec_cmd(data, cmds);
 	}
 	free (cmds);
 }

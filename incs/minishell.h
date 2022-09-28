@@ -51,8 +51,8 @@ int		checkechoflag(char *cmd);
 int 	echo(char *cmd);
 int 	env(t_data *data);
 char 	*getpath(t_data *data);
-void 	exec_cmd(t_data *data, char **cmd);
-void	handle_cmd(t_data *data);
 
+void	handle_cmd(t_data *data);
+int		executecmd(char *cmd, t_data *data);
 
 #endif

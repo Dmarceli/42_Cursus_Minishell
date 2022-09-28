@@ -21,5 +21,24 @@ int	is_builtin(char *value, t_data *data)
 	else if (!(ft_strncmp(value, "exit", 4)))
 		exit(1);
 	else
-		return(0);
+		return(executecmd(value, data));
+}
+
+int	executecmd(char *cmd, t_data *data)
+{
+	int		a;
+	char	*args[2];
+	(void)cmd;
+	a = fork();
+	if (!a)
+	{
+		args[0] = ft_strdup("/bin/ls");
+		args[1] = NULL;
+		//args[2] = ft_strdup(cmd);
+		if (execve("/bin/ls", args, data->env) == -1)
+			printf("error\n");
+		exit(0);
+	}
+	wait(0);
+	return(0);
 }
