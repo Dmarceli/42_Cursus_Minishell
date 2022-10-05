@@ -1,35 +1,31 @@
 #include "../incs/minishell.h"
 
-char *getpath(t_data *data)
+int	executecmd(char *cmd, t_data *data)
 {
-	int i;
-	char **path;
+	int		a;
+	int 	i;
+	char	**args;	
 
-	i = -1;
-	while (data->env[++i])
+	i = 0;
+	data->exec = (char**)malloc(sizeof(cmd));
+	args = (char**)malloc(sizeof(cmd));
+	if (ft_strchr(cmd, ' '))
+	 	data->exec = ft_split(cmd,' ');
+	else 
+		data->exec[0] = ft_strdup(cmd);
+	a = fork();
+	if (!a)
 	{
-		if (ft_strncmp("PATH=", data->env[i], 5) == 0)
-		{
-			path = ft_split(data->env[i], '=');
-			return(path[1]);
-		}
+		args[0] = ft_strjoin("/bin/", data->exec[0]);
+		while (data->exec[++i])
+			args[i] = ft_strdup(data->exec[i]);
+		args[i] = NULL;
+		if (execve(args[0], args, data->env) == -1)
+			printf("Error: %s not found\n", cmd);
+		exit(0);
 	}
+	wait(0);
+	free(data->exec);
+	free(args);
 	return(0);
-}
-
-void exec_cmd(t_data *data, char **cmd)
-{
-	char *path;
-	int pid;
-	int z;
-	(void)cmd;
-	char* const args[] = { "/bin/", NULL};
-
-	path = "bin/ls";//getenv("PATH");
-	pid = fork();
-	if (pid == 0)
-	{
-		z = execve(path, args, data->env);
-		printf("%d\n", z);
-	}
 }

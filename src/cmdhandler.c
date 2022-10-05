@@ -1,7 +1,5 @@
 #include "../incs/minishell.h"
 
-
-
 int	is_builtin(char *value, t_data *data)
 {
 	if (!value)
@@ -24,21 +22,3 @@ int	is_builtin(char *value, t_data *data)
 		return(executecmd(value, data));
 }
 
-int	executecmd(char *cmd, t_data *data)
-{
-	int		a;
-	char	*args[2];
-	(void)cmd;
-	a = fork();
-	if (!a)
-	{
-		args[0] = ft_strdup("/bin/ls");
-		args[1] = NULL;
-		//args[2] = ft_strdup(cmd);
-		if (execve("/bin/ls", args, data->env) == -1)
-			printf("error\n");
-		exit(0);
-	}
-	wait(0);
-	return(0);
-}

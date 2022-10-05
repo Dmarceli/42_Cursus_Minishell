@@ -7,7 +7,7 @@ int checkechoflag(char *cmd)
 	i = 0;
 	while (cmd[i])	
 	{
-		if (cmd[i] == '-' && cmd[i + 1] == 'n')
+		if (cmd[i] == '-' && cmd[i + 1] == 'n' && cmd[i + 2] == ' ')
 			return(1);
 		i++;
 	}

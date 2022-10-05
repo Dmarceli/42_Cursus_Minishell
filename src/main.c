@@ -30,6 +30,6 @@ int main(int ac, char **av, char **envs)
 		if(!input)
 			exit(0);
 		minishellparser(input, &data);
-			
 	}
+	free(data.env);
 }
