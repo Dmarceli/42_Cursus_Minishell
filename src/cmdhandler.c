@@ -11,7 +11,7 @@ int	is_builtin(char *value, t_data *data)
 	else if (!(ft_strncmp(value, "pwd", 3)))
 		return(ms_pwd());
 	else if (!(ft_strncmp(value, "export", 6)))
-		return (1);
+		return (ms_export(value, data));
 	else if (!(ft_strncmp(value, "unset",5)))
 		return (1);
 	else if (!(ft_strncmp(value, "env", 3)))
