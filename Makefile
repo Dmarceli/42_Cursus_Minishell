@@ -33,7 +33,6 @@ SRCS			:= $(PATH_SRC)/main.c \
 					$(PATH_SRC)/export.c \
 					$(PATH_SRC)/unset.c \
 
-
 OBJ				:= $(subst .c,.o,$(subst $(PATH_SRC), $(PATH_OBJS), $(SRCS)))
 
 all:$(BIN)
@@ -41,7 +40,6 @@ all:$(BIN)
 $(BIN): $(LIBFT) $(OBJ)
 		@$(CC) -o $(@) $^ -I$(PATH_INCLUDES) $(LIBFT) $(INCS) $(LIBS)
 		@printf "\033[44m[$(NAME) built!]\033[0m\n"
-
 
 $(PATH_OBJS)/%.o: $(PATH_SRC)/%.c | $(PATH_BUILD)
 		@$(CC) $(CFLAGS) -c $(^) -o $@ 
