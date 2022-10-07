@@ -21,6 +21,7 @@ int add_new_var(char *cmd, t_data *data)
 	free(tmp);
 	free(var);
 	return (1);
+	data->envlen++;
 }
 
 int ms_export(char *cmd , t_data *data)

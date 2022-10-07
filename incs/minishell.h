@@ -30,6 +30,7 @@ typedef struct s_data
 	char	**env;
 	char 	**cmdtable;
 	char 	**exec;
+	int		envlen;
 
 }	t_data;
 

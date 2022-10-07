@@ -12,6 +12,7 @@ void	initenv(char **envs, t_data *data)
 	while (envs[++i])
 		data->env[i] = ft_strdup(envs[i]);
 	data->env[i] = 0;
+	data->envlen = i;
 }
 
 

@@ -3,13 +3,13 @@ YELLOW		=	\033[0;33m
 RED			=	\033[0;31m
 RESET		=	\033[0m
 
-NAME			=	minishell
+NAME			:=	minishell
 CC				:=	gcc
 CFLAGS			:= -g -Wall -Wextra -Werror 
 LIBS			:=  -lreadline 
 
 
-INCS		=	-I .brew/opt/readline/include -I$(LIBFT_DIR)
+INCS			=	-I .brew/opt/readline/include -I$(LIBFT_DIR)
 
 PATH_SRC		:=	./src
 PATH_INCLUDES	:=	./incs
@@ -19,7 +19,9 @@ LIBFT		=	./libft/libft.a
 LIBFT_DIR	=	./libft
 
 PATH_OBJS		:= $(PATH_BUILD)/objs
+
 BIN				:=	./$(NAME)
+
 SRCS			:= $(PATH_SRC)/main.c \
 					$(PATH_SRC)/msparser.c \
 					$(PATH_SRC)/signals.c \
@@ -39,7 +41,6 @@ all:$(BIN)
 $(BIN): $(LIBFT) $(OBJ)
 		@$(CC) -o $(@) $^ -I$(PATH_INCLUDES) $(LIBFT) $(INCS) $(LIBS)
 		@printf "\033[44m[$(NAME) built!]\033[0m\n"
-
 
 
 $(PATH_OBJS)/%.o: $(PATH_SRC)/%.c | $(PATH_BUILD)

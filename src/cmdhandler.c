@@ -18,7 +18,7 @@ int	is_builtin(char *value, t_data *data)
 		return (env(data));
 	else if (!(ft_strncmp(value, "exit", 4)))
 		exit(1);
-	else if (!(ft_strncmp(value, "clear", 4)))
+	else if (!(ft_strncmp(value, "clear", 6)))
 		return(clear_screen());
 	else
 		return(executecmd(value, data));
