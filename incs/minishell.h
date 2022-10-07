@@ -24,9 +24,6 @@
 # define BLANK "\e[0m"
 # define CLEAR_SCREEN "\033[?1049h\033[H"
 
-// # ifndef PATH_MAX
-// #  define PATH_MAX 2048 
-// # endif
 
 typedef struct s_data
 {
@@ -43,7 +40,7 @@ void	initenv(char **envs, t_data *data);
 int		checkquotation(char *input);
 void	ignore_signal(void);
 void	ctrl_c_handler(int j);
-int		ms_pwd(void);
+int		ms_pwd(char *cmd);
 int		ms_cd(char *cmd);
 void	cdwithpath(char *cmd);
 int		is_builtin(char *value, t_data *data);
@@ -54,6 +51,9 @@ int 	env(t_data *data);
 char 	*getpath(t_data *data);
 void	handle_cmd(t_data *data);
 int 	ms_export(char *cmd , t_data *data);
+int		ms_unset(char *cmd, t_data *data);
 int		executecmd(char *cmd, t_data *data);
+int 	look_for_var_in_array(char *cmd, t_data *data);
+int 	clear_screen(void);
 
 #endif

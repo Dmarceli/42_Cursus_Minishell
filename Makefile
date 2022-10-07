@@ -29,6 +29,7 @@ SRCS			:= $(PATH_SRC)/main.c \
 					$(PATH_SRC)/env.c \
 					$(PATH_SRC)/exec.c \
 					$(PATH_SRC)/export.c \
+					$(PATH_SRC)/unset.c \
 
 
 OBJ				:= $(subst .c,.o,$(subst $(PATH_SRC), $(PATH_OBJS), $(SRCS)))

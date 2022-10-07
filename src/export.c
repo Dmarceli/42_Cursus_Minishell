@@ -8,7 +8,7 @@ int add_new_var(char *cmd, t_data *data)
 
 
 	i = 0;
-	(void)data;
+
 	var = (char**)malloc(sizeof(cmd));
 	var = ft_split(cmd,' ');
 	var[1] = ft_strtrim(var[1] ," ");
@@ -16,7 +16,8 @@ int add_new_var(char *cmd, t_data *data)
 		i++;
 	tmp = ft_strdup(data->env[--i]);
 	data->env[i] = ft_strdup(var[1]);
-	data->env[i++] = ft_strdup(tmp);
+	data->env[++i] = ft_strdup(tmp);
+	data->env[++i] = 0;
 	free(tmp);
 	free(var);
 	return (1);

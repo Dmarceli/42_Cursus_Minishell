@@ -1,16 +1,21 @@
 #include "../incs/minishell.h"
 
-int		ms_pwd(void)
+int		ms_pwd(char *cmd)
 {
 	char	cwd[1040];
-
-	if (getcwd(cwd, sizeof(cwd)))
+	if (!ft_strncmp(cmd, "pwd\0", 4))
 	{
-		ft_putendl_fd(cwd, 1);
-		return (1);
+		if (getcwd(cwd, sizeof(cwd)))
+		{
+			printf("%s\n", cwd);
+			return (1);
+		}
+		else
+			return (0);
 	}
 	else
-		return (0);
+		printf("pwd: too many arguments\n");
+	return(0);
 }
 
 void	cdwithpath(char *cmd)
