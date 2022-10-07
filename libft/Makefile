@@ -3,15 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+         #
+#    By: danielsequeira <danielsequeira@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/25 19:15:37 by dmarceli          #+#    #+#              #
-#    Updated: 2021/11/04 15:47:05 by dmarceli         ###   ########.fr        #
+#    Updated: 2022/10/07 03:40:38 by danielseque      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+
+UGreen="\[\033[4;32m\]"   
+
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror 
 LIB1	= ar -rcs
 LIB2	= ranlib
 RM		= /bin/rm -f
@@ -30,17 +33,20 @@ BONUS_S	= ft_lstsize.c ft_lstlast.c ft_lstadd_front.c ft_lstadd_back.c \
 BONUS_O	= $(BONUS_S:.c=.o)
 all:		$(NAME)
 $(NAME):	$(OBJS) $(INCLUDE)
-			$(LIB1) $(NAME) $(OBJS)
-			$(LIB2) $(NAME)
+			@$(LIB1) $(NAME) $(OBJS)
+			@$(LIB2) $(NAME)
 bonus:		$(NAME) $(BONUS_O)
 			$(LIB1) $(NAME) $(BONUS_O)
 			$(LIB2) $(NAME)
 .c.o:
-			$(CC) $(CFLAGS) -I$(INCLUDE) -c $< -o $(<:.c=.o)
+			@$(CC) $(CFLAGS) -I$(INCLUDE) -c $< -o $(<:.c=.o)
 clean:
 			$(RM) $(OBJS) $(BONUS_O)
 fclean:		clean
 			$(RM) $(NAME)
+
 re:			fclean all
+
 rebonus:	fclean bonus
+
 .PHONY:		all clean fclean re bonus rebonus

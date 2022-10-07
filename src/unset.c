@@ -22,6 +22,7 @@ int look_for_var_in_array(char *cmd, t_data *data)
 int ms_unset(char *cmd, t_data *data)
 {
 	char **var;
+
 	if(!ft_strncmp(cmd, "unset\0", 6))
 		printf("unset: not enough arguments\n");
 	else

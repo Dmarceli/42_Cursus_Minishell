@@ -52,6 +52,7 @@ $(PATH_BUILD):
 		@mkdir -p $(PATH_OBJS)
 
 $(LIBFT):
+	@printf "\033[4;32m[Building Libft]\033[0m\n"
 	@ $(MAKE) -C ./libft --silent
 
 clean:
