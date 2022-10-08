@@ -18,7 +18,7 @@ void	initenv(char **envs, t_data *data)
 
 int env(t_data *data)
 {
-	int i ;
+	int i;
 	i = -1;
 	while(data->env[++i])
 		printf("%s\n", data->env[i]);

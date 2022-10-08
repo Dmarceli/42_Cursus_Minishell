@@ -3,8 +3,8 @@
 int add_new_var(char *cmd, t_data *data)
 {
 	char **var;
-	int i;
 	char *tmp;
+	int i;
 
 	i = 0;
 	var = (char**)malloc(sizeof(cmd));
@@ -17,7 +17,6 @@ int add_new_var(char *cmd, t_data *data)
 		tmp = ft_strdup(data->env[--i]);
 		data->env[i] = ft_strdup(var[1]);
 		data->env[++i] = ft_strdup(tmp);
-		data->env[++i] = 0;
 		free(tmp);
 		free(var);
 		data->envlen++;

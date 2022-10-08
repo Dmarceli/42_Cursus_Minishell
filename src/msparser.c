@@ -36,12 +36,15 @@ void minishellparser(char* input, t_data *data)
 	if (input)
 		add_history(input);
 	if (!checkquotation(input))
-		printf("%s%s\n", CYAN"minishell$ "BLANK, "Quotation incomplete");
+	{
+		printf("%s\n", "Quotation incomplete");
+		return ;
+	}
 	cmds = malloc(sizeof(cmds));
 	if (ft_strchr(input, '|'))
 	 	cmds = ft_split(input,'|');
 	else
-		cmds[0] = strdup(input);
+		cmds[0] = ft_strdup(input);
 	i = -1;
 	while (++i < (int)sizeof(**cmds))
 	{
