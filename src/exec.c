@@ -5,9 +5,10 @@ char *handlepath(char *cmd, t_data *data)
 	char **possible_path;
 	char *test_cmd;
 	(void)data;
+	int i; 
+	i  = -1;
 
 	possible_path = ft_split(getenv("PATH"), ':');
-	int i  = -1;
 	while (possible_path[++i])
 	{
 		possible_path[i] = ft_strjoin(possible_path[i] , "/");
@@ -41,8 +42,14 @@ int	executecmd(char *cmd, t_data *data)
 	a = fork();
 	if (!a)
 	{
-		path = handlepath(data->exec[0], data);
-		args[0] = ft_strjoin(path, data->exec[0]);
+		if (!ft_strncmp("./" , data->exec[0], 2))
+		{
+			path = getenv("PWD");
+			path = ft_strjoin(path , "/");
+		}
+		else 
+			path = handlepath(data->exec[0], data);
+		args[0] = ft_strjoin(path, data->exec[0]);	
 		while (data->exec[++i])
 			args[i] = ft_strdup(data->exec[i]);
 		args[i] = NULL;
