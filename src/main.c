@@ -3,8 +3,8 @@
 
 int main(int ac, char **av, char **envs)
 {	
-	char* input;
 	t_data data;
+	char* input;
 	(void)ac;
 	(void)av;
 

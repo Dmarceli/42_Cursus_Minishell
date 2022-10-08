@@ -41,6 +41,7 @@ void minishellparser(char* input, t_data *data)
 		return ;
 	}
 	cmds = malloc(sizeof(cmds));
+	//function to handle operators
 	if (ft_strchr(input, '|'))
 	 	cmds = ft_split(input,'|');
 	else

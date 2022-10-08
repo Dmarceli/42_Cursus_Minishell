@@ -13,6 +13,7 @@ char *handlepath(char *cmd, t_data *data)
 	{
 		possible_path[i] = ft_strjoin(possible_path[i] , "/");
 		test_cmd = ft_strjoin(possible_path[i], cmd);
+		printf("%s\n", test_cmd);
 		if(access(test_cmd, F_OK) < 0)
 			free(test_cmd);
 		else
