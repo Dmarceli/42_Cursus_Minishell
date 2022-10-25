@@ -41,9 +41,10 @@ void minishellparser(char* input, t_data *data)
 		return ;
 	}
 	cmds = malloc(sizeof(cmds));
-	//function to handle operators
-	if (ft_strchr(input, '|'))
-	 	cmds = ft_split(input,'|');
+	if (ft_strchr(input, '$'))
+		cmds[0] = handle_dollar(input, data);	//function to handle operators
+	//if (ft_strchr(input, '|'))
+	 	//cmds = ft_split(input,'|');
 	else
 		cmds[0] = ft_strdup(input);
 	i = -1;
@@ -51,7 +52,7 @@ void minishellparser(char* input, t_data *data)
 	{
 		cmds[i] = ft_strtrim(cmds[i], " ");
 		if (!is_builtin(cmds[i], data))
-			continue;
+			return ;
 	}
 	free (cmds);
 }

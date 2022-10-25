@@ -12,7 +12,7 @@ int main(int ac, char **av, char **envs)
 	while (1)
 	{
 		ignore_signal();
-		input = readline(CYAN"minishell$ "BLANK);
+		input = readline(CYAN"minishell> "BLANK);
 		if(!input)
 			exit(0);
 		minishellparser(input, &data);

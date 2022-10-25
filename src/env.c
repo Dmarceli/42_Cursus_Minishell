@@ -7,12 +7,12 @@ void	initenv(char **envs, t_data *data)
 
 	while (envs[i])
 		i++;
-	data->env = (char **)malloc(sizeof(char *) * (i + 10));
+	data->envlen = i;
+	data->env = (char **)malloc(sizeof(char *) * (i + 1));
 	i = -1;
 	while (envs[++i])
 		data->env[i] = ft_strdup(envs[i]);
 	data->env[i] = 0;
-	data->envlen = i;
 }
 
 

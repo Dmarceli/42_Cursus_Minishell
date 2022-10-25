@@ -13,7 +13,6 @@ char *handlepath(char *cmd, t_data *data)
 	{
 		possible_path[i] = ft_strjoin(possible_path[i] , "/");
 		test_cmd = ft_strjoin(possible_path[i], cmd);
-		printf("%s\n", test_cmd);
 		if(access(test_cmd, F_OK) < 0)
 			free(test_cmd);
 		else
@@ -31,8 +30,8 @@ int	executecmd(char *cmd, t_data *data)
 	int		a;
 	int 	i;
 	char	**args;
-	char 	*path;
-
+	char 	*path = NULL;
+	char	cwd[1040];
 	i = 0;
 	data->exec = (char**)malloc(sizeof(cmd));
 	args = (char**)malloc(sizeof(cmd));
@@ -45,12 +44,15 @@ int	executecmd(char *cmd, t_data *data)
 	{
 		if (!ft_strncmp("./" , data->exec[0], 2))
 		{
-			path = getenv("PWD");
+			if (getcwd(cwd, sizeof(cwd)))
+				path = ft_strdup(cwd);
 			path = ft_strjoin(path , "/");
+			//path = getenv("PWD");	
 		}
 		else 
 			path = handlepath(data->exec[0], data);
-		args[0] = ft_strjoin(path, data->exec[0]);	
+		args[0] = ft_strjoin(path, data->exec[0]);
+		free(path);	
 		while (data->exec[++i])
 			args[i] = ft_strdup(data->exec[i]);
 		args[i] = NULL;
