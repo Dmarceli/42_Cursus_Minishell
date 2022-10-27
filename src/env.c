@@ -2,16 +2,19 @@
 
 void	initenv(char **envs, t_data *data)
 {
-	size_t i;
+	int i;
 	i = 0;
 
 	while (envs[i])
 		i++;
 	data->envlen = i;
 	data->env = (char **)malloc(sizeof(char *) * (i + 1));
-	i = -1;
-	while (envs[++i])
+	i = 0;
+	while (i < data->envlen)
+	{
 		data->env[i] = ft_strdup(envs[i]);
+		i++;
+	}
 	data->env[i] = 0;
 }
 
@@ -20,7 +23,7 @@ int env(t_data *data)
 {
 	int i;
 	i = -1;
-	while(data->env[++i])
+	while(++i < data->envlen)
 		printf("%s\n", data->env[i]);
 	return(1);
 }

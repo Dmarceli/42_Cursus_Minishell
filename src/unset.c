@@ -5,11 +5,10 @@ void	remove_var(t_data *data, int pos)
 	int i;
 
 	i = pos - 1;
-	while (i++ < data->envlen)
+	while (i++ < data->envlen - 1)
     	data->env[i] = data->env[i + 1];
 	data->env[i] = 0;
 }
-
 
 int look_for_var_in_array(char *cmd, t_data *data)
 {
@@ -42,5 +41,6 @@ int ms_unset(char *cmd, t_data *data)
 		else 
 			remove_var(data, pos);
 	}
+	data->envlen--;
 	return(1);
 }

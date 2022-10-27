@@ -7,7 +7,6 @@ int add_new_var(char *cmd, t_data *data)
 	int i;
 
 	i = 0;
-	var = (char**)malloc(sizeof(cmd));
 	var = ft_split(cmd,' ');
 	if(ft_strchr(var[1], '='))
 	{
@@ -19,8 +18,8 @@ int add_new_var(char *cmd, t_data *data)
 		data->env[++i] = ft_strdup(tmp);
 		free(tmp);
 		free(var);
-		data->envlen++;
 		return (1);
+		data->envlen++;
 	}
 	else 
 		return (0);
@@ -28,8 +27,14 @@ int add_new_var(char *cmd, t_data *data)
 
 int ms_export(char *cmd , t_data *data)
 {
+	int i;
+
+	i = -1;
 	if (!ft_strncmp(cmd, "export\0" , 8) || !ft_strncmp(cmd, "export \0" , 9))
-		env(data);
+	{
+		while(++i < data->envlen)
+			printf("declare -x %s\n", data->env[i]);
+	}//env(data);
 	else
 		return (add_new_var(cmd, data));
 	return (1);

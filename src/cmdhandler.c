@@ -17,7 +17,12 @@ int	is_builtin(char *value, t_data *data)
 	else if (!(ft_strncmp(value, "env", 3)))
 		return (env(data));
 	else if (!(ft_strncmp(value, "exit", 4)))
+	{
+		int i = -1;
+		while(++i < data->envlen)
+			free (data->env[i]);
 		exit(1);
+	}
 	else if (!(ft_strncmp(value, "clear", 6)))
 		return(clear_screen());
 	else

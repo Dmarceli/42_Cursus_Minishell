@@ -30,29 +30,19 @@ int	checkquotation(char *input)
 void minishellparser(char* input, t_data *data)
 {
 	char **cmds;
-	int i;
-
 
 	if (input)
 		add_history(input);
+	if (!ft_strlen(input))
+		return(rl_replace_line("", 0));
 	if (!checkquotation(input))
-	{
-		printf("%s\n", "Quotation incomplete");
-		return ;
-	}
+		return((void)printf("%s\n", "Quotation incomplete"));
 	cmds = malloc(sizeof(cmds));
 	if (ft_strchr(input, '$'))
 		cmds[0] = handle_dollar(input, data);	//function to handle operators
-	//if (ft_strchr(input, '|'))
-	 	//cmds = ft_split(input,'|');
 	else
 		cmds[0] = ft_strdup(input);
-	i = -1;
-	while (++i < (int)sizeof(**cmds))
-	{
-		cmds[i] = ft_strtrim(cmds[i], " ");
-		if (!is_builtin(cmds[i], data))
-			return ;
-	}
+	if (!is_builtin(cmds[0], data))
+		return ;
 	free (cmds);
 }
