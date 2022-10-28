@@ -6,7 +6,7 @@
 /*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:17:54 by dmarceli          #+#    #+#             */
-/*   Updated: 2021/10/29 16:21:15 by dmarceli         ###   ########.fr       */
+/*   Updated: 2022/10/28 15:28:54 by dmarceli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static char	*ft_strdup1(char *src, int j, int i)
 {
 	char	*ptr;
 
-	ptr = (char *) malloc((i - j + 1) * sizeof(char));
+	ptr = (char *)malloc((i - j + 1) * sizeof(char));
 	if (ptr == 0)
 		return (0);
 	ft_strcpy(ptr, src, j, i);
@@ -83,13 +83,3 @@ char	**ft_split(char const *s, char c)
 	return (split);
 }
 
-// int main(void)
-// {
-// 	char	**str;
-// 	int		i;
-
-// 	i = 0;
-// 	str = ft_split("ABC%DFG%HIJ%%J%%", '%');
-// 	while(str[i])
-// 		printf("%s\n", str[i++]);
-// }

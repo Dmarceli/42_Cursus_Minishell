@@ -30,6 +30,7 @@ int	checkquotation(char *input)
 void minishellparser(char* input, t_data *data)
 {
 	char **cmds;
+	//int 	i;
 
 	if (input)
 		add_history(input);
@@ -43,6 +44,11 @@ void minishellparser(char* input, t_data *data)
 	else
 		cmds[0] = ft_strdup(input);
 	if (!is_builtin(cmds[0], data))
+	{
+		free (cmds[0]);
+		free(cmds);
 		return ;
-	free (cmds);
+	}
+	free (cmds[0]);
+	free(cmds);
 }

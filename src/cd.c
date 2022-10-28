@@ -2,6 +2,7 @@
 
 int		ms_pwd(char *cmd)
 {
+	cmd = ft_strtrim(cmd, " ");
 	char	cwd[1040];
 	if (!ft_strncmp(cmd, "pwd\0", 4))
 	{
@@ -25,7 +26,8 @@ void	cdwithpath(char *cmd)
 	dir = ft_split(cmd, ' ');
 	if (chdir(dir[1]))
 		printf("ERROR!\n");
-	free (dir);	
+	free (dir);
+	return ;
 }
 
 
