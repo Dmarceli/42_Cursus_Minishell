@@ -6,6 +6,7 @@ int		ms_pwd(char *cmd)
 	char	cwd[1040];
 	if (!ft_strncmp(cmd, "pwd\0", 4))
 	{
+		free(cmd);
 		if (getcwd(cwd, sizeof(cwd)))
 		{
 			printf("%s\n", cwd);
@@ -16,6 +17,7 @@ int		ms_pwd(char *cmd)
 	}
 	else
 		printf("pwd: too many arguments\n");
+	free(cmd);
 	return(0);
 }
 
@@ -29,6 +31,8 @@ void freearray(char **arr)
 			free(arr[i]);
 	}
 	free(arr);
+	printf("frees = %d\n", i);
+	
 }
 
 void	cdwithpath(char *cmd)
@@ -48,10 +52,10 @@ int	ms_cd(char *cmd)
 	if (!ft_strncmp(cmd, "cd ~\0", 5)
 		|| !ft_strncmp(cmd, "cd \0", 4)
 		|| !ft_strncmp(cmd, "cd\0", 3))
-		{
-			chdir(getenv("HOME"));
-			return(1);
-		}
+	{
+		chdir(getenv("HOME"));
+		return(1);
+	}
 	else if (!ft_strncmp(cmd, "cd ", 3))
 	{
 		cdwithpath(cmd);

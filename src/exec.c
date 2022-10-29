@@ -5,9 +5,9 @@ char *handlepath(char *cmd, t_data *data)
 	char **possible_path;
 	char *test_cmd;
 	(void)data;
-	int i; 
-	i  = -1;
+	int i;
 
+	i  = -1;
 	possible_path = ft_split(getenv("PATH"), ':');
 	while (possible_path[++i])
 	{
@@ -16,11 +16,15 @@ char *handlepath(char *cmd, t_data *data)
 		if(access(test_cmd, F_OK) < 0)
 			free(test_cmd);
 		else
+		{
+			free(test_cmd);
 			return(possible_path[i]);
+		}
 	}
-	free(possible_path[i]);
-	free(possible_path);
-	return("ERROR");
+	printf("arrlen = %d\n", i);
+	printf("vim para aqui!!!11\n");
+	freearray(possible_path);
+	return(0);
 }
 
 int	executecmd(char *cmd, t_data *data)
@@ -33,7 +37,7 @@ int	executecmd(char *cmd, t_data *data)
 	 	data->exec = ft_split(cmd,' ');
 	else
 	{
-		data->exec = (char**)malloc(sizeof(data->exec) * 2);
+		data->exec = (char**)malloc(sizeof(char *) * 2);
 		data->exec[0] = ft_strdup(cmd);
 		data->exec[1] = NULL;
 	}
@@ -48,16 +52,18 @@ int	executecmd(char *cmd, t_data *data)
 		}
 		else 
 			path = handlepath(data->exec[0], data);
+		if (!path)
+		{
+			printf("Error: %s not found\n", cmd);
+			exit (0);
+		}
 		data->exec[0] = ft_strjoin(path, data->exec[0]);
-		free(path);
 		if (execve(data->exec[0], data->exec, data->env) == -1)
 			printf("Error: %s not found\n", cmd);
-		free(data->exec[0]);
-		free(data->exec);
+		freearray(data->exec);
 		exit(0);
 	}
-	free(data->exec[0]);
-	free(data->exec);
+	freearray(data->exec);
 	wait(0);
 	return(0);
 }

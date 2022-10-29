@@ -32,9 +32,9 @@ void minishellparser(char* input, t_data *data)
 	char **cmds;
 	//int 	i;
 
-	if (input)
+	if (ft_strlen(input))
 		add_history(input);
-	if (!ft_strlen(input))
+	else
 		return(rl_replace_line("", 0));
 	if (!checkquotation(input))
 		return((void)printf("%s\n", "Quotation incomplete"));

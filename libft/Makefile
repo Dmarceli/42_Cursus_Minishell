@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: danielsequeira <danielsequeira@student.    +#+  +:+       +#+         #
+#    By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/25 19:15:37 by dmarceli          #+#    #+#              #
-#    Updated: 2022/10/07 03:40:38 by danielseque      ###   ########.fr        #
+#    Updated: 2022/10/29 23:43:53 by dmarceli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	libft.a
 
 CC	=	gcc
-CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror -g
 RM	=	rm -f
 
 HEADER = ./

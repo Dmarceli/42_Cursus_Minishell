@@ -6,7 +6,7 @@
 /*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/24 18:26:45 by dmarceli          #+#    #+#             */
-/*   Updated: 2021/10/29 15:47:48 by dmarceli         ###   ########.fr       */
+/*   Updated: 2022/10/29 23:01:54 by dmarceli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,22 @@
 
 char	*ft_strdup(const char *s1)
 {
-	char	*str;
+	char	*newstring;
+	int		counter;
+	int		size;
+	char	*str_copy;
 
-	str = (char *)malloc(sizeof(*s1) * ft_strlen(s1) + 1);
-	if (!str)
+	size = ft_strlen(s1);
+	newstring = (char *)malloc((size + 1) * sizeof(char));
+	if (!(newstring))
 		return (0);
-	ft_strlcpy(str, s1, ft_strlen(s1) + 1);
-	str[ft_strlen(s1)] = '\0';
-	return (str);
+	counter = 0;
+	str_copy = newstring;
+	while (counter < size)
+	{
+		str_copy[counter] = s1[counter];
+		counter++;
+	}
+	str_copy[counter] = '\0';
+	return (newstring);
 }
