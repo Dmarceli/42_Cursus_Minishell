@@ -19,6 +19,18 @@ int		ms_pwd(char *cmd)
 	return(0);
 }
 
+void freearray(char **arr)
+{
+	int i;
+	i = -1;
+	while(arr[++i])
+	{
+		if(arr[i])
+			free(arr[i]);
+	}
+	free(arr);
+}
+
 void	cdwithpath(char *cmd)
 {
 	char **dir;
@@ -26,7 +38,7 @@ void	cdwithpath(char *cmd)
 	dir = ft_split(cmd, ' ');
 	if (chdir(dir[1]))
 		printf("ERROR!\n");
-	free (dir);
+	freearray(dir);
 	return ;
 }
 

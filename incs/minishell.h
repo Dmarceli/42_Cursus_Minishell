@@ -56,5 +56,6 @@ int		executecmd(char *cmd, t_data *data);
 int 	look_for_var_in_array(char *cmd, t_data *data);
 int 	clear_screen(void);
 char 	*handle_dollar(char *cmd, t_data *data);
+void 	freearray(char **arr);
 
 #endif

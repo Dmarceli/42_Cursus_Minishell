@@ -28,6 +28,9 @@ int echo(char *cmd)
 		while(value[++i])
 			printf("%s ", value[i]);
 		printf(" ");
+		i = -1;
+		while(value[++i])
+			free(value[i]);
 		free(value);
 		return(1);
 	}
@@ -37,11 +40,17 @@ int echo(char *cmd)
 		while (value[++i])
 			printf("%s ", value[i]);
 		printf("\n");
+		i = -1;
+		while(value[++i])
+			free(value[i]);
 		free(value);
 		return(1);
 	}
 	else
 	{
+		i = -1;
+		while(value[++i])
+			free(value[i]);
 		free(value);
 		return(0);
 	}
