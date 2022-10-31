@@ -31,8 +31,7 @@ void freearray(char **arr)
 			free(arr[i]);
 	}
 	free(arr);
-	printf("frees = %d\n", i);
-	
+	arr = NULL;
 }
 
 void	cdwithpath(char *cmd)

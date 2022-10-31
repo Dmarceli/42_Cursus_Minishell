@@ -4,6 +4,7 @@ char *handlepath(char *cmd, t_data *data)
 {
 	char **possible_path;
 	char *test_cmd;
+	char *tmp;
 	(void)data;
 	int i;
 
@@ -11,18 +12,19 @@ char *handlepath(char *cmd, t_data *data)
 	possible_path = ft_split(getenv("PATH"), ':');
 	while (possible_path[++i])
 	{
-		possible_path[i] = ft_strjoin(possible_path[i] , "/");
-		test_cmd = ft_strjoin(possible_path[i], cmd);
+		tmp = ft_strjoin(possible_path[i] , "/");
+		test_cmd = ft_strjoin(tmp, cmd);
 		if(access(test_cmd, F_OK) < 0)
+		{
 			free(test_cmd);
+			free(tmp);
+		}
 		else
 		{
 			free(test_cmd);
-			return(possible_path[i]);
+			return(tmp);
 		}
 	}
-	printf("arrlen = %d\n", i);
-	printf("vim para aqui!!!11\n");
 	freearray(possible_path);
 	return(0);
 }
