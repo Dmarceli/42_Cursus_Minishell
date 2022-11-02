@@ -22,6 +22,7 @@ int echo(char *cmd)
 
 	is_n = checkechoflag(cmd);
 	value = ft_split(cmd,' ');
+	free(cmd);
 	if (is_n)
 	{
 		i = 1;

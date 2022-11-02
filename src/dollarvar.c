@@ -2,18 +2,22 @@
 
 char	*join_strs(char **strs)
 {
-	int i;
-	int j;
+	int		i;
+	char	**tmp;
+	char	*ret;
+	char	*tj;
+	
+	tmp = malloc(sizeof(char *) * big_len(strs));
 	i = -1;
-	j = -1;
 	while (strs[++i])
-		strs[i] = ft_strjoin(strs[i], " ");
-	i = -1;
-	while (strs[++i])
-		strs[i + 1] = ft_strjoin(strs[i], strs[i + 1]);
-	while (strs[++j] && j != (i - 1))
-		free(strs[j]);
-	return(strs[i - 1]);
+	{
+		tj = ft_strjoin(" ", strs[i + 1]);
+		tmp[i] = ft_strjoin(strs[i], tj);
+		free(tj);
+	}
+	ret = strdup(tmp[i - 2]);
+	free_split(tmp);
+	return(ret);
 }
 
 int findvar(char *cmd, t_data *data)
@@ -51,12 +55,26 @@ char *handle_dollar(char *cmd, t_data *data)
 	if (k)
 	{
 		value = ft_substr(ft_strchr(data->env[k], '='), 1, ft_strlen(data->env[k]));
+		free(j[i]);
 		j[i] = ft_strdup(value);
 		free(value);
 		value = join_strs(j);
-		free(j);
+		free_split(j);
 		return (value);
 	}
 	else
+	{
+		free_split(j);
 		return(0);
+	}
+}
+
+void	free_split(char **sp)
+{
+	int	fr;
+
+	fr = -1;
+	while(sp[++fr] != NULL)
+		free(sp[fr]);
+	free(sp);
 }

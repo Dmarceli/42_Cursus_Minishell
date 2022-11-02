@@ -41,14 +41,19 @@ void minishellparser(char* input, t_data *data)
 	cmds = malloc(sizeof(cmds));
 	if (ft_strchr(input, '$'))
 		cmds[0] = handle_dollar(input, data);	//function to handle operators
+	else if (ft_strchr(input, '|'))
+	{
+		cmds = ft_split(input, '|');
+		handle_pipes(cmds, data);
+		free(cmds);
+		return ;
+	}
 	else
 		cmds[0] = ft_strdup(input);
 	if (!is_builtin(cmds[0], data))
 	{
-		free (cmds[0]);
 		free(cmds);
 		return ;
 	}
-	free (cmds[0]);
 	free(cmds);
 }
