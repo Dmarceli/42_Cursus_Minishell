@@ -21,8 +21,10 @@ int	checkquotation(char *input)
 			onequote = 0;
 		i++;
 	}
-	if (onequote + doublequote == 0)
+	if (onequote && !doublequote)
 		return (1);
+	if (!onequote && doublequote)
+		return (2);
 	else
 		return (0);
 }
@@ -30,17 +32,16 @@ int	checkquotation(char *input)
 void minishellparser(char* input, t_data *data)
 {
 	char **cmds;
-	//int 	i;
 
 	if (ft_strlen(input))
 		add_history(input);
 	else
 		return(rl_replace_line("", 0));
-	if (!checkquotation(input))
-		return((void)printf("%s\n", "Quotation incomplete"));
+	if (checkquotation(input))
+		return((void)printf("Quotation incomplete\n"));
 	cmds = malloc(sizeof(cmds));
 	if (ft_strchr(input, '$'))
-		cmds[0] = handle_dollar(input, data);	//function to handle operators
+		cmds[0] = handle_dollar(input, data);
 	else if (ft_strchr(input, '|'))
 	{
 		cmds = ft_split(input, '|');
@@ -52,6 +53,7 @@ void minishellparser(char* input, t_data *data)
 		cmds[0] = ft_strdup(input);
 	if (!is_builtin(cmds[0], data))
 	{
+		free(cmds[0]);
 		free(cmds);
 		return ;
 	}

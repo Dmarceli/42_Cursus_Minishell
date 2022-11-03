@@ -15,7 +15,7 @@ char	*join_strs(char **strs)
 		tmp[i] = ft_strjoin(strs[i], tj);
 		free(tj);
 	}
-	ret = strdup(tmp[i - 2]);
+	ret = ft_strdup(tmp[i - 2]);
 	free_split(tmp);
 	return(ret);
 }
