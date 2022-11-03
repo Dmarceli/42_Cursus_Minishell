@@ -27,7 +27,11 @@ int findvar(char *cmd, t_data *data)
 	char *var;
 
 	i = -1;
-	var = ft_substr(cmd, 1, (ft_strlen(cmd)));
+	
+	if(ft_strchr(cmd, '\"'))
+		var = ft_substr(cmd, 2, (ft_strlen(cmd) - 3));
+	else
+		var = ft_substr(cmd, 1, (ft_strlen(cmd)));
 	while(data->env[++i])
 	{
 		if(!ft_strncmp(var, data->env[i], ft_strlen(var)))
@@ -44,6 +48,7 @@ char *handle_dollar(char *cmd, t_data *data)
 {
 	char **j;
 	char *value;
+	char *tmp;
 	int i;
 	int k;
 
@@ -51,6 +56,16 @@ char *handle_dollar(char *cmd, t_data *data)
 	j = ft_split(cmd, ' ');
 	while (ft_strchr(j[i], '$') == NULL)
 		i++;
+	if(ft_strchr(j[i], '\''))
+	{
+		tmp = ft_strtrim(j[i], "\'" );
+		free(j[i]);
+		j[i] = ft_strtrim(tmp, "\'" );
+		free(tmp);
+		value = join_strs(j);
+		free_split(j);
+		return (value);
+	}
 	k = findvar(j[i], data);
 	if (k)
 	{
