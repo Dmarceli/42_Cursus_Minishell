@@ -44,9 +44,10 @@ void minishellparser(char* input, t_data *data)
 		cmds[0] = handle_dollar(input, data);
 	else if (ft_strchr(input, '|'))
 	{
+		free(cmds);
 		cmds = ft_split(input, '|');
 		handle_pipes(cmds, data);
-		free(cmds);
+		free_split(cmds);
 		return ;
 	}
 	else
