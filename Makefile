@@ -34,7 +34,9 @@ SRCS			:= $(PATH_SRC)/main.c \
 					$(PATH_SRC)/export.c \
 					$(PATH_SRC)/unset.c \
 					$(PATH_SRC)/pipes.c \
-					$(PATH_SRC)/redirect.c
+					$(PATH_SRC)/redirect.c \
+					$(PATH_SRC)/quotes.c \
+					
 
 OBJ				:= $(subst .c,.o,$(subst $(PATH_SRC), $(PATH_OBJS), $(SRCS)))
 

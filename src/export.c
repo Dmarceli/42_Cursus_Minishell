@@ -18,8 +18,8 @@ int add_new_var(char *cmd, t_data *data)
 		data->env[++i] = ft_strdup(tmp);
 		free(tmp);
 		free(var);
-		return (1);
 		data->envlen++;
+		return (1);
 	}
 	else 
 		return (0);
@@ -34,7 +34,7 @@ int ms_export(char *cmd , t_data *data)
 	{
 		while(++i < data->envlen)
 			printf("declare -x %s\n", data->env[i]);
-	}//env(data);
+	}
 	else
 		return (add_new_var(cmd, data));
 	return (1);

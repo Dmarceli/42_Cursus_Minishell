@@ -1,34 +1,5 @@
 #include "../incs/minishell.h"
 
-int	checkquotation(char *input)
-{
-	int	i;
-	int	onequote;
-	int	doublequote;
-
-	i = 0;
-	onequote = 0;
-	doublequote = 0;
-	while (input[i])
-	{
-		if (input[i] == '\"' && doublequote == 0 && onequote == 0)
-			doublequote = 1;
-		else if (input[i] == '\"' && doublequote == 1 && onequote == 0)
-			doublequote = 0;
-		else if (input[i] == '\'' && onequote == 0 && doublequote == 0)
-			onequote = 1;
-		else if (input[i] == '\'' && onequote == 1 && doublequote == 0)
-			onequote = 0;
-		i++;
-	}
-	if (onequote && !doublequote)
-		return (1);
-	if (!onequote && doublequote)
-		return (2);
-	else
-		return (0);
-}
-
 void minishellparser(char* input, t_data *data)
 {
 	char **cmds;
@@ -49,6 +20,12 @@ void minishellparser(char* input, t_data *data)
 		handle_pipes(cmds, data);
 		free_split(cmds);
 		return ;
+	}
+	else if (ft_strchr(input, '\"') || ft_strchr(input, '\''))
+	{
+		printf("ola\n");
+		cmds[0] = removequotes(input);
+
 	}
 	else
 		cmds[0] = ft_strdup(input);

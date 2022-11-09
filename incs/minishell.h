@@ -60,14 +60,15 @@ int 	look_for_var_in_array(char *cmd, t_data *data);
 int 	clear_screen(void);
 char 	*handle_dollar(char *cmd, t_data *data);
 void 	freearray(char **arr);
-int	big_len(char **str);
+int		big_len(char **str);
 void	free_split(char **sp);
 void	handle_pipes(char **cmds, t_data *data);
-void multiple_child(char **cmds, t_data *data, int counter);
-int	check_redirect(char *cmd);
-int	overwrite(char *cmd);
-int	ft_index(char *str, char ch);
+void	 multiple_child(char **cmds, t_data *data, int counter);
+int		check_redirect(char *cmd);
+int		overwrite(char *cmd);
+int		ft_index(char *str, char ch);
 char	*return_trim(char *bush);
-int	special_quote(char *input, int index);
+int		special_quote(char *input, int index);
+char 	*removequotes(char *cmd);
 
 #endif
