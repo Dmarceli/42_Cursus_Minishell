@@ -46,8 +46,10 @@ void	cdwithpath(char *cmd)
 }
 
 
-int	ms_cd(char *cmd)
+int	ms_cd(char *cmd, t_data *data)
 {
+	char	cwd[1040];
+	int 	pos;
 	if (!ft_strncmp(cmd, "cd ~\0", 5)
 		|| !ft_strncmp(cmd, "cd \0", 4)
 		|| !ft_strncmp(cmd, "cd\0", 3))
@@ -58,6 +60,9 @@ int	ms_cd(char *cmd)
 	else if (!ft_strncmp(cmd, "cd ", 3))
 	{
 		cdwithpath(cmd);
+		getcwd(cwd, sizeof(cwd));
+		pos = look_for_var_in_array("PWD", data);
+		data->env[pos] = ft_strjoin("PWD=", cwd);
 		return (1);
 	}
 	else

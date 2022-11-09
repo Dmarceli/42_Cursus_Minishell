@@ -7,7 +7,7 @@ int	is_builtin(char *value, t_data *data)
 	else if (!(ft_strncmp(value, "echo", 4)))
 		return (echo(value));
 	else if (!(ft_strncmp(value, "cd", 2)))
-		return (ms_cd(value));
+		return (ms_cd(value, data));
 	else if (!(ft_strncmp(value, "pwd", 3)))
 		return(ms_pwd(value));
 	else if (!(ft_strncmp(value, "export", 6)))
