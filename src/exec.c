@@ -2,14 +2,17 @@
 
 char *handlepath(char *cmd, t_data *data)
 {
-	char **possible_path;
-	char *test_cmd;
-	char *tmp;
-	(void)data;
-	int i;
+	char 	**possible_path;
+	char	*test_cmd;
+	int 	pos;
+	char 	*tmp;
+	int		i;
 
 	i  = -1;
-	possible_path = ft_split(getenv("PATH"), ':');
+	pos = look_for_var_in_array("PATH", data);
+	if (pos == -1)
+		return(0);
+	possible_path = ft_split(data->env[pos], ':');
 	while (possible_path[++i])
 	{
 		tmp = ft_strjoin(possible_path[i] , "/");

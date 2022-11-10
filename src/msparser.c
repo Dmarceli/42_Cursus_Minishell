@@ -11,6 +11,7 @@ void minishellparser(char* input, t_data *data)
 	if (checkquotation(input))
 		return((void)printf("Quotation incomplete\n"));
 	cmds = malloc(sizeof(cmds));
+	cmds[0] = NULL;
 	if (ft_strchr(input, '$'))
 		cmds[0] = handle_dollar(input, data);
 	else if (ft_strchr(input, '|'))
@@ -22,11 +23,7 @@ void minishellparser(char* input, t_data *data)
 		return ;
 	}
 	else if (ft_strchr(input, '\"') || ft_strchr(input, '\''))
-	{
-		printf("ola\n");
 		cmds[0] = removequotes(input);
-
-	}
 	else
 		cmds[0] = ft_strdup(input);
 	if (!is_builtin(cmds[0], data))
