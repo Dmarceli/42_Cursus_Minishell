@@ -10,21 +10,6 @@ void	remove_var(t_data *data, int pos)
 	data->env[i] = 0;
 }
 
-int look_for_var_in_array(char *cmd, t_data *data)
-{
-	int i;
-	size_t len;
-
-	i = -1;
-	len = ft_strlen(cmd);	
-	while (data->env[++i])
-	{
-		if (!ft_strncmp(cmd, data->env[i], len))
-			return(i);
-	}
-	return(-1);
-}
-
 int ms_unset(char *cmd, t_data *data)
 {
 	char **var;
@@ -42,5 +27,6 @@ int ms_unset(char *cmd, t_data *data)
 			remove_var(data, pos);
 	}
 	data->envlen--;
+	freearray(var);
 	return(1);
 }

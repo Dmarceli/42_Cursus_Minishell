@@ -21,19 +21,6 @@ int		ms_pwd(char *cmd)
 	return(0);
 }
 
-void freearray(char **arr)
-{
-	int i;
-	i = -1;
-	while(arr[++i])
-	{
-		if(arr[i])
-			free(arr[i]);
-	}
-	free(arr);
-	arr = NULL;
-}
-
 void	cdwithpath(char *cmd)
 {
 	char **dir;
@@ -45,7 +32,6 @@ void	cdwithpath(char *cmd)
 	return ;
 }
 
-
 int	ms_cd(char *cmd, t_data *data)
 {
 	char	cwd[1040];
@@ -55,6 +41,10 @@ int	ms_cd(char *cmd, t_data *data)
 		|| !ft_strncmp(cmd, "cd\0", 3))
 	{
 		chdir(getenv("HOME"));
+		getcwd(cwd, sizeof(cwd));
+		pos = look_for_var_in_array("PWD", data);
+		free(data->env[pos]);
+		data->env[pos] = ft_strjoin("PWD=", cwd);
 		return(1);
 	}
 	else if (!ft_strncmp(cmd, "cd ", 3))
@@ -62,6 +52,7 @@ int	ms_cd(char *cmd, t_data *data)
 		cdwithpath(cmd);
 		getcwd(cwd, sizeof(cwd));
 		pos = look_for_var_in_array("PWD", data);
+		free(data->env[pos]);
 		data->env[pos] = ft_strjoin("PWD=", cwd);
 		return (1);
 	}
