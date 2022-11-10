@@ -6,7 +6,7 @@
 /*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 21:36:51 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/11/08 21:49:34 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/11/10 19:20:57 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	handle_pipes(char **cmds, t_data *data)
 
 void multiple_child(char **cmds, t_data *data, int counter)
 {
-	int	fd_red;
+	//int	fd_red;
 
 	if (counter == 0)
 		close(data->fd[0]);
@@ -47,16 +47,16 @@ void multiple_child(char **cmds, t_data *data, int counter)
 	}
 	if (counter != big_len(cmds) - 1)
 		dup2(data->fd[1], STDOUT_FILENO);
-	if (counter == big_len(cmds) - 1)
-	{
-		fd_red = check_redirect(cmds[counter]);
-		if (fd_red != STDOUT_FILENO)
-		{
-			dup2(fd_red, STDOUT_FILENO);
-			close(fd_red);
-			cmds[counter] = return_trim(cmds[counter]);
-		}
-	}
+	// if (counter == big_len(cmds) - 1)
+	// {
+	// 	fd_red = check_redirect(cmds[counter]);
+	// 	if (fd_red != STDOUT_FILENO)
+	// 	{
+	// 		dup2(fd_red, STDOUT_FILENO);
+	// 		close(fd_red);
+	// 		cmds[counter] = return_trim(cmds[counter]);
+	// 	}
+	// }
 	is_builtin(cmds[counter], data);
 	exit(0);
 }

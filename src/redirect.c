@@ -6,7 +6,7 @@
 /*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 20:21:08 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/11/08 21:50:14 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/11/10 18:57:54 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	overwrite(char *cmd)
 	tmp = ft_substr(cmd, ft_index(cmd, '>') + 1, ft_strlen(cmd));
 	filename = ft_strtrim(tmp, " ");
 	free(tmp);
-	fd = open(filename, O_WRONLY | O_TRUNC | O_CREAT);
+	fd = open(filename, O_RDWR | O_TRUNC | O_CREAT, 0666);
 	free(filename);
 	return fd;
 }
@@ -46,35 +46,6 @@ int	ft_index(char *str, char ch)
 		counter++;
 	}
 	return -1;
-}
-
-int	special_quote(char *input, int index)
-{
-	int	left_q;
-	int	right_q;
-	int	counter;
-
-	if (index == -1)
-		return (0);
-	left_q = 0;
-	right_q = 0;
-	counter = index;
-	while(counter > 0)
-	{
-		if (input[counter] == '\"' || input[counter] == '\'')
-			left_q += 1;
-		counter -= 1;
-	}
-	counter = index;
-	while(input[counter])
-	{
-		if (input[counter] == '\"' || input[counter] == '\'')
-			right_q += 1;
-		counter += 1;
-	}
-	if ((left_q % 2 != 0 || right_q % 2 != 0 ) && (left_q != 0 && right_q != 0))
-		return (0);
-	return (1);
 }
 
 char	*return_trim(char *bush)
