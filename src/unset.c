@@ -12,7 +12,7 @@ void	remove_var(t_data *data, int pos)
 
 int ms_unset(char *cmd, t_data *data)
 {
-	char **var;
+	char **var = NULL;
 	int pos;
 	int i;
 	i = 0;

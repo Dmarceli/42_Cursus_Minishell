@@ -21,7 +21,7 @@ int	check_special(char *input, char chr)
 	{
 		if (input[counter] == chr)
 		{
-			if (special_quote(input, input[counter]))
+			if (special_quote(input, input[counter]) == 0)
 				return (1);
 		}
 		counter++;
