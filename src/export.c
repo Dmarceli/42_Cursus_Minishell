@@ -4,26 +4,26 @@ int add_new_var(char *cmd, t_data *data)
 {
 	char **var;
 	char *tmp;
-	int i;
+	int j;
 
-	i = 0;
+	j = 0;
 	var = ft_split(cmd,' ');
-	if(ft_strchr(var[1], '='))
+	tmp	= ft_strdup(data->env[data->envlen - 1]);
+	while(var[++j])
 	{
-		var[1] = ft_strtrim(var[1] ," ");
-		while (data->env[i])
-			i++;
-		tmp = ft_strdup(data->env[--i]);
-		data->env[i] = ft_strdup(var[1]);
-		data->env[++i] = ft_strdup(tmp);
-		free(tmp);
-		free(var);
-		data->envlen++;
-		return (1);
+		if(ft_strchr(var[j], '='))
+		{
+			data->env[data->envlen - 1] = ft_strdup(var[j]);
+			data->envlen++;
+		}
+		else 
+			continue;
 	}
-	else 
-		return (0);
-}
+	data->env[data->envlen -1] = ft_strdup(tmp);
+	freearray(var);
+	free(tmp);
+	return (1);
+}	
 
 int ms_export(char *cmd , t_data *data)
 {
@@ -36,6 +36,7 @@ int ms_export(char *cmd , t_data *data)
 			printf("declare -x %s\n", data->env[i]);
 	}
 	else
-		return (add_new_var(cmd, data));
+		add_new_var(cmd, data);
+	free(cmd);
 	return (1);
 }

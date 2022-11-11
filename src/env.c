@@ -8,7 +8,7 @@ void	initenv(char **envs, t_data *data)
 	while (envs[i])
 		i++;
 	data->envlen = i;
-	data->env = (char **)malloc(sizeof(char *) * (i + 1));
+	data->env = (char **)malloc(sizeof(char *) * (i + 10));
 	i = 0;
 	while (i < data->envlen)
 	{

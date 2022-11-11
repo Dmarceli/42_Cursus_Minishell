@@ -28,6 +28,7 @@ void minishellparser(char* input, t_data *data)
 		free(cmds);
 		return ;
 	}
+	//free(cmds[0]);
 	free(cmds);
 	// if (ft_strchr(input, '$'))
 	// 	cmds[0] = handle_dollar(input, data);
