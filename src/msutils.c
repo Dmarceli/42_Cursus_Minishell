@@ -27,3 +27,18 @@ int look_for_var_in_array(char *cmd, t_data *data)
 	}
 	return(-1);
 }
+
+int is_numeric(char *value)
+{
+    int j;
+    j = ft_strlen(value);
+    while(j--)
+    {
+        if(value[j] >= '0' && value[j] <= '9')
+            continue;
+		else
+        	return (0);
+    }
+    return (1);
+}
+

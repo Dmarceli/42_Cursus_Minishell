@@ -1,9 +1,9 @@
 #include "../incs/minishell.h"
 
-
 int main(int ac, char **av, char **envs)
 {	
 	t_data data;
+	int 	exitvalue;
 	char* input;
 	(void)ac;
 	(void)av;
@@ -16,5 +16,8 @@ int main(int ac, char **av, char **envs)
 		if(!input)
 			exit(0);
 		minishellparser(input, &data);
+		exitvalue = WEXITSTATUS(data.lastexec);
+		printf("%d\n", exitvalue);
 	}
+	return(exitvalue);
 }

@@ -31,6 +31,7 @@ typedef struct s_data
 	char 	**cmdtable;
 	char 	**exec;
 	int		envlen;
+	int		lastexec;
 	int		fd[2];
 	pid_t	pid;
 	int		pipe_fd;
@@ -70,7 +71,9 @@ int		ft_index(char *str, char ch);
 char	*return_trim(char *bush);
 int		special_quote(char *input, int index);
 char 	*removequotes(char *cmd);
-int	check_special(char *input, char chr);
-int	give_inputfd(char *input);
+int		check_special(char *input, char chr);
+int		give_inputfd(char *input);
+int 	is_numeric(char *value);
+int		ft_exit(char *cmd, t_data *data);
 
 #endif

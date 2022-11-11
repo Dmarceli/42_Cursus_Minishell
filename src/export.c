@@ -23,7 +23,7 @@ int add_new_var(char *cmd, t_data *data)
 	freearray(var);
 	free(tmp);
 	return (1);
-}	
+}
 
 int ms_export(char *cmd , t_data *data)
 {

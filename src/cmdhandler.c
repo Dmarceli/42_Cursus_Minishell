@@ -18,10 +18,11 @@ int	is_builtin(char *value, t_data *data)
 		return (env(data));
 	else if (!(ft_strncmp(value, "exit", 4)))
 	{
-		int i = -1;
-		while(++i < data->envlen)
-			free (data->env[i]);
-		exit(1);
+		return(ft_exit(value, data));
+		// int i = -1;
+		// while(++i < data->envlen)
+		// 	free (data->env[i]);
+		// exit(1);
 	}
 	else if (!(ft_strncmp(value, "clear", 6)))
 		return(clear_screen());

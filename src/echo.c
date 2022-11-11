@@ -33,6 +33,7 @@ int echo(char *cmd)
 		while(value[++i])
 			free(value[i]);
 		free(value);
+
 		return(1);
 	}
 	else if (!is_n)
