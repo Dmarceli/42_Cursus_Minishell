@@ -44,6 +44,7 @@ int findvar(char *cmd, t_data *data)
 	return (0);
 }
 
+
 char *handle_dollar(char *cmd, t_data *data)
 {
 	char **j;
@@ -62,6 +63,16 @@ char *handle_dollar(char *cmd, t_data *data)
 		free(j[i]);
 		j[i] = ft_strtrim(tmp, "\'" );
 		free(tmp);
+		value = join_strs(j);
+		free_split(j);
+		return (value);
+	}
+	if(ft_strchr(j[i], '?'))
+	{
+		value = ft_itoa(data->lastexec);
+		free(j[i]);
+		j[i] = ft_strdup(value);
+		free(value);
 		value = join_strs(j);
 		free_split(j);
 		return (value);

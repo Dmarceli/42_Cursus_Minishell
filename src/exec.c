@@ -36,6 +36,7 @@ int	executecmd(char *cmd, t_data *data)
 {
 	int		a;
 	char 	*path = NULL;
+	int 	exitvalue;
 	char	cwd[1040];
 
 	if (ft_strchr(cmd, ' '))
@@ -60,7 +61,7 @@ int	executecmd(char *cmd, t_data *data)
 			path = handlepath(data->exec[0], data);
 			if (!path)
 			{
-				printf("Error1: %s not found\n", cmd);
+				printf("Error: %s not found\n", cmd);
 				exit (127);
 			}
 			data->exec[0] = ft_strjoin(path, data->exec[0]);
@@ -71,7 +72,8 @@ int	executecmd(char *cmd, t_data *data)
 		exit(126);
 	}
 	freearray(data->exec);
-	waitpid(a, &data->lastexec, 0);
+	waitpid(a, &exitvalue, 0);
+	data->lastexec= WEXITSTATUS(exitvalue);
 	wait(0);
 	return(0);
 }

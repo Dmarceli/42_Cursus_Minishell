@@ -16,8 +16,7 @@ int main(int ac, char **av, char **envs)
 		if(!input)
 			exit(0);
 		minishellparser(input, &data);
-		exitvalue = WEXITSTATUS(data.lastexec);
-		printf("%d\n", exitvalue);
+		exitvalue = data.lastexec;
 	}
 	return(exitvalue);
 }
