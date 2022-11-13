@@ -65,7 +65,6 @@ int		big_len(char **str);
 void	free_split(char **sp);
 void	handle_pipes(char **cmds, t_data *data);
 void	 multiple_child(char **cmds, t_data *data, int counter);
-int		check_redirect(char *cmd);
 int		overwrite(char *cmd);
 int		ft_index(char *str, char ch);
 char	*return_trim(char *bush);
@@ -75,5 +74,12 @@ int		check_special(char *input, char chr);
 int		give_inputfd(char *input);
 int 	is_numeric(char *value);
 int		ft_exit(char *cmd, t_data *data);
+char	*get_infilename(char *cmd, char chr);
+int	output(char *cmd);
+int	count_output(char *cmd);
+char	*get_outfilename(char *cmd, int counter);
+int	special_index(char *str);
+int	trimmer(char *bush, int counter);
+void child_process(char **cmds, t_data *data, int counter);
 
 #endif

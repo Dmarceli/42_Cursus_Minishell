@@ -25,7 +25,7 @@ void	handle_pipes(char **cmds, t_data *data)
 		if (data->pid < 0)
 			return ;
 		if (data->pid == 0)
-			multiple_child(cmds, data, counter);
+			child_process(cmds, data, counter);
 		close(data->fd[1]);
 		waitpid(data->pid, NULL, 0);
 		data->pipe_fd = data->fd[0];
@@ -34,29 +34,39 @@ void	handle_pipes(char **cmds, t_data *data)
 	return ;
 }
 
-void multiple_child(char **cmds, t_data *data, int counter)
+void child_process(char **cmds, t_data *data, int counter)
 {
-	//int	fd_red;
+	int	fd_in;
+	int	fd_out;
 
-	if (counter == 0)
-		close(data->fd[0]);
-	else if (counter > 0)
+
+	if (check_special(cmds[counter], '<') == 0)
 	{
-		dup2(data->pipe_fd, STDIN_FILENO);
-		close(data->pipe_fd);
+		if (counter == 0)
+			close(data->fd[0]);
+		else if (counter > 0)
+		{
+			dup2(data->pipe_fd, STDIN_FILENO);
+			close(data->pipe_fd);
+		}
 	}
-	if (counter != big_len(cmds) - 1)
-		dup2(data->fd[1], STDOUT_FILENO);
-	// if (counter == big_len(cmds) - 1)
-	// {
-	// 	fd_red = check_redirect(cmds[counter]);
-	// 	if (fd_red != STDOUT_FILENO)
-	// 	{
-	// 		dup2(fd_red, STDOUT_FILENO);
-	// 		close(fd_red);
-	// 		cmds[counter] = return_trim(cmds[counter]);
-	// 	}
-	// }
+	else
+	{
+		fd_in = 2; dup2(fd_in, STDIN_FILENO);
+		close(fd_in);
+	}
+	if (check_special(cmds[counter], '>') == 0)
+	{
+		if (counter != big_len(cmds) - 1)
+			dup2(data->fd[1], STDOUT_FILENO);
+	}
+	else
+	{
+		fd_out = output(cmds[counter]);
+		dup2(fd_out, STDOUT_FILENO);
+		close(fd_out);
+		cmds[counter] = return_trim(cmds[counter]);
+	}
 	is_builtin(cmds[counter], data);
 	exit(0);
 }
