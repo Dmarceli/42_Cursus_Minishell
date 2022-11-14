@@ -28,31 +28,6 @@ void minishellparser(char* input, t_data *data)
 		free(cmds);
 		return ;
 	}
-	//free(cmds[0]);
+	free(cmds[0]);
 	free(cmds);
-	// if (ft_strchr(input, '$'))
-	// 	cmds[0] = handle_dollar(input, data);
-	// else if (ft_strchr(input, '|'))
-	// {
-	// 	free(cmds);
-	// 	cmds = ft_split(input, '|');
-	// 	handle_pipes(cmds, data);
-	// 	free_split(cmds);
-	// 	return ;
-	// }
-	// else if (ft_strchr(input, '\"') || ft_strchr(input, '\''))
-	// {
-	// 	printf("ola\n");
-	// 	cmds[0] = removequotes(input);
-
-	// }
-	// else
-	// 	cmds[0] = ft_strdup(input);
-	// if (!is_builtin(cmds[0], data))
-	// {
-	// 	free(cmds[0]);
-	// 	free(cmds);
-	// 	return ;
-	// }
-	// free(cmds);
 }

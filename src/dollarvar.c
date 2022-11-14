@@ -1,23 +1,25 @@
 #include "../incs/minishell.h"
 
-char	*join_strs(char **strs)
+char	*join_strs(char **str_chunks, char *sep, int limiter)
 {
-	int		i;
-	char	**tmp;
-	char	*ret;
-	char	*tj;
-	
-	tmp = malloc(sizeof(char *) * big_len(strs));
-	i = -1;
-	while (strs[++i])
+	int		k;
+	char	*complete_str;
+
+	k = -1;
+	complete_str = 0;
+	while (str_chunks[++k] && (k < limiter || limiter < 0))
 	{
-		tj = ft_strjoin(" ", strs[i + 1]);
-		tmp[i] = ft_strjoin(strs[i], tj);
-		free(tj);
+		if (!complete_str)
+			complete_str = ft_strjoin(sep, str_chunks[k]);
+		else
+		{
+			complete_str = ft_strjoin(complete_str, sep);
+			complete_str = ft_strjoin(complete_str, str_chunks[k]);
+		}
 	}
-	ret = ft_strdup(tmp[i - 2]);
-	free_split(tmp);
-	return(ret);
+	if (complete_str)
+		return (ft_strjoin(complete_str, sep));
+	return (complete_str);
 }
 
 int findvar(char *cmd, t_data *data)
@@ -63,7 +65,7 @@ char *handle_dollar(char *cmd, t_data *data)
 		free(j[i]);
 		j[i] = ft_strtrim(tmp, "\'" );
 		free(tmp);
-		value = join_strs(j);
+		value = join_strs(j," ",-1);
 		free_split(j);
 		return (value);
 	}
@@ -73,9 +75,17 @@ char *handle_dollar(char *cmd, t_data *data)
 		free(j[i]);
 		j[i] = ft_strdup(value);
 		free(value);
-		value = join_strs(j);
+		value = join_strs(j, " ",-1);
 		free_split(j);
-		return (value);
+		if (!ft_strchr(value, '$'))
+			return (value);
+		else
+		{
+			value = handle_dollar(value, data);
+			return(value);
+		}
+			
+
 	}
 	k = findvar(j[i], data);
 	if (k)
@@ -84,9 +94,16 @@ char *handle_dollar(char *cmd, t_data *data)
 		free(j[i]);
 		j[i] = ft_strdup(value);
 		free(value);
-		value = join_strs(j);
+		value = join_strs(j, " ",-1);
 		free_split(j);
-		return (value);
+		if (!ft_strchr(value, '$'))
+			return (value);
+		else
+		{
+			value = handle_dollar(value, data);
+			return(value);
+		}
+		//return (value);
 	}
 	else
 	{
