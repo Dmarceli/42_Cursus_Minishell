@@ -3,6 +3,7 @@
 void minishellparser(char* input, t_data *data)
 {
 	char **cmds;
+	int	pid;
 
 	if (ft_strlen(input))
 		add_history(input);
@@ -22,7 +23,13 @@ void minishellparser(char* input, t_data *data)
 		cmds[0] = handle_dollar(input, data);
 	else
 		cmds[0] = ft_strdup(input);
-	if (!is_builtin(cmds[0], data))
+	if (check_special(cmds[0], '>'))
+	{
+		pid = fork();
+		if (pid == 0)
+			child_process(cmds, data, 0);
+	}
+	else if (!is_builtin(cmds[0], data))
 	{
 		free(cmds[0]);
 		free(cmds);
