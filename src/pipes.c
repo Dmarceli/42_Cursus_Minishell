@@ -36,25 +36,37 @@ void	handle_pipes(char **cmds, t_data *data)
 
 void child_process(char **cmds, t_data *data, int counter)
 {
-	int	fd_in;
+	// int	fd_in;
 	int	fd_out;
 
 
-	if (check_special(cmds[counter], '<') == 0)
+	if (counter == 0)
+		close(data->fd[0]);
+	else if (counter > 0)
 	{
-		if (counter == 0)
-			close(data->fd[0]);
-		else if (counter > 0)
-		{
-			dup2(data->pipe_fd, STDIN_FILENO);
-			close(data->pipe_fd);
-		}
+		dup2(data->pipe_fd, STDIN_FILENO);
+		close(data->pipe_fd);
 	}
-	else
-	{
-		fd_in = 2; dup2(fd_in, STDIN_FILENO);
-		close(fd_in);
-	}
+	// if (check_special(cmds[counter], '<') == 0)
+	// {
+	// 	if (counter == 0)
+	// 		close(data->fd[0]);
+	// 	else if (counter > 0)
+	// 	{
+	// 		dup2(data->pipe_fd, STDIN_FILENO);
+	// 		close(data->pipe_fd);
+	// 	}
+	// }
+	// else
+	// {
+	// 	if (counter == 0)
+	// 		close(data->fd[0]);
+	// 	else
+	// 		close(data->pipe_fd);
+	// 	fd_in = STDIN_FILENO;
+	// 	dup2(fd_in, STDIN_FILENO);
+	// 	close(fd_in);
+	// }
 	if (check_special(cmds[counter], '>') == 0)
 	{
 		if (counter != big_len(cmds) - 1)

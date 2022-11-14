@@ -28,6 +28,5 @@ void minishellparser(char* input, t_data *data)
 		free(cmds);
 		return ;
 	}
-	free(cmds[0]);
 	free(cmds);
 }

@@ -72,7 +72,10 @@ int	output(char *cmd)
 				fd = open(filename, O_RDWR | O_TRUNC | O_CREAT, 0666);
 			}
 			if (outs == 1)
+			{
+				free(filename);
 				return (fd);
+			}
 			outs--;
 			free(filename);
 			close(fd);
@@ -108,9 +111,9 @@ char	*return_trim(char *bush)
 	while (ft_strchr(trim, '<') || ft_strchr(trim, '>'))
 	{
 		free(trim);
-		if (ft_strchr("<>", trim[0]))
+		if (ft_strchr("<>", old[0]))
 		{
-			trim = ft_substr(old, 0, trimmer(trim, 0));
+			trim = ft_substr(old, 1 + trimmer(old, 1), ft_strlen(old));
 		}
 		else
 		{
@@ -173,7 +176,7 @@ char	*get_outfilename(char *cmd, int counter)
 	filename = ft_calloc(ft_strlen(cmd), sizeof(char));
 	while (cmd[counter] == ' ')
 		counter++;
-	while(ft_strchr(">< ", cmd[counter]) == NULL)
+	while(ft_strchr(">< ", cmd[counter]) == NULL && cmd[counter] != '\0')
 	{
 		filename[subcounter] = cmd[counter];
 		subcounter++;
