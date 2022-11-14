@@ -22,6 +22,6 @@ int	ft_exit(char *cmd, t_data *data)
 	else
 	{
 		freearray(data->env);
-		exit(0);
+		exit(data->lastexec);
 	}
 }	
