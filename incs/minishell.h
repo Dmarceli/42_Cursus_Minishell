@@ -24,7 +24,6 @@
 # define BLANK "\e[0m"
 # define CLEAR_SCREEN "\033[?1049h\033[H"
 
-
 typedef struct s_data
 {
 	char	**env;
@@ -74,12 +73,19 @@ int		check_special(char *input, char chr);
 int		give_inputfd(char *input);
 int 	is_numeric(char *value);
 int		ft_exit(char *cmd, t_data *data);
-char	*get_infilename(char *cmd, char chr);
+char	*get_infilename(char *cmd);
 int	output(char *cmd);
 int	count_output(char *cmd);
 char	*get_outfilename(char *cmd, int counter);
 int	special_index(char *str);
 int	trimmer(char *bush, int counter);
 void child_process(char **cmds, t_data *data, int counter);
+int	input_red(char *cmd);
+char	*ft_free(char *buffer, char *buf);
+char	*ft_next(char *buffer);
+char	*ft_line(char *buffer);
+char	*read_file(int fd, char *ret);
+char	*get_next_line(int fd);
+void	redirect(char *cmd, t_data *data);
 
 #endif

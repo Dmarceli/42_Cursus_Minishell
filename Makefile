@@ -38,7 +38,8 @@ SRCS			:= $(PATH_SRC)/main.c \
 					$(PATH_SRC)/redirect.c \
 					$(PATH_SRC)/quotes.c \
 					$(PATH_SRC)/special_check.c \
-					$(PATH_SRC)/msexit.c
+					$(PATH_SRC)/msexit.c \
+					$(PATH_SRC)/redirect_util.c \
 					
 
 OBJ				:= $(subst .c,.o,$(subst $(PATH_SRC), $(PATH_OBJS), $(SRCS)))

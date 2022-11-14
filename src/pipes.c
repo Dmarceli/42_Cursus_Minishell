@@ -6,7 +6,7 @@
 /*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 21:36:51 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/11/10 19:20:57 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/11/14 19:49:11 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,37 +36,29 @@ void	handle_pipes(char **cmds, t_data *data)
 
 void child_process(char **cmds, t_data *data, int counter)
 {
-	// int	fd_in;
+	int	fd_in;
 	int	fd_out;
 
-
-	if (counter == 0)
-		close(data->fd[0]);
-	else if (counter > 0)
+	if (check_special(cmds[counter], '<') == 0)
 	{
-		dup2(data->pipe_fd, STDIN_FILENO);
-		close(data->pipe_fd);
+		if (counter == 0)
+			close(data->fd[0]);
+		else if (counter > 0)
+		{
+			dup2(data->pipe_fd, STDIN_FILENO);
+			close(data->pipe_fd);
+		}
 	}
-	// if (check_special(cmds[counter], '<') == 0)
-	// {
-	// 	if (counter == 0)
-	// 		close(data->fd[0]);
-	// 	else if (counter > 0)
-	// 	{
-	// 		dup2(data->pipe_fd, STDIN_FILENO);
-	// 		close(data->pipe_fd);
-	// 	}
-	// }
-	// else
-	// {
-	// 	if (counter == 0)
-	// 		close(data->fd[0]);
-	// 	else
-	// 		close(data->pipe_fd);
-	// 	fd_in = STDIN_FILENO;
-	// 	dup2(fd_in, STDIN_FILENO);
-	// 	close(fd_in);
-	// }
+	else
+	{
+		if (counter == 0)
+			close(data->fd[0]);
+		else if (counter > 0)
+			close(data->pipe_fd);
+		fd_in = input_red(cmds[counter]);
+		dup2(fd_in, STDIN_FILENO);
+		close(fd_in);
+	}
 	if (check_special(cmds[counter], '>') == 0)
 	{
 		if (counter != big_len(cmds) - 1)
@@ -78,6 +70,7 @@ void child_process(char **cmds, t_data *data, int counter)
 		dup2(fd_out, STDOUT_FILENO);
 		close(fd_out);
 		cmds[counter] = return_trim(cmds[counter]);
+		// printf("%s\n", cmds[counter]);
 	}
 	is_builtin(cmds[counter], data);
 	exit(0);

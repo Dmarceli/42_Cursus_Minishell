@@ -6,44 +6,11 @@
 /*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 20:21:08 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/11/10 18:57:54 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/11/14 20:09:51 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/minishell.h"
-
-// int	overwrite(char *cmd)
-// {
-// 	char	*filename;
-// 	int		fd;
-
-// 	filename = get_filename(cmd, '>');
-// 	fd = open(filename, O_RDWR | O_TRUNC | O_CREAT, 0666);
-// 	free(filename);
-// 	return fd;
-// }
-
-int	count_output(char *cmd)
-{
-	int	counter;
-	int	out_counter;
-
-	counter = 0;
-	out_counter = 0;
-	while (cmd[counter])
-	{
-		if (cmd[counter] == '>' && special_quote(cmd, counter) == 0)
-		{
-			out_counter++;
-			counter++;
-			if (cmd[counter] == '>')
-				counter++;
-		}
-		else
-			counter++;
-	}
-	return (out_counter);
-}
 
 int	output(char *cmd)
 {
@@ -85,20 +52,6 @@ int	output(char *cmd)
 	return (fd);
 }
 
-int	ft_index(char *str, char ch)
-{
-	int	counter;
-
-	counter = 0;
-	while (str[counter])
-	{
-		if (str[counter] == ch)
-			return (counter);
-		counter++;
-	}
-	return -1;
-}
-
 char	*return_trim(char *bush)
 {
 	char	*trim;
@@ -131,42 +84,6 @@ char	*return_trim(char *bush)
 	return (trim);
 }
 
-int	special_index(char *str)
-{
-	int	out;
-	int	in;
-
-	out = ft_index(str, '>');
-	in = ft_index(str, '<');
-
-	if (out == -1)
-		return (in);
-	else if (in == -1)
-		return (out);
-	else if (out < in)
-		return (out);
-	else
-		return (in);
-}
-
-int	trimmer(char *bush, int counter)
-{
-	int	size;
-
-	size = 0;
-	while (ft_strchr("<> ", bush[counter]))
-	{
-		counter++;
-		size++;
-	}
-	while (ft_strchr(">< ", bush[counter]) == NULL)
-	{
-		counter++;
-		size++;
-	}
-	return (size);
-}
-
 char	*get_outfilename(char *cmd, int counter)
 {
 	char	*filename;
@@ -186,25 +103,60 @@ char	*get_outfilename(char *cmd, int counter)
 	return (filename);
 }
 
-// char	*get_infilename(char *cmd, char chr)
-// {
-// 	char	*tmp;
-// 	char	*filename;
-// 	int		counter;
+int	input_red(char *cmd)
+{
+	int		fd;
+	char	*filename;
 
-// 	tmp = ft_strrchr(cmd, chr);
-// 	counter = 0;
-// 	filename = ft_calloc(ft_strlen(red) * sizeof(char));
-// 	*tmp++;
-// 	while(*tmp == ' ')
-// 		*tmp++;
-// 	while (*tmp != ' ' && *tmp != '>' && *tmp != '<')
-// 	{
-// 		filename[counter] = *tmp;
-// 		counter++;
-// 		*tmp++;
-// 	}
-// 	filename[counter] = '\0';
-// 	free(tmp);
-// 	return (filename);
-// }
+	filename = get_infilename(cmd);
+	fd = open(filename, O_RDONLY);
+	free(filename);
+	return (fd);
+}
+
+char	*get_infilename(char *cmd)
+{
+	char	*tmp;
+	char	*filename;
+	int		counter;
+	int		sub_counter;
+
+	tmp = ft_strrchr(cmd, '<');
+	counter = 0;
+	sub_counter = 0;
+	filename = ft_calloc(ft_strlen(cmd), sizeof(char));
+	sub_counter++;
+	while(tmp[sub_counter] == ' ')
+		sub_counter++;
+	while (ft_strchr("<> \0", tmp[sub_counter]) == NULL)
+	{
+		filename[counter] = tmp[sub_counter];
+		counter++;
+		sub_counter++;
+	}
+	filename[counter] = '\0';
+	//free(tmp);
+	return (filename);
+}
+
+void	redirect(char *cmd, t_data *data)
+{
+	int	fd_in;
+	int	fd_out;
+
+	if (check_special(cmd, '<'))
+	{
+		fd_in = input_red(cmd);
+		dup2(fd_in, STDIN_FILENO);
+		close(fd_in);
+	}
+	if (check_special(cmd, '>'))
+	{
+		fd_out = output(cmd);
+		dup2(fd_out, STDOUT_FILENO);
+		close(fd_out);
+	}
+	cmd = return_trim(cmd);
+	is_builtin(cmd, data);
+	exit(0);
+}
