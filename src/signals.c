@@ -1,10 +1,5 @@
 #include "../incs/minishell.h"
 
-int clear_screen(void)
-{
-	printf(CLEAR_SCREEN);
-	return (1);
-}
 
 static void	sighandler(int sig)
 {
