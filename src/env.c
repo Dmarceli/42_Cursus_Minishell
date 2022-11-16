@@ -16,6 +16,7 @@ void	initenv(char **envs, t_data *data)
 		i++;
 	}
 	data->env[i] = 0;
+	data->lastexec = 0;
 }
 
 

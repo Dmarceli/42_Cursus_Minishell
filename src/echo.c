@@ -33,8 +33,7 @@ int echo(char *cmd)
 		while(value[++i])
 			free(value[i]);
 		free(value);
-
-		return(1);
+		return(0);
 	}
 	else if (!is_n)
 	{
@@ -46,7 +45,7 @@ int echo(char *cmd)
 		while(value[++i])
 			free(value[i]);
 		free(value);
-		return(1);
+		return(0);
 	}
 	else
 	{
@@ -54,6 +53,6 @@ int echo(char *cmd)
 		while(value[++i])
 			free(value[i]);
 		free(value);
-		return(0);
+		return(2);
 	}
 }

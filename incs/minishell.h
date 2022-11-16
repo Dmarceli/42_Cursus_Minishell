@@ -45,7 +45,7 @@ void	ignore_signal(void);
 void	ctrl_c_handler(int j);
 int		ms_pwd(char *cmd);
 int		ms_cd(char *cmd, t_data *data);
-void	cdwithpath(char *cmd);
+int		cdwithpath(char *cmd);
 int		is_builtin(char *value, t_data *data);
 int		execbuiltin(char *value, t_data *data);
 int		checkechoflag(char *cmd);

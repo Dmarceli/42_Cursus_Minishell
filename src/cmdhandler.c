@@ -5,15 +5,15 @@ int	is_builtin(char *value, t_data *data)
 	if (!value)
 		return (0);
 	else if (!(ft_strncmp(value, "echo", 4)))
-		return (echo(value));
+		return (data->lastexec = echo(value));
 	else if (!(ft_strncmp(value, "cd", 2)))
-		return (ms_cd(value, data));
+		return (data->lastexec = ms_cd(value, data));
 	else if (!(ft_strncmp(value, "pwd", 3)))
-		return(ms_pwd(value));
+		return(data->lastexec = ms_pwd(value));
 	else if (!(ft_strncmp(value, "export", 6)))
-		return (ms_export(value, data));
+		return (data->lastexec = ms_export(value, data));
 	else if (!(ft_strncmp(value, "unset",5)))
-		return (ms_unset(value, data));
+		return (data->lastexec = ms_unset(value, data));
 	else if (!(ft_strncmp(value, "env", 3)))
 		return (env(data));
 	else if (!(ft_strncmp(value, "exit", 4)))

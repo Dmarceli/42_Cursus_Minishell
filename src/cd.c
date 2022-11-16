@@ -10,26 +10,29 @@ int		ms_pwd(char *cmd)
 		if (getcwd(cwd, sizeof(cwd)))
 		{
 			printf("%s\n", cwd);
-			return (1);
+			return (0);
 		}
 		else
-			return (0);
+			return (1);
 	}
 	else
 		printf("pwd: too many arguments\n");
 	free(cmd);
-	return(0);
+	return(1);
 }
 
-void	cdwithpath(char *cmd)
+int	cdwithpath(char *cmd)
 {
 	char **dir;
 
 	dir = ft_split(cmd, ' ');
 	if (chdir(dir[1]))
-		printf("ERROR!\n");
+	{
+		printf("cd: no such file or directory: %s\n", dir[1]);
+		return(0);
+	}
 	freearray(dir);
-	return ;
+	return (1);
 }
 
 int	ms_cd(char *cmd, t_data *data)
@@ -45,17 +48,18 @@ int	ms_cd(char *cmd, t_data *data)
 		pos = look_for_var_in_array("PWD", data);
 		free(data->env[pos]);
 		data->env[pos] = ft_strjoin("PWD=", cwd);
-		return(1);
+		return(0);
 	}
 	else if (!ft_strncmp(cmd, "cd ", 3))
 	{
-		cdwithpath(cmd);
+		if(!cdwithpath(cmd))
+			return(1);
 		getcwd(cwd, sizeof(cwd));
 		pos = look_for_var_in_array("PWD", data);
 		free(data->env[pos]);
 		data->env[pos] = ft_strjoin("PWD=", cwd);
-		return (1);
+		return (0);
 	}
 	else
-		return(0);
+		return(1);
 }

@@ -22,7 +22,7 @@ int add_new_var(char *cmd, t_data *data)
 	data->env[data->envlen -1] = ft_strdup(tmp);
 	freearray(var);
 	free(tmp);
-	return (1);
+	return (0);
 }
 
 int ms_export(char *cmd , t_data *data)
@@ -38,5 +38,5 @@ int ms_export(char *cmd , t_data *data)
 	else
 		add_new_var(cmd, data);
 	free(cmd);
-	return (1);
+	return (0);
 }

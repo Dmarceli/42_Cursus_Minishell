@@ -14,7 +14,7 @@ int main(int ac, char **av, char **envs)
 		ignore_signal();
 		input = readline(CYAN"minishell> "BLANK);
 		if(!input)
-			exit(0);
+			exit(data.lastexec);
 		minishellparser(input, &data);
 		exitvalue = data.lastexec;
 	}
