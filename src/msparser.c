@@ -38,6 +38,8 @@ void minishellparser(char* input, t_data *data)
 	cmds = malloc(sizeof(cmds));
 	if (ft_strchr(input, '$'))
 		cmds[0] = handle_dollar(input, data);
+	else if (ft_strchr(input, '\'') || ft_strchr(input, '\"'))
+		cmds[0] = removequotes(input);
 	else
 		cmds[0] = ft_strdup(input);
 	if (check_special(cmds[0], '>') || check_special(cmds[0], '<'))
