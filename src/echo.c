@@ -20,8 +20,8 @@ int echo(char *cmd)
 	char	**value;
 	int		i;
 
-	is_n = checkechoflag(cmd);
 	value = ft_split(cmd,' ');
+	is_n = checkechoflag(value[1]);
 	free(cmd);
 	if (is_n)
 	{
