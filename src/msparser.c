@@ -1,5 +1,20 @@
 #include "../incs/minishell.h"
 
+int check_emptyprompt(char *cmd)
+{
+	int i;
+	i = -1;
+	while (cmd[++i])
+	{
+		if(cmd[i] == ' ' || cmd[i] == '\t')
+			i++;
+		if (!cmd[i])
+			return(0);
+	}
+	return(1);
+	
+}
+
 void minishellparser(char* input, t_data *data)
 {
 	char **cmds;
@@ -9,6 +24,8 @@ void minishellparser(char* input, t_data *data)
 		add_history(input);
 	else
 		return(rl_replace_line("", 0));
+	if (!check_emptyprompt(input))
+		return;
 	if (checkquotation(input))
 		return((void)printf("Quotation incomplete\n"));
 	if (check_special(input, '|'))
