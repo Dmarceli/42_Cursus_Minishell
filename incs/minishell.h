@@ -23,6 +23,8 @@
 # define CYAN "\e[1;36m"
 # define BLANK "\e[0m"
 # define CLEAR_SCREEN "\033[?1049h\033[H"
+# define EXIT_STATUS(status)	(((status) & 0xff00) >> 8)
+
 
 typedef struct s_data
 {
@@ -74,13 +76,13 @@ int		give_inputfd(char *input);
 int 	is_numeric(char *value);
 int		ft_exit(char *cmd, t_data *data);
 char	*get_infilename(char *cmd);
-int	output(char *cmd);
-int	count_output(char *cmd);
+int		output(char *cmd);
+int		count_output(char *cmd);
 char	*get_outfilename(char *cmd, int counter);
-int	special_index(char *str);
-int	trimmer(char *bush, int counter);
-void child_process(char **cmds, t_data *data, int counter);
-int	input_red(char *cmd);
+int		special_index(char *str);
+int		trimmer(char *bush, int counter);
+void 	child_process(char **cmds, t_data *data, int counter);
+int		input_red(char *cmd);
 char	*ft_free(char *buffer, char *buf);
 char	*ft_next(char *buffer);
 char	*ft_line(char *buffer);

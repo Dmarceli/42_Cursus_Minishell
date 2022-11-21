@@ -29,8 +29,6 @@ void minishellparser(char* input, t_data *data)
 
 	if (ft_strlen(input))
 		add_history(input);
-	else
-		return(rl_replace_line("", 0));
 	if (!check_emptyprompt(input))
 		return;
 	if (checkquotation(input))
@@ -45,8 +43,6 @@ void minishellparser(char* input, t_data *data)
 	cmds = malloc(sizeof(cmds));
 	if (ft_strchr(input, '$'))
 		cmds[0] = handle_dollar(input, data);
-	else if (ft_strchr(input, '\'') || ft_strchr(input, '\"'))
-		cmds[0] = removequotes(input);
 	else
 		cmds[0] = ft_strdup(input);
 	if (check_special(cmds[0], '>') || check_special(cmds[0], '<'))
@@ -56,7 +52,9 @@ void minishellparser(char* input, t_data *data)
 			redirect(cmds[0], data);
 		waitpid(pid, NULL, 0);
 	}
-	else if (!is_builtin(cmds[0], data))
+	if (ft_strchr(input, '\'') || ft_strchr(input, '\"'))
+		cmds[0] = removequotes(input);
+	if (!is_builtin(cmds[0], data))
 	{
 		if (!cmds[0])
 			free(cmds[0]); 	

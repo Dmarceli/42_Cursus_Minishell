@@ -74,7 +74,7 @@ int	executecmd(char *cmd, t_data *data)
 	}
 	freearray(data->exec); 
 	waitpid(a, &exitvalue, 0);
-	data->lastexec= WEXITSTATUS(exitvalue);
+	data->lastexec = EXIT_STATUS(exitvalue);
 	wait(0);
 	return(0);
 }
