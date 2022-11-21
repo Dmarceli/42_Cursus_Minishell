@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   special_check.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: duartebaeta <duartebaeta@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 18:18:43 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/11/10 19:19:06 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/11/21 00:35:42 by duartebaeta      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	check_special(char *input, char chr)
 	{
 		if (input[counter] == chr)
 		{
-			if (special_quote(input, input[counter]) == 0)
+			if (special_quote(input, counter) == 0)
 				return (1);
 		}
 		counter++;
