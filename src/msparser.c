@@ -52,9 +52,7 @@ void minishellparser(char* input, t_data *data)
 			redirect(cmds[0], data);
 		waitpid(pid, NULL, 0);
 	}
-	if (ft_strchr(input, '\'') || ft_strchr(input, '\"'))
-		cmds[0] = removequotes(input);
-	if (!is_builtin(cmds[0], data))
+	else if (!is_builtin(cmds[0], data))
 	{
 		if (!cmds[0])
 			free(cmds[0]); 	
