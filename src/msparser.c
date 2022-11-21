@@ -1,18 +1,25 @@
 #include "../incs/minishell.h"
 
+int is_space(char c)
+{
+	if (c == ' ' || c == '\t')
+		return(1);
+	else
+		return(0);
+}
+
 int check_emptyprompt(char *cmd)
 {
 	int i;
 	i = -1;
 	while (cmd[++i])
 	{
-		if(cmd[i] == ' ' || cmd[i] == '\t')
+		if (is_space(cmd[i]))
 			i++;
-		if (!cmd[i])
-			return(0);
+		else
+			return(1);
 	}
-	return(1);
-	
+	return(0);
 }
 
 void minishellparser(char* input, t_data *data)
