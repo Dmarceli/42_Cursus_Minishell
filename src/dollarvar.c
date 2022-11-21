@@ -108,7 +108,7 @@ char *handle_dollar(char *cmd, t_data *data)
 	else
 	{
 		free_split(j);
-		return(0);
+		return(cmd);
 	}
 }
 

@@ -14,7 +14,7 @@ int main(int ac, char **av, char **envs)
 	{
 		ignore_signal();
 		input = readline(CYAN"minishell> "BLANK);
-		if(!input && printf("\n"))	
+		if(!input && write(0, "\n", 1))	
 			ft_exit("", &data);
 		minishellparser(input, &data);
 		exitvalue = data.lastexec;
