@@ -19,8 +19,13 @@ int echo(char *cmd)
 	int		is_n;
 	char	**value;
 	int		i;
-
-	value = ft_split(cmd,' ');
+	if (ft_strchr(cmd, ' '))
+		value = ft_split(cmd,' ');
+	else
+	{
+		printf("\n");
+		return(0);
+	}
 	is_n = checkechoflag(value[1]);
 	free(cmd);
 	if (is_n)
