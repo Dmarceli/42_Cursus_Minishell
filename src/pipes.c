@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: duartebaeta <duartebaeta@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 21:36:51 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/11/14 19:49:11 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/11/21 20:15:30 by duartebaeta      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ void child_process(char **cmds, t_data *data, int counter)
 		fd_out = output(cmds[counter]);
 		dup2(fd_out, STDOUT_FILENO);
 		close(fd_out);
-		cmds[counter] = return_trim(cmds[counter]);
-		// printf("%s\n", cmds[counter]);
 	}
+	if (check_special(cmds[counter], '>') || check_special(cmds[counter], '<'))
+		cmds[counter] = return_trim(cmds[counter]);
 	is_builtin(cmds[counter], data);
 	exit(0);
 }
