@@ -25,6 +25,10 @@
 # define CLEAR_SCREEN "\033[?1049h\033[H"
 # define EXIT_STATUS(status)	(((status) & 0xff00) >> 8)
 
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 42
+#endif
+
 
 typedef struct s_data
 {
@@ -89,5 +93,12 @@ char	*ft_line(char *buffer);
 char	*read_file(int fd, char *ret);
 char	*get_next_line(int fd);
 void	redirect(char *cmd, t_data *data);
+int	heredoc(char *eof);
+
+char	*ft_free(char *buffer, char *buf);
+char	*ft_next(char *buffer);
+char	*ft_line(char *buffer);
+char	*read_file(int fd, char *res);
+char	*get_next_line(int fd);
 
 #endif

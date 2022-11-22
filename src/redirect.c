@@ -6,7 +6,7 @@
 /*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 20:21:08 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/11/14 20:09:51 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/11/22 17:37:19 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,34 @@ int	input_red(char *cmd)
 	char	*filename;
 
 	filename = get_infilename(cmd);
-	fd = open(filename, O_RDONLY);
+	if (*(ft_strrchr(cmd, '<') - 1) == '<')
+		fd = heredoc(filename);
+	else
+		fd = open(filename, O_RDONLY);
 	free(filename);
 	return (fd);
+}
+
+int	heredoc(char *eof)
+{
+	char	*content;
+	int		tmp_fd;
+	int		fd_in;
+
+	tmp_fd = open("./.tmp/tmpfile.txt", O_TRUNC | O_CREAT | O_WRONLY, 0666);
+	content = get_next_line(STDIN_FILENO);
+	while(1)
+	{
+		if (ft_strncmp(content, eof, ft_strlen(content) - 1) == 0)
+			break;
+		write(tmp_fd, content, ft_strlen(content));
+		free(content);
+		content = get_next_line(STDIN_FILENO);
+	}
+	free(content);
+	close(tmp_fd);
+	fd_in = open("./.tmp/tmpfile.txt", O_RDONLY, 0777);
+	return fd_in;
 }
 
 char	*get_infilename(char *cmd)

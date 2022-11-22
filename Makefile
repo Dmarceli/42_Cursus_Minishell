@@ -15,6 +15,8 @@ PATH_SRC		:=	./src
 PATH_INCLUDES	:=	./incs
 PATH_BUILD		:= ./build
 
+TMP_FILES		:= ./.tmp
+
 LIBFT		=	./libft/libft.a
 LIBFT_DIR	=	./libft
 
@@ -40,11 +42,12 @@ SRCS			:= $(PATH_SRC)/main.c \
 					$(PATH_SRC)/special_check.c \
 					$(PATH_SRC)/msexit.c \
 					$(PATH_SRC)/redirect_util.c \
+					$(PATH_SRC)/get_next_line.c
 					
 
 OBJ				:= $(subst .c,.o,$(subst $(PATH_SRC), $(PATH_OBJS), $(SRCS)))
 
-all:$(BIN)
+all:$(BIN) $(TMP_FILES)
 
 $(BIN): $(LIBFT) $(OBJ)
 		@$(CC) -o $(@) $^ -I$(PATH_INCLUDES) $(LIBFT) $(INCS) $(LIBS)
@@ -63,6 +66,9 @@ $(LIBFT):
 	@printf "\033[4;32m[Building Libft]\033[0m\n"
 	@ $(MAKE) -C ./libft --silent
 
+$(TMP_FILES):
+	@mkdir $@
+
 clean:
 		@printf "\033[38;5;1m[Cleaning objects!]\033[0m\n"
 		@rm -rf $(PATH_OBJS)
@@ -70,7 +76,7 @@ clean:
 fclean: clean
 		@ $(MAKE) fclean -C $(LIBFT_DIR) --silent
 		@rm -rf $(PATH_BUILD) $(NAME)
-		@rm -rf $(BIN)
+		@rm -rf $(BIN) $(TMP_FILES)
 		@printf "\033[38;5;1m[Cleaning Bin!]\033[0m\n"
 
 re: fclean all
