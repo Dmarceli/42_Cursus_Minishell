@@ -51,6 +51,7 @@ void minishellparser(char* input, t_data *data)
 		if (pid == 0)
 			redirect(cmds[0], data);
 		waitpid(pid, NULL, 0);
+		free(cmds[0]);
 	}
 	else if (!is_builtin(cmds[0], data))
 	{
