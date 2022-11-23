@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 20:21:08 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/11/22 18:13:12 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/11/23 15:46:49 by dmarceli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ int	heredoc(char *eof)
 	int		fd_in;
 
 	tmp_fd = open("./.tmp/tmpfile.txt", O_TRUNC | O_CREAT | O_WRONLY, 0666);
+	write(1, "> ", 2);
 	content = get_next_line(STDIN_FILENO);
 	while(1)
 	{
@@ -131,6 +132,7 @@ int	heredoc(char *eof)
 			break;
 		write(tmp_fd, content, ft_strlen(content));
 		free(content);
+		write(1, "> ", 2);
 		content = get_next_line(STDIN_FILENO);
 	}
 	free(content);
@@ -160,7 +162,6 @@ char	*get_infilename(char *cmd)
 		sub_counter++;
 	}
 	filename[counter] = '\0';
-	//free(tmp);
 	return (filename);
 }
 

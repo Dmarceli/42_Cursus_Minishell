@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_util.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:50:07 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/11/14 18:25:34 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/11/23 14:54:45 by dmarceli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ft_index(char *str, char ch)
 			return (counter);
 		counter++;
 	}
-	return -1;
+	return (-1);
 }
 
 int	special_index(char *str)
@@ -55,7 +55,6 @@ int	special_index(char *str)
 
 	out = ft_index(str, '>');
 	in = ft_index(str, '<');
-
 	if (out == -1)
 		return (in);
 	else if (in == -1)

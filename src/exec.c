@@ -50,7 +50,6 @@ int	executecmd(char *cmd, t_data *data)
 	a = fork();
 	if (!a)
 	{
-
 		if (!ft_strncmp("./" , data->exec[0], 2))
 		{
 			if (getcwd(cwd, sizeof(cwd)))
