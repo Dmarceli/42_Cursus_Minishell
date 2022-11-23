@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 21:36:51 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/11/23 19:31:01 by dmarceli         ###   ########.fr       */
+/*   Updated: 2022/11/23 19:55:48 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,24 @@ void	handle_pipes(char **cmds, t_data *data)
 	int	counter;
 
 	counter = 0;
+	data->pid = malloc(sizeof(pid_t) * big_len(cmds));
 	while (cmds[counter])
 	{
 		if (pipe(data->fd) == -1)
 			return ;
-		data->pid = fork();
-		if (data->pid < 0)
+		data->pid[counter] = fork();
+		if (data->pid[counter] < 0)
 			return ;
-		if (data->pid == 0)
+		if (data->pid[counter] == 0)
 			child_process(cmds, data, counter);
 		close(data->fd[1]);
-		waitpid(data->pid, NULL, 0);
 		data->pipe_fd = data->fd[0];
 		counter++;
 	}
+	counter = 0;
+	while (data->pid[counter])
+		waitpid(data->pid[counter++], NULL, 0);
+	free(data->pid);
 	return ;
 }
 

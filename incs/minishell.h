@@ -38,7 +38,7 @@ typedef struct s_data
 	int		envlen;
 	int		lastexec;
 	int		fd[2];
-	pid_t	pid;
+	pid_t	*pid;
 	int		pipe_fd;
 }	t_data;
 

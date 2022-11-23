@@ -1,3 +1,0 @@
-OLDPWD=/nfs/homes/dmarceli/Desktop
-PWD=/nfs/homes/dmarceli/Desktop/42_Cursus_Minishell
-USER=dmarceli
