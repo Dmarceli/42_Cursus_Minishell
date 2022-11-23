@@ -27,23 +27,26 @@ int findvar(char *cmd, t_data *data)
 	(void)data;
 	int i;
 	char *var;
+	char *tmp;
 
 	i = -1;
-	
 	if(ft_strchr(cmd, '\"'))
-		var = ft_substr(cmd, 2, (ft_strlen(cmd) - 3));
+		var = ft_strtrim(cmd, "\"");
 	else
 		var = ft_substr(cmd, 1, (ft_strlen(cmd)));
+	tmp = ft_strtrim(var, " $");
 	while(data->env[++i])
 	{
-		if(!ft_strncmp(var, data->env[i], ft_strlen(var)))
+		if(!ft_strncmp(tmp, data->env[i], ft_strlen(tmp)))
 		{
 			free(var);
+			free(tmp);
 			return(i);
 		}
 	}
+	free(tmp);
 	free(var);
-	return (0);
+	return (-1);
 }
 
 
@@ -56,16 +59,27 @@ char *handle_dollar(char *cmd, t_data *data)
 	int k;
 
 	i = 0;
-	j = ft_split(cmd, ' ');
-	while (ft_strchr(j[i], '$') == NULL)
-		i++;
+	if (ft_strchr(cmd, ' '))
+	{
+		j = ft_split(cmd, ' ');
+		while (ft_strchr(j[i], '$') == NULL)
+			i++;
+	}
+	else
+	{
+		j = ft_split(cmd, '$');
+		i = 1;
+	}
 	if(ft_strchr(j[i], '\''))
 	{
 		tmp = ft_strtrim(j[i], "\'" );
 		free(j[i]);
 		j[i] = ft_strtrim(tmp, "\'" );
 		free(tmp);
-		value = join_strs(j," ",-1);
+		if (big_len(j) != 1)
+			value = join_strs(j," ",-1);
+		else
+			value = ft_strdup(j[i]);
 		free_split(j);
 		return (value);
 	}
@@ -84,11 +98,9 @@ char *handle_dollar(char *cmd, t_data *data)
 			value = handle_dollar(value, data);
 			return(value);
 		}
-			
-
 	}
 	k = findvar(j[i], data);
-	if (k)
+	if (k != -1)
 	{
 		value = ft_substr(ft_strchr(data->env[k], '='), 1, ft_strlen(data->env[k]));
 		free(j[i]);
@@ -107,8 +119,12 @@ char *handle_dollar(char *cmd, t_data *data)
 	}
 	else
 	{
+		free(j[i]);
+		j[i] = ft_strdup("");
+		value = join_strs(j," ",-1);
+		printf("%s\n", value);	
 		free_split(j);
-		return(cmd);
+		return(value);
 	}
 }
 

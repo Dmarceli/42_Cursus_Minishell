@@ -19,13 +19,17 @@ int echo(char *cmd)
 	int		is_n;
 	char	**value;
 	int		i;
-	if (ft_strchr(cmd, ' '))
-		value = ft_split(cmd,' ');
+	char 	*tmp;
+
+	tmp = ft_strtrim(cmd, " ");
+	if (ft_strchr(tmp, ' '))
+		value = ft_split(tmp,' ');
 	else
 	{
 		printf("\n");
 		return(0);
 	}
+	free(tmp);
 	is_n = checkechoflag(value[1]);
 	free(cmd);
 	if (is_n)
@@ -33,7 +37,6 @@ int echo(char *cmd)
 		i = 1;
 		while(value[++i])
 			printf("%s ", value[i]);
-		printf(" ");
 		i = -1;
 		while(value[++i])
 			free(value[i]);

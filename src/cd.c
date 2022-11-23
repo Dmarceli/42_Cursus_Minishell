@@ -26,6 +26,8 @@ int	cdwithpath(char *cmd)
 	char **dir;
 
 	dir = ft_split(cmd, ' ');
+	if (dir[2])
+		return(printf("cd: string not in pwd: %s\n", dir[2]));
 	if (chdir(dir[1]))
 	{
 		printf("cd: no such file or directory: %s\n", dir[1]);

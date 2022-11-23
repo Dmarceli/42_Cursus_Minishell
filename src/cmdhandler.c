@@ -4,6 +4,8 @@ int	is_builtin(char *value, t_data *data)
 {
 	if (ft_strchr(value, '\'') || ft_strchr(value, '\"'))
 	 	value = removequotes(value);
+	if (!check_emptyprompt(value))
+		return(printf("%s: command not found\n", value));
 	if (!value)
 		return (0);
 	else if (!(ft_strncmp(value, "echo", 4)))
@@ -23,4 +25,3 @@ int	is_builtin(char *value, t_data *data)
 	else
 		return(executecmd(value, data));
 }
-

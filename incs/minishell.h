@@ -58,6 +58,7 @@ int		cdwithpath(char *cmd);
 int		is_builtin(char *value, t_data *data);
 int		execbuiltin(char *value, t_data *data);
 int		checkechoflag(char *cmd);
+int 	check_emptyprompt(char *cmd);
 int 	echo(char *cmd);
 int 	env(t_data *data);
 char 	*getpath(t_data *data);

@@ -8,10 +8,16 @@ void	sighandler_i(int sig)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 	}
+	if (sig == SIGQUIT)
+	{
+		write(0, "Quit (core dumped)\n", 20);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+	}
 }
 void ignore_signal_i(void)
 {
-	signal(SIGQUIT, SIG_IGN);
+	signal(SIGQUIT, sighandler_i);
 	signal(SIGINT, sighandler_i);
 }
 
@@ -20,7 +26,6 @@ void	sighandler(int sig)
 	if (sig == SIGINT)
 	{
 		write(0, "\n", 1);
-		write(1,"olasoueu\n",10);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();

@@ -61,13 +61,13 @@ int	executecmd(char *cmd, t_data *data)
 			path = handlepath(data->exec[0], data);
 			if (!path)
 			{
-				printf("Error: %s not found\n", cmd);
+				printf("%s: command not found\n", cmd);
 				exit (127);
 			}
 			data->exec[0] = ft_strjoin(path, data->exec[0]);
 		}
 		if (execve(data->exec[0], data->exec, data->env) == -1)
-			printf("Error: %s not found\n", cmd);
+			printf("%s: command not found\n", cmd);
 		freearray(data->exec);
 		exit(126);
 	}
