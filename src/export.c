@@ -5,6 +5,8 @@ int add_new_var(char *cmd, t_data *data)
 	char **var;
 	char *tmp;
 	int j;
+	int in;
+	char **in_out;
 
 	j = 0;
 	var = ft_split(cmd,' ');
@@ -13,13 +15,25 @@ int add_new_var(char *cmd, t_data *data)
 	{
 		if(ft_strchr(var[j], '='))
 		{
-			data->env[data->envlen - 1] = ft_strdup(var[j]);
-			data->envlen++;
+			in_out = ft_split(var[j], '=');
+			in = look_for_var_in_array(in_out[0], data);
+			free(in_out);
+			if (in != -1)
+			{
+				free(data->env[in]);
+				data->env[in] = ft_strdup(var[j]);
+			}
+			else
+			{
+				free(data->env[data->envlen - 1] );
+				data->env[data->envlen - 1] = ft_strdup(var[j]);
+				data->envlen++;
+				data->env[data->envlen - 1] = ft_strdup(tmp);
+			}
 		}
 		else 
 			continue;
 	}
-	data->env[data->envlen -1] = ft_strdup(tmp);
 	freearray(var);
 	free(tmp);
 	return (0);

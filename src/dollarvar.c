@@ -4,7 +4,6 @@ char	*join_strs(char **str_chunks, char *sep, int limiter)
 {
 	int		k;
 	char	*complete_str;
-
 	k = -1;
 	complete_str = 0;
 	while (str_chunks[++k] && (k < limiter || limiter < 0))
@@ -48,7 +47,6 @@ int findvar(char *cmd, t_data *data)
 	free(var);
 	return (-1);
 }
-
 
 char *handle_dollar(char *cmd, t_data *data)
 {
@@ -115,14 +113,12 @@ char *handle_dollar(char *cmd, t_data *data)
 			value = handle_dollar(value, data);
 			return(value);
 		}
-		//return (value);
 	}
 	else
 	{
 		free(j[i]);
 		j[i] = ft_strdup("");
 		value = join_strs(j," ",-1);
-		printf("%s\n", value);	
 		free_split(j);
 		return(value);
 	}
