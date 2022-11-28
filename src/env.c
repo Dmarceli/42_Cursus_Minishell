@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/28 17:44:31 by dmarceli          #+#    #+#             */
+/*   Updated: 2022/11/28 17:44:53 by dmarceli         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../incs/minishell.h"
 
 void	initenv(char **envs, t_data *data)
 {
-	int i;
-	i = 0;
+	int	i;
 
+	i = 0;
 	while (envs[i])
 		i++;
 	data->envlen = i;
@@ -19,12 +31,12 @@ void	initenv(char **envs, t_data *data)
 	data->lastexec = 0;
 }
 
-
-int env(t_data *data)
+int	env(t_data *data)
 {
-	int i;
+	int	i;
+
 	i = -1;
-	while(++i < data->envlen)
+	while (++i < data->envlen)
 		printf("%s\n", data->env[i]);
-	return(1);
+	return (1);
 }
