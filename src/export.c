@@ -1,19 +1,35 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/29 18:27:16 by dmarceli          #+#    #+#             */
+/*   Updated: 2022/11/29 18:54:23 by dmarceli         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../incs/minishell.h"
 
-int add_new_var(char *cmd, t_data *data)
+void	export_new_var(t_data *data, char *var, char *tmp)
 {
-	char **var;
-	char *tmp;
-	int j;
-	int in;
-	char **in_out;
+	free(data->env[data->envlen - 1]);
+	data->env[data->envlen - 1] = ft_strdup(var);
+	data->envlen++;
+	data->env[data->envlen - 1] = ft_strdup(tmp);
+}
+
+void	process_array(char **var, char *tmp, t_data *data)
+{
+	int		in;
+	char	**in_out;
+	int		j;
 
 	j = 0;
-	var = ft_split(cmd,' ');
-	tmp	= ft_strdup(data->env[data->envlen - 1]);
-	while(var[++j])
+	while (var[++j])
 	{
-		if(ft_strchr(var[j], '='))
+		if (ft_strchr(var[j], '='))
 		{
 			in_out = ft_split(var[j], '=');
 			in = look_for_var_in_array(in_out[0], data);
@@ -24,29 +40,35 @@ int add_new_var(char *cmd, t_data *data)
 				data->env[in] = ft_strdup(var[j]);
 			}
 			else
-			{
-				free(data->env[data->envlen - 1] );
-				data->env[data->envlen - 1] = ft_strdup(var[j]);
-				data->envlen++;
-				data->env[data->envlen - 1] = ft_strdup(tmp);
-			}
+				export_new_var(data, var[j], tmp);
 		}
-		else 
-			continue;
+		else
+			continue ;
 	}
+	return ;
+}
+
+int	add_new_var(char *cmd, t_data *data)
+{
+	char	**var;
+	char	*tmp;
+
+	var = ft_split(cmd, ' ');
+	tmp = ft_strdup(data->env[data->envlen - 1]);
+	process_array(var, tmp, data);
 	freearray(var);
 	free(tmp);
 	return (0);
 }
 
-int ms_export(char *cmd , t_data *data)
+int	ms_export(char *cmd, t_data *data)
 {
-	int i;
+	int	i;
 
 	i = -1;
-	if (!ft_strncmp(cmd, "export\0" , 8) || !ft_strncmp(cmd, "export \0" , 9))
+	if (!ft_strncmp(cmd, "export\0", 8) || !ft_strncmp(cmd, "export \0", 9))
 	{
-		while(++i < data->envlen)
+		while (++i < data->envlen)
 			printf("declare -x %s\n", data->env[i]);
 	}
 	else

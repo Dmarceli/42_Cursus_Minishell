@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   signals.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/29 19:13:29 by dmarceli          #+#    #+#             */
+/*   Updated: 2022/11/29 19:14:12 by dmarceli         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../incs/minishell.h"
 
 void	sighandler_i(int sig)
@@ -15,7 +27,8 @@ void	sighandler_i(int sig)
 		rl_replace_line("", 0);
 	}
 }
-void ignore_signal_i(void)
+
+void	ignore_signal_i(void)
 {
 	signal(SIGQUIT, sighandler_i);
 	signal(SIGINT, sighandler_i);
@@ -32,7 +45,7 @@ void	sighandler(int sig)
 	}
 }
 
-void ignore_signal(void)
+void	ignore_signal(void)
 {
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, sighandler);

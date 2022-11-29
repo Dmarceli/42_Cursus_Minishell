@@ -6,7 +6,7 @@
 /*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 17:33:02 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/11/28 17:42:00 by dmarceli         ###   ########.fr       */
+/*   Updated: 2022/11/29 16:40:02 by dmarceli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int	checkechoflag(char *cmd)
 int	echo(char *cmd)
 {
 	int		is_n;
-	int		i;
 	char	**value;
 	char	*tmp;
 

@@ -37,7 +37,7 @@ void minishellparser(char* input, t_data *data)
 	{
 		cmds = ft_split(input, '|');
 		handle_pipes(cmds, data);
-		free_split(cmds);
+		freearray(cmds);
 		return ;
 	}
 	cmds = malloc(sizeof(cmds));

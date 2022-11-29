@@ -6,25 +6,19 @@
 /*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 17:45:42 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/11/28 17:55:03 by dmarceli         ###   ########.fr       */
+/*   Updated: 2022/11/29 17:05:07 by dmarceli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/minishell.h"
 
-char	*handlepath(char *cmd, t_data *data)
+char	*test_path(char **possible_path, char *cmd)
 {
-	char	**possible_path;
-	char	*test_cmd;
-	int		pos;
 	char	*tmp;
+	char	*test_cmd;
 	int		i;
 
 	i = -1;
-	pos = look_for_var_in_array("PATH", data);
-	if (pos == -1)
-		return (0);
-	possible_path = ft_split(data->env[pos], ':');
 	while (possible_path[++i])
 	{
 		tmp = ft_strjoin(possible_path[i], "/");
@@ -36,6 +30,7 @@ char	*handlepath(char *cmd, t_data *data)
 		}
 		else
 		{
+			freearray(possible_path);
 			free(test_cmd);
 			return (tmp);
 		}
@@ -44,13 +39,51 @@ char	*handlepath(char *cmd, t_data *data)
 	return (0);
 }
 
+char	*handlepath(char *cmd, t_data *data)
+{
+	char	**possible_path;
+	int		pos;
+
+	pos = look_for_var_in_array("PATH", data);
+	if (pos == -1)
+		return (0);
+	possible_path = ft_split(data->env[pos], ':');
+	return (test_path(possible_path, cmd));
+}
+
+void	execprocess(char *cmd, t_data *data, char *path)
+{
+	char	cwd[1040];
+
+	if (!ft_strncmp("./", data->exec[0], 2))
+	{
+		if (getcwd(cwd, sizeof(cwd)))
+			path = ft_strdup(cwd);
+		path = ft_strjoin(path, "/");
+	}
+	else if (cmd[0] != '/')
+	{
+		path = handlepath(data->exec[0], data);
+		if (!path)
+		{
+			printf("%s: command not found\n", cmd);
+			exit (127);
+		}
+		data->exec[0] = ft_strjoin(path, data->exec[0]);
+	}
+	if (execve(data->exec[0], data->exec, data->env) == -1)
+		printf("%s: command not found\n", cmd);
+	freearray(data->exec);
+	exit(126);
+}
+
 int	executecmd(char *cmd, t_data *data)
 {
 	int		a;
 	char	*path;
 	int		exitvalue;
-	char	cwd[1040];
 
+	path = NULL;
 	if (ft_strchr(cmd, ' '))
 		data->exec = ft_split(cmd, ' ');
 	else
@@ -61,28 +94,7 @@ int	executecmd(char *cmd, t_data *data)
 	}
 	a = fork();
 	if (!a)
-	{
-		if (!ft_strncmp("./", data->exec[0], 2))
-		{
-			if (getcwd(cwd, sizeof(cwd)))
-				path = ft_strdup(cwd);
-			path = ft_strjoin(path , "/");
-		}
-		else if (cmd[0] != '/')
-		{
-			path = handlepath(data->exec[0], data);
-			if (!path)
-			{
-				printf("%s: command not found\n", cmd);
-				exit (127);
-			}
-			data->exec[0] = ft_strjoin(path, data->exec[0]);
-		}
-		if (execve(data->exec[0], data->exec, data->env) == -1)
-			printf("%s: command not found\n", cmd);
-		freearray(data->exec);
-		exit(126);
-	}
+		execprocess(cmd, data, path);
 	freearray(data->exec);
 	waitpid(a, &exitvalue, 0);
 	data->lastexec = EXIT_STATUS(exitvalue);

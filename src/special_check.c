@@ -6,7 +6,7 @@
 /*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 18:18:43 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/11/23 19:05:57 by dmarceli         ###   ########.fr       */
+/*   Updated: 2022/11/29 19:14:25 by dmarceli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 int	check_special(char *input, char chr)
 {
 	int	counter;
-	
-	//printf("%s\n", input);
+
 	counter = 0;
 	while (input[counter])
 	{
@@ -41,7 +40,7 @@ int	special_quote(char *input, int index)
 	d_q = 0;
 	s_q = 0;
 	counter = index;
-	while(counter > 0)
+	while (counter > 0)
 	{
 		if (input[counter] == '\"')
 			d_q += 1;

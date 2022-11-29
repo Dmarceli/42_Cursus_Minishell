@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   quotes.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/29 19:03:38 by dmarceli          #+#    #+#             */
+/*   Updated: 2022/11/29 19:13:14 by dmarceli         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../incs/minishell.h"
 
 int	checkquotation(char *input)
@@ -29,44 +41,53 @@ int	checkquotation(char *input)
 		return (0);
 }
 
-char *removequotes(char *cmd)
+char	*removesinglequotes(char *cmd)
 {
-	int j = 0;
-	int i = -1;
-    if (ft_strchr(cmd, '\"'))
-    {
-        while (++i < (int)ft_strlen(cmd))
-        {
-            if (cmd[i] == '\\')
-            {
-                cmd[j++] = cmd[i++];
-                cmd[j++] = cmd[i];
-                if (cmd[i] == '\0')
-                    break;
-            }
-            else if (cmd[i] != '"')
-                cmd[j++] = cmd[i];
-        }
-        cmd[j] = '\0';
-        return (cmd);
-    }
-    else if (ft_strchr(cmd, '\''))
-    {
-        while (++i < (int)ft_strlen(cmd))
-        {
-            if (cmd[i] == '\\')
-            {
-                cmd[j++] = cmd[i++];
-                cmd[j++] = cmd[i];
-                if (cmd[i] == '\0')
-                    break;
-            }
-            else if (cmd[i] != '\'')
-                cmd[j++] = cmd[i];
-        }
-        cmd[j] = '\0';
-        return (cmd);
-    }
-    else 
-        return (0);
+	while (++i < (int)ft_strlen(cmd))
+	{
+		if (cmd[i] == '\\')
+		{
+			cmd[j++] = cmd[i++];
+			cmd[j++] = cmd[i];
+			if (cmd[i] == '\0')
+				break ;
+		}
+		else if (cmd[i] != '\'')
+			cmd[j++] = cmd[i];
+	}
+	cmd[j] = '\0';
+	return (cmd);
+}
+
+char	*removedoublequotes(char *cmd)
+{
+	int	j;
+	int	i;
+
+	j = 0;
+	i = -1;
+	while (++i < (int)ft_strlen(cmd))
+	{
+		if (cmd[i] == '\\')
+		{
+			cmd[j++] = cmd[i++];
+			cmd[j++] = cmd[i];
+			if (cmd[i] == '\0')
+				break ;
+		}
+		else if (cmd[i] != '"')
+			cmd[j++] = cmd[i];
+	}
+	cmd[j] = '\0';
+	return (cmd);
+}
+
+char	*removequotes(char *cmd)
+{
+	if (ft_strchr(cmd, '\"'))
+		return (removedoublequotes(cmd));
+	else if (ft_strchr(cmd, '\''))
+		return (removesinglequotes(cmd));
+	else
+		return (0);
 }
