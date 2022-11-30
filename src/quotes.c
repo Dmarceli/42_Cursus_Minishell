@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dani <dani@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 19:03:38 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/11/29 19:13:14 by dmarceli         ###   ########.fr       */
+/*   Updated: 2022/11/30 18:02:40 by dani             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ int	checkquotation(char *input)
 
 char	*removesinglequotes(char *cmd)
 {
+	int	j;
+	int	i;
+
+	j = 0;
+	i = -1;
 	while (++i < (int)ft_strlen(cmd))
 	{
 		if (cmd[i] == '\\')

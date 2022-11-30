@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msexit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dani <dani@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:57:20 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/11/29 19:00:55 by dmarceli         ###   ########.fr       */
+/*   Updated: 2022/11/30 18:03:21 by dani             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,5 @@ int	ft_exit(char *cmd, t_data *data)
 		freearray(data->env);
 		exit(data->lastexec);
 	}
+	return (0);
 }
