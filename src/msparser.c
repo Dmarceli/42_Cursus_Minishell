@@ -58,6 +58,7 @@ void minishellparser(char* input, t_data *data)
 	}
 	else if (!is_builtin(cmds[0], data))
 	{
+
 		free(cmds);
 		return ;
 	}
