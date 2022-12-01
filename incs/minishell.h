@@ -104,5 +104,6 @@ char	*ft_next(char *buffer);
 char	*ft_line(char *buffer);
 char	*read_file(int fd, char *res);
 char	*get_next_line(int fd);
+char	*justthevar(char *str);
 
 #endif

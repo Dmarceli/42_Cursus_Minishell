@@ -6,7 +6,7 @@
 /*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:27:16 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/11/29 18:54:23 by dmarceli         ###   ########.fr       */
+/*   Updated: 2022/12/01 16:35:48 by dmarceli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	process_array(char **var, char *tmp, t_data *data)
 		{
 			in_out = ft_split(var[j], '=');
 			in = look_for_var_in_array(in_out[0], data);
-			free(in_out);
+			freearray(in_out);
 			if (in != -1)
 			{
 				free(data->env[in]);

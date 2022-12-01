@@ -1,25 +1,26 @@
 #include "../incs/minishell.h"
 
-int is_space(char c)
+int	is_space(char c)
 {
 	if (c == ' ' || c == '\t')
-		return(1);
+		return (1);
 	else
-		return(0);
+		return (0);
 }
 
 int check_emptyprompt(char *cmd)
 {
-	int i;
+	int	i;
+
 	i = -1;
 	while (cmd[++i])
 	{
 		if (is_space(cmd[i]))
 			i++;
 		else
-			return(1);
+			return (1);
 	}
-	return(0);
+	return (0);
 }
 
 void minishellparser(char* input, t_data *data)
@@ -41,10 +42,12 @@ void minishellparser(char* input, t_data *data)
 		return ;
 	}
 	cmds = malloc(sizeof(cmds));
+	cmds[0] = NULL;
 	if (ft_strchr(input, '$'))
 		cmds[0] = handle_dollar(input, data);
 	else
 		cmds[0] = ft_strdup(input);
+	free(input);
 	if (check_special(cmds[0], '>') || check_special(cmds[0], '<'))
 	{
 		pid = fork();
@@ -55,8 +58,6 @@ void minishellparser(char* input, t_data *data)
 	}
 	else if (!is_builtin(cmds[0], data))
 	{
-		if (!cmds[0])
-			free(cmds[0]); 	
 		free(cmds);
 		return ;
 	}

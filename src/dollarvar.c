@@ -6,7 +6,7 @@
 /*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:44:01 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/11/29 17:54:06 by dmarceli         ###   ########.fr       */
+/*   Updated: 2022/12/01 15:23:27 by dmarceli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ char	*handle_dollar_in(char **j, int i, t_data *data)
 	j[i] = ft_strdup(value);
 	free(value);
 	value = join_strs(j, " ", -1);
+	freearray(j);
 	if (!ft_strchr(value, '$'))
 		return (value);
 	else
@@ -79,6 +80,7 @@ int	findvar(char *cmd, t_data *data)
 	int		i;
 	char	*var;
 	char	*tmp;
+	char 	*tmp2 = NULL;
 
 	i = -1;
 	if (ft_strchr(cmd, '\"'))
@@ -88,12 +90,15 @@ int	findvar(char *cmd, t_data *data)
 	tmp = ft_strtrim(var, " $");
 	while (data->env[++i])
 	{
-		if (!ft_strncmp(tmp, data->env[i], ft_strlen(tmp)))
+		tmp2 = justthevar(data->env[i]);
+		if (!ft_strncmp(tmp, tmp2, ft_strlen(tmp2)))
 		{
 			free(var);
 			free(tmp);
+			free (tmp2);
 			return (i);
 		}
+		free (tmp2);
 	}
 	free(tmp);
 	free(var);

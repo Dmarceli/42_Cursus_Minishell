@@ -1,36 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   msutils1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/29 18:56:31 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/01 16:54:18 by dmarceli         ###   ########.fr       */
+/*   Created: 2022/12/01 13:16:48 by dmarceli          #+#    #+#             */
+/*   Updated: 2022/12/01 13:42:45 by dmarceli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/minishell.h"
 
-int	main(int ac, char **av, char **envs)
-{	
-	t_data	data;
-	int		exitvalue;
-	char	*input;
+char	*justthevar(char *str)
+{
+	int		len;
+	char	*ret;
+	int		i;
 
-	(void)ac;
-	(void)av;
-	initenv(envs, &data);
-	ignore_signal();
-	while (1)
+	len = 0;
+	i = 0;
+	while (str[len] != '=')
+		len++;
+	ret = malloc(sizeof(char) * len + 1);
+	ret[len] = '\0';
+	while (i < len)
 	{
-		input = readline(CYAN"minishell> "BLANK);
-		if (!input && write(0, "\n", 1))
-			ft_exit("exit", &data);
-		ignore_signal_i();
-		minishellparser(input, &data);
-		ignore_signal();
-		exitvalue = data.lastexec;
+		ret[i] = str[i];
+		i++;
 	}
-	return (exitvalue);
+	return (ret);
 }

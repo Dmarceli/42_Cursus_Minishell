@@ -6,7 +6,7 @@
 /*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 19:01:51 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/11/29 19:02:58 by dmarceli         ###   ########.fr       */
+/*   Updated: 2022/12/01 16:07:19 by dmarceli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,15 @@ void	freearray(char **arr)
 	arr = NULL;
 }
 
+char	*ft_strfree_join(char **s1, char *s2)
+{
+	char	*result;
+
+	result = ft_strjoin(*s1, s2);
+	free(*s1);
+	return (result);
+}
+
 char	*join_strs(char **str_chunks, char *sep, int limiter)
 {
 	int		k;
@@ -39,12 +48,12 @@ char	*join_strs(char **str_chunks, char *sep, int limiter)
 			complete_str = ft_strjoin(sep, str_chunks[k]);
 		else
 		{
-			complete_str = ft_strjoin(complete_str, sep);
-			complete_str = ft_strjoin(complete_str, str_chunks[k]);
+			complete_str = ft_strfree_join(&complete_str, sep);
+			complete_str = ft_strfree_join(&complete_str, str_chunks[k]);
 		}
 	}
 	if (complete_str)
-		return (ft_strjoin(complete_str, sep));
+		return (ft_strfree_join(&complete_str, sep));
 	return (complete_str);
 }
 
