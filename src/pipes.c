@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: duartebaeta <duartebaeta@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 21:36:51 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/11/23 19:55:48 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/01 18:46:57 by duartebaeta      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,20 @@ void	handle_pipes(char **cmds, t_data *data)
 	data->pid = malloc(sizeof(pid_t) * big_len(cmds));
 	while (cmds[counter])
 	{
-		if (pipe(data->fd) == -1)
-			return ;
-		data->pid[counter] = fork();
-		if (data->pid[counter] < 0)
-			return ;
-		if (data->pid[counter] == 0)
-			child_process(cmds, data, counter);
-		close(data->fd[1]);
-		data->pipe_fd = data->fd[0];
+		if (is_parent(cmds[counter], data))
+			data->pid[counter] = 1;
+		else
+		{	
+			if (pipe(data->fd) == -1)
+				return ;
+			data->pid[counter] = fork();
+			if (data->pid[counter] < 0)
+				return ;
+			if (data->pid[counter] == 0)
+				child_process(cmds, data, counter);
+			close(data->fd[1]);
+			data->pipe_fd = data->fd[0];
+		}
 		counter++;
 	}
 	counter = 0;

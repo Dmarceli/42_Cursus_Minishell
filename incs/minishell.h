@@ -105,5 +105,6 @@ char	*ft_line(char *buffer);
 char	*read_file(int fd, char *res);
 char	*get_next_line(int fd);
 char	*justthevar(char *str);
+int		is_parent(char *cmd, t_data *data);
 
 #endif

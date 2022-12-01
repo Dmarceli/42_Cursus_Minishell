@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmdhandler.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: duartebaeta <duartebaeta@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:35:28 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/01 14:20:21 by dmarceli         ###   ########.fr       */
+/*   Updated: 2022/12/01 18:39:24 by duartebaeta      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,22 @@ int	is_builtin(char *value, t_data *data)
 		return (ft_exit(value, data));
 	else
 		return (executecmd(value, data));
+}
+
+int	is_parent(char *cmd, t_data *data)
+{
+	char	*value;
+
+	value = ft_strtrim(cmd, " ");
+	if (!(ft_strncmp(value, "cd ", 3)))
+		data->lastexec = ms_cd(value, data);
+	else if (!(ft_strncmp(value, "export", 6)))
+		data->lastexec = ms_export(value, data);
+	else if (!(ft_strncmp(value, "unset ", 6)))
+		data->lastexec = ms_unset(value, data);
+	else if (!(ft_strncmp(value, "exit", 4)))
+		ft_exit(value, data);
+	else
+		return (0);
+	return (1);
 }
