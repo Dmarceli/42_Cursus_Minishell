@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmdhandler.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: duartebaeta <duartebaeta@student.42.fr>    +#+  +:+       +#+        */
+/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:35:28 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/01 18:39:24 by duartebaeta      ###   ########.fr       */
+/*   Updated: 2022/12/05 16:40:30 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,10 @@ int	is_parent(char *cmd, t_data *data)
 	else if (!(ft_strncmp(value, "exit", 4)))
 		ft_exit(value, data);
 	else
+	{
+		free(value);
 		return (0);
+	}
+	free(value);
 	return (1);
 }

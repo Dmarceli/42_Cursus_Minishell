@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: duartebaeta <duartebaeta@student.42.fr>    +#+  +:+       +#+        */
+/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 21:36:51 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/12/01 18:46:57 by duartebaeta      ###   ########.fr       */
+/*   Updated: 2022/12/05 16:54:26 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	handle_pipes(char **cmds, t_data *data)
 {
 	int	counter;
+	int	pid_counter;
 
 	counter = 0;
 	data->pid = malloc(sizeof(pid_t) * big_len(cmds));
@@ -36,9 +37,13 @@ void	handle_pipes(char **cmds, t_data *data)
 		}
 		counter++;
 	}
-	counter = 0;
-	while (data->pid[counter])
-		waitpid(data->pid[counter++], NULL, 0);
+	pid_counter = 0;
+	while (pid_counter < counter)
+	{
+		waitpid(data->pid[pid_counter], NULL, 0);
+		printf("%i\n", counter);
+		pid_counter++;
+	}
 	free(data->pid);
 	return ;
 }
@@ -90,7 +95,7 @@ int	big_len(char **str)
 	int	counter;
 
 	counter = 0;
-	while (str[counter])
+	while (str[counter] != NULL)
 		counter++;
 	return (counter);
 }
