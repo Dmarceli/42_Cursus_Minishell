@@ -6,7 +6,7 @@
 /*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 17:33:02 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/11/29 16:40:02 by dmarceli         ###   ########.fr       */
+/*   Updated: 2022/12/05 14:47:39 by dmarceli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,5 @@ int	echo(char *cmd)
 	}
 	free(tmp);
 	is_n = checkechoflag(value[1]);
-	free(cmd);
 	return (exec_echo(value, is_n));
 }

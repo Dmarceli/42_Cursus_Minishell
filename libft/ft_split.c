@@ -6,12 +6,11 @@
 /*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:17:54 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/10/29 23:34:49 by dmarceli         ###   ########.fr       */
+/*   Updated: 2022/12/05 15:02:16 by dmarceli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
 
 static int	nb_words(const char *str, char c)
 {
