@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msutils1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 13:16:48 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/01 13:42:45 by dmarceli         ###   ########.fr       */
+/*   Updated: 2022/12/05 17:57:52 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,23 @@ char	*justthevar(char *str)
 		i++;
 	}
 	return (ret);
+}
+
+int	big_len(char **str)
+{
+	int	counter;
+
+	counter = 0;
+	while (str[counter] != NULL)
+		counter++;
+	return (counter);
+}
+
+char	*no_var_to_expand(char **j, int i, char *value)
+{
+	free(j[i]);
+	j[i] = ft_strdup("");
+	value = join_strs(j, " ", -1);
+	freearray(j);
+	return (value);
 }

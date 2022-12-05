@@ -106,5 +106,7 @@ char	*read_file(int fd, char *res);
 char	*get_next_line(int fd);
 char	*justthevar(char *str);
 int		is_parent(char *cmd, t_data *data);
+void	child_input(char **cmds, t_data *data, int counter);
+void	wait_pid(t_data *data, int counter);
 
 #endif

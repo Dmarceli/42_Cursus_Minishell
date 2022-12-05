@@ -6,7 +6,7 @@
 /*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 21:36:51 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/12/05 16:54:26 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/05 18:47:57 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	handle_pipes(char **cmds, t_data *data)
 {
 	int	counter;
-	int	pid_counter;
 
 	counter = 0;
 	data->pid = malloc(sizeof(pid_t) * big_len(cmds));
@@ -37,21 +36,34 @@ void	handle_pipes(char **cmds, t_data *data)
 		}
 		counter++;
 	}
-	pid_counter = 0;
-	while (pid_counter < counter)
-	{
-		waitpid(data->pid[pid_counter], NULL, 0);
-		printf("%i\n", counter);
-		pid_counter++;
-	}
-	free(data->pid);
-	return ;
+	wait_pid(data, counter);
 }
 
-void child_process(char **cmds, t_data *data, int counter)
+void	child_process(char **cmds, t_data *data, int counter)
+{
+	int	fd_out;
+
+	child_input(cmds, data, counter);
+	if (check_special(cmds[counter], '>') == 0)
+	{
+		if (counter != big_len(cmds) - 1)
+			dup2(data->fd[1], STDOUT_FILENO);
+	}
+	else
+	{
+		fd_out = output(cmds[counter]);
+		dup2(fd_out, STDOUT_FILENO);
+		close(fd_out);
+	}
+	if (check_special(cmds[counter], '>') || check_special(cmds[counter], '<'))
+		cmds[counter] = return_trim(cmds[counter]);
+	is_builtin(cmds[counter], data);
+	exit(0);
+}
+
+void	child_input(char **cmds, t_data *data, int counter)
 {
 	int	fd_in;
-	int	fd_out;
 
 	if (check_special(cmds[counter], '<') == 0)
 	{
@@ -73,29 +85,14 @@ void child_process(char **cmds, t_data *data, int counter)
 		dup2(fd_in, STDIN_FILENO);
 		close(fd_in);
 	}
-	if (check_special(cmds[counter], '>') == 0)
-	{
-		if (counter != big_len(cmds) - 1)
-			dup2(data->fd[1], STDOUT_FILENO);
-	}
-	else
-	{
-		fd_out = output(cmds[counter]);
-		dup2(fd_out, STDOUT_FILENO);
-		close(fd_out);
-	}
-	if (check_special(cmds[counter], '>') || check_special(cmds[counter], '<'))
-		cmds[counter] = return_trim(cmds[counter]);
-	is_builtin(cmds[counter], data);
-	exit(0);
 }
 
-int	big_len(char **str)
+void	wait_pid(t_data *data, int counter)
 {
-	int	counter;
+	int	pid_counter;
 
-	counter = 0;
-	while (str[counter] != NULL)
-		counter++;
-	return (counter);
+	pid_counter = 0;
+	while (pid_counter < counter)
+		waitpid(data->pid[pid_counter++], NULL, 0);
+	free(data->pid);
 }

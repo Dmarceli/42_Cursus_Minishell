@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msutils.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 19:01:51 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/01 16:07:19 by dmarceli         ###   ########.fr       */
+/*   Updated: 2022/12/05 17:57:47 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,4 @@ int	is_numeric(char *value)
 			return (0);
 	}
 	return (1);
-}
-
-char	*no_var_to_expand(char **j, int i, char *value)
-{
-	free(j[i]);
-	j[i] = ft_strdup("");
-	value = join_strs(j, " ", -1);
-	freearray(j);
-	return (value);
 }
