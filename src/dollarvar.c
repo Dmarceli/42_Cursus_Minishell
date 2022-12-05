@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollarvar.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:44:01 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/01 15:23:27 by dmarceli         ###   ########.fr       */
+/*   Updated: 2022/12/05 17:07:03 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	findvar(char *cmd, t_data *data)
 	int		i;
 	char	*var;
 	char	*tmp;
-	char 	*tmp2 = NULL;
+	char	*tmp2 = NULL;
 
 	i = -1;
 	if (ft_strchr(cmd, '\"'))
