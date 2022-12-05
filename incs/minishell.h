@@ -108,5 +108,7 @@ char	*justthevar(char *str);
 int		is_parent(char *cmd, t_data *data);
 void	child_input(char **cmds, t_data *data, int counter);
 void	wait_pid(t_data *data, int counter);
+int	output_util(char *cmd, int outs, int counter);
+char	*trim_util(char *old);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_util.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:50:07 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/11/23 14:54:45 by dmarceli         ###   ########.fr       */
+/*   Updated: 2022/12/05 19:38:56 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,6 @@ int	count_output(char *cmd)
 			counter++;
 	}
 	return (out_counter);
-}
-
-int	ft_index(char *str, char ch)
-{
-	int	counter;
-
-	counter = 0;
-	while (str[counter])
-	{
-		if (str[counter] == ch)
-			return (counter);
-		counter++;
-	}
-	return (-1);
 }
 
 int	special_index(char *str)
@@ -81,4 +67,47 @@ int	trimmer(char *bush, int counter)
 		size++;
 	}
 	return (size);
+}
+
+char	*return_trim(char *bush)
+{
+	char	*trim;
+	char	*old;
+
+	old = ft_strdup(bush);
+	trim = ft_strdup(bush);
+	while (ft_strchr(trim, '<') || ft_strchr(trim, '>'))
+	{
+		free(trim);
+		trim = trim_util(old);
+		free(old);
+		old = strdup(trim);
+	}
+	free(old);
+	free(bush);
+	return (trim);
+}
+
+char	*get_infilename(char *cmd)
+{
+	char	*tmp;
+	char	*filename;
+	int		counter;
+	int		sub_counter;
+
+	tmp = ft_strrchr(cmd, '<');
+	counter = 0;
+	sub_counter = 0;
+	filename = ft_calloc(ft_strlen(cmd), sizeof(char));
+	sub_counter++;
+	while (tmp[sub_counter] == ' ')
+		sub_counter++;
+	while (ft_strchr("<> \0", tmp[sub_counter]) == NULL)
+	{
+		filename[counter] = tmp[sub_counter];
+		counter++;
+		sub_counter++;
+	}
+	filename[counter] = '\0';
+	return (filename);
 }
