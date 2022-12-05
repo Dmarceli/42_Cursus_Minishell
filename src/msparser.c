@@ -12,8 +12,8 @@ int check_emptyprompt(char *cmd)
 {
 	int	i;
 
-	i = -1;
-	while (cmd[++i])
+	i = 0;
+	while (cmd[i] != '\0')
 	{
 		if (is_space(cmd[i]))
 			i++;
@@ -31,7 +31,10 @@ void minishellparser(char* input, t_data *data)
 	if (ft_strlen(input))
 		add_history(input);
 	if (!check_emptyprompt(input))
-		return;
+	{
+		free(input);
+		return ;
+	}
 	if (checkquotation(input))
 		return((void)printf("Quotation incomplete\n"));
 	if (check_special(input, '|'))
@@ -41,12 +44,12 @@ void minishellparser(char* input, t_data *data)
 		freearray(cmds);
 		return ;
 	}
-	cmds = malloc(sizeof(cmds));
+	cmds = ft_calloc(sizeof(char **) * ft_strlen(input), sizeof(cmds));
 	cmds[0] = NULL;
 	if (ft_strchr(input, '$'))
 		cmds[0] = handle_dollar(input, data);
 	else
-		cmds[0] = ft_strdup(input);
+		cmds[0] = ft_strdup(input); //leak, idk why
 	free(input);
 	if (check_special(cmds[0], '>') || check_special(cmds[0], '<'))
 	{
