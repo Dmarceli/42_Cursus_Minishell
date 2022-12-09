@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dani <dani@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 19:03:38 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/11/30 18:02:40 by dani             ###   ########.fr       */
+/*   Updated: 2022/12/09 18:01:02 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@ int	checkquotation(char *input)
 	int	onequote;
 	int	doublequote;
 
-	i = 0;
+	i = -1;
 	onequote = 0;
 	doublequote = 0;
-	while (input[i])
+	while (input[++i])
 	{
+		if (input[i - 1] == '\\' && input[i - 2] != '\\')
+			continue;
 		if (input[i] == '\"' && doublequote == 0 && onequote == 0)
 			doublequote = 1;
 		else if (input[i] == '\"' && doublequote == 1 && onequote == 0)
@@ -31,7 +33,6 @@ int	checkquotation(char *input)
 			onequote = 1;
 		else if (input[i] == '\'' && onequote == 1 && doublequote == 0)
 			onequote = 0;
-		i++;
 	}
 	if (onequote && !doublequote)
 		return (1);

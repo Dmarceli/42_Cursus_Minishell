@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 17:33:02 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/05 14:47:39 by dmarceli         ###   ########.fr       */
+/*   Updated: 2022/12/09 18:32:48 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,27 @@ int	checkechoflag(char *cmd)
 	return (0);
 }
 
+char	*remove_escape(char *cmd)
+{
+	int		counter;
+	int		ret_counter;
+	char	*ret;
+
+	if (!ft_strchr(cmd, '\\'))
+		return (cmd);
+	counter = -1;
+	ret_counter = -1;
+	ret = malloc(sizeof(char) * ft_strlen(cmd));
+	while (cmd[++counter])
+	{
+		if (cmd[counter] == '\\' && cmd[counter - 1] != '\\')
+			continue ;
+		ret[++ret_counter] = cmd[counter];
+	}
+	free(cmd);
+	return (ret);
+}
+
 int	echo(char *cmd)
 {
 	int		is_n;
@@ -59,6 +80,7 @@ int	echo(char *cmd)
 	char	*tmp;
 
 	tmp = ft_strtrim(cmd, " ");
+	tmp = remove_escape(tmp);
 	if (ft_strchr(tmp, ' '))
 		value = ft_split(tmp, ' ');
 	else
