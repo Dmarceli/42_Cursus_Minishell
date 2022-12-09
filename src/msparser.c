@@ -23,6 +23,38 @@ int check_emptyprompt(char *cmd)
 	return (0);
 }
 
+int	check_inquotes(char *cmd)
+{
+	int	counter;
+	int	len;
+	char	*tmp;
+
+	counter = 1;
+	len = ft_strlen(cmd) - 1;
+	tmp = ft_strtrim(cmd, " ");
+	if (tmp[0] == '\"')
+	{
+		while (tmp[counter])
+		{
+			if (tmp[counter] == '\"' && counter == len)
+				break;
+			else if (tmp[counter] == '\"' && tmp[counter - 1] != '\\')
+			{
+				free(tmp);
+				return (0);
+			}
+			counter++;
+		}
+	}
+	else
+	{
+		free(tmp);
+		return (0);
+	}
+	free(tmp);
+	return (1);
+}
+
 void minishellparser(char* input, t_data *data)
 {
 	char **cmds;
@@ -34,6 +66,12 @@ void minishellparser(char* input, t_data *data)
 	{
 		free(input);
 		return ;
+	}
+	if (check_inquotes(input))
+	{
+		printf("%s: command not found\n", input);
+		data->lastexec = 127;
+		return	;
 	}
 	if (checkquotation(input))
 		return((void)printf("Quotation incomplete\n"));

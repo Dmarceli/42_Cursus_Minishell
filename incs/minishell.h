@@ -110,5 +110,6 @@ void	child_input(char **cmds, t_data *data, int counter);
 void	wait_pid(t_data *data, int counter);
 int	output_util(char *cmd, int outs, int counter);
 char	*trim_util(char *old);
+int	check_inquotes(char *cmd);
 
 #endif
