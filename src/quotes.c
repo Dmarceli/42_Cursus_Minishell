@@ -6,7 +6,7 @@
 /*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 19:03:38 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/09 18:01:02 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/10 01:54:12 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,5 @@ char	*removequotes(char *cmd)
 	else if (ft_strchr(cmd, '\''))
 		return (removesinglequotes(cmd));
 	else
-		return (0);
+		return (cmd);
 }

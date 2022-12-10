@@ -113,6 +113,7 @@ char	*trim_util(char *old);
 int	check_inquotes(char *cmd);
 char	*remove_escape(char *cmd);
 char	*norm_findvar(char *cmd);
+int	norm_inquotes(char *tmp, int len);
 
 
 #endif

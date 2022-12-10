@@ -6,7 +6,7 @@
 /*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:35:28 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/09 20:23:23 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/10 01:57:23 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,26 @@
 
 int	is_builtin(char *value, t_data *data)
 {
-	if (ft_strchr(value, '\'') || ft_strchr(value, '\"'))
-		value = removequotes(value);
 	if (!check_emptyprompt(value))
 		return (printf("%s: command not found\n", value));
 	if (!value)
 		return (0);
 	else if (!(ft_strncmp(value, "echo ", 5)))
-		return (data->lastexec = echo(value));
+		return (data->lastexec = echo(removequotes(value)));
 	else if (!(ft_strncmp(value, "cd ", 3)))
-		return (data->lastexec = ms_cd(value, data));
+		return (data->lastexec = ms_cd(removequotes(value), data));
 	else if (!(ft_strncmp(value, "pwd ", 4)))
-		return (data->lastexec = ms_pwd(value));
+		return (data->lastexec = ms_pwd(removequotes(value)));
 	else if (!(ft_strncmp(value, "export", 6)))
-		return (data->lastexec = ms_export(value, data));
+		return (data->lastexec = ms_export(removequotes(value), data));
 	else if (!(ft_strncmp(value, "unset ", 6)))
-		return (data->lastexec = ms_unset(value, data));
+		return (data->lastexec = ms_unset(removequotes(value), data));
 	else if (!(ft_strncmp(value, "env", 3)))
 		return (env(data));
 	else if (!(ft_strncmp(value, "exit", 4)))
-		return (ft_exit(value, data));
+		return (ft_exit(removequotes(value), data));
 	else
-		return (executecmd(value, data));
+		return (executecmd(removequotes(value), data));
 }
 
 int	is_parent(char *cmd, t_data *data)
@@ -44,13 +42,13 @@ int	is_parent(char *cmd, t_data *data)
 
 	value = ft_strtrim(cmd, " ");
 	if (!(ft_strncmp(value, "cd ", 3)))
-		data->lastexec = ms_cd(value, data);
+		data->lastexec = ms_cd(removequotes(value), data);
 	else if (!(ft_strncmp(value, "export", 6)))
-		data->lastexec = ms_export(value, data);
+		data->lastexec = ms_export(removequotes(value), data);
 	else if (!(ft_strncmp(value, "unset ", 6)))
-		data->lastexec = ms_unset(value, data);
+		data->lastexec = ms_unset(removequotes(value), data);
 	else if (!(ft_strncmp(value, "exit", 4)))
-		ft_exit(value, data);
+		ft_exit(removequotes(value), data);
 	else
 	{
 		free(value);
