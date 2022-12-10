@@ -48,7 +48,7 @@ void	minishellparser(char* input, t_data *data);
 void	initenv(char **envs, t_data *data);
 int		checkquotation(char *input);
 void	ignore_signal(void);
-void 	ignore_signal_i(void);
+void	ignore_signal_i(void);
 void	sighandler(int sig);
 void	sighandler_i(int sig);
 void	ctrl_c_handler(int j);
@@ -112,5 +112,7 @@ int	output_util(char *cmd, int outs, int counter);
 char	*trim_util(char *old);
 int	check_inquotes(char *cmd);
 char	*remove_escape(char *cmd);
+char	*norm_findvar(char *cmd);
+
 
 #endif

@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   dollar_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/29 18:56:31 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/10 01:13:31 by dhomem-d         ###   ########.fr       */
+/*   Created: 2022/12/10 01:18:18 by dhomem-d          #+#    #+#             */
+/*   Updated: 2022/12/10 01:18:52 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/minishell.h"
 
-int	main(int ac, char **av, char **envs)
-{	
-	t_data	data;
-	int		exitvalue;
-	char	*input;
+char	*norm_findvar(char *cmd)
+{
+	char	*var;
 
-	(void)ac;
-	(void)av;
-	initenv(envs, &data);
-	ignore_signal();
-	while (1)
-	{
-		input = readline(CYAN"minishell> "BLANK);
-		if (!input && write(0, "\n", 1))
-			ft_exit("exit", &data);
-		ignore_signal_i();
-		minishellparser(input, &data);
-		ignore_signal();
-		exitvalue = data.lastexec;
-	}
-	return (exitvalue);
+	if (ft_strchr(cmd, '\"'))
+		var = ft_strtrim(cmd, "\"");
+	else
+		var = ft_substr(cmd, 1, (ft_strlen(cmd)));
+	return (var);
 }

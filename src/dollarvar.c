@@ -6,7 +6,7 @@
 /*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:44:01 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/05 17:07:03 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/10 01:18:48 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,11 @@ int	findvar(char *cmd, t_data *data)
 	int		i;
 	char	*var;
 	char	*tmp;
-	char	*tmp2 = NULL;
+	char	*tmp2;
 
 	i = -1;
-	if (ft_strchr(cmd, '\"'))
-		var = ft_strtrim(cmd, "\"");
-	else
-		var = ft_substr(cmd, 1, (ft_strlen(cmd)));
+	tmp2 = NULL;
+	var = norm_findvar(cmd);
 	tmp = ft_strtrim(var, " $");
 	while (data->env[++i])
 	{
@@ -98,7 +96,7 @@ int	findvar(char *cmd, t_data *data)
 			free (tmp2);
 			return (i);
 		}
-		free (tmp2);
+		free(tmp2);
 	}
 	free(tmp);
 	free(var);
