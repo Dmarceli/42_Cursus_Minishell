@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: danielsequeira <danielsequeira@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 17:45:42 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/05 13:52:41 by dmarceli         ###   ########.fr       */
+/*   Updated: 2022/12/10 18:38:16 by danielseque      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ int	executecmd(char *cmd, t_data *data)
 {
 	int		a;
 	char	*path;
-	int		exitvalue;
 
 	path = NULL;
 	if (ft_strchr(cmd, ' '))
@@ -97,7 +96,7 @@ int	executecmd(char *cmd, t_data *data)
 		execprocess(cmd, data, path);
 	freearray(data->exec);
 	waitpid(a, &exitvalue, 0);
-	data->lastexec = EXIT_STATUS(exitvalue);
+	exitvalue = EXIT_STATUS(exitvalue);
 	wait(0);
 	return (0);
 }

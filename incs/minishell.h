@@ -29,6 +29,7 @@
 # define BUFFER_SIZE 42
 #endif
 
+extern int	exitvalue;
 
 typedef struct s_data
 {

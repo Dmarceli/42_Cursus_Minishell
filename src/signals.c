@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: danielsequeira <danielsequeira@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 19:13:29 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/10 01:13:05 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/10 17:48:39 by danielseque      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/minishell.h"
+
 
 void	sighandler_i(int sig)
 {
@@ -19,6 +20,7 @@ void	sighandler_i(int sig)
 		write(0, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
+		exitvalue = 130;
 	}
 	if (sig == SIGQUIT)
 	{
@@ -42,6 +44,7 @@ void	sighandler(int sig)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+		exitvalue = 130;
 	}
 }
 

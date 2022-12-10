@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: danielsequeira <danielsequeira@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:56:31 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/10 01:13:31 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/10 18:39:51 by danielseque      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/minishell.h"
 
+int		exitvalue;
+
 int	main(int ac, char **av, char **envs)
 {	
 	t_data	data;
-	int		exitvalue;
 	char	*input;
 
 	(void)ac;
@@ -28,9 +29,9 @@ int	main(int ac, char **av, char **envs)
 		if (!input && write(0, "\n", 1))
 			ft_exit("exit", &data);
 		ignore_signal_i();
+		data.lastexec = exitvalue;
 		minishellparser(input, &data);
 		ignore_signal();
-		exitvalue = data.lastexec;
 	}
 	return (exitvalue);
 }
