@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: danielsequeira <danielsequeira@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 18:21:32 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/12/11 18:28:06 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/11 22:45:15 by danielseque      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@
 # define CYAN "\e[1;36m"
 # define BLANK "\e[0m"
 # define CLEAR_SCREEN "\033[?1049h\033[H"
-# define EXIT_STATUS(status)	(((status) & 0xff00) >> 8)
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
@@ -126,5 +125,6 @@ char	*norm_findvar(char *cmd);
 int		norm_inquotes(char *tmp, int len);
 int		msparser_checks(char *input);
 char	**msparser_inits(char *input, t_data *data);
+int 	EXIT_STATUS(int status);
 
 #endif

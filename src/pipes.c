@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: danielsequeira <danielsequeira@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 21:36:51 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/12/11 19:48:23 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/11 22:31:03 by danielseque      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	child_process(char **cmds, t_data *data, int counter)
 	if (check_special(cmds[counter], '>') || check_special(cmds[counter], '<'))
 		cmds[counter] = return_trim(cmds[counter]);
 	is_builtin(cmds[counter], data);
-	exit(0);
+	exit(g_exitvalue);
 }
 
 void	child_input(char **cmds, t_data *data, int counter)
@@ -93,6 +93,11 @@ void	wait_pid(t_data *data, int counter)
 
 	pid_counter = 0;
 	while (pid_counter < counter)
-		waitpid(data->pid[pid_counter++], NULL, 0);
+	{
+		waitpid(data->pid[pid_counter++], &g_exitvalue, 0);
+		g_exitvalue = EXIT_STATUS(g_exitvalue);
+	}
+
+		//waitpid(data->pid[pid_counter++], NULL, 0);
 	free(data->pid);
 }

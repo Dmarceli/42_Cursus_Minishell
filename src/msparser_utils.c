@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msparser_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: danielsequeira <danielsequeira@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 01:23:31 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/12/11 18:01:56 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/11 22:45:22 by danielseque      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,9 @@ int	norm_inquotes(char *tmp, int len)
 	}
 	else
 		return (0);
+}
+
+int EXIT_STATUS(int status)
+{
+	return(((status) & 0xff00) >> 8);
 }
