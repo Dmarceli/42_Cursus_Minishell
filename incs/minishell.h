@@ -6,7 +6,7 @@
 /*   By: danielsequeira <danielsequeira@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 18:21:32 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/12/11 22:45:15 by danielseque      ###   ########.fr       */
+/*   Updated: 2022/12/11 22:50:56 by danielseque      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,6 @@ char	*norm_findvar(char *cmd);
 int		norm_inquotes(char *tmp, int len);
 int		msparser_checks(char *input);
 char	**msparser_inits(char *input, t_data *data);
-int 	EXIT_STATUS(int status);
+int 	exit_status(int status);
 
 #endif

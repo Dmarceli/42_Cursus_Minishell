@@ -6,7 +6,7 @@
 /*   By: danielsequeira <danielsequeira@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 18:02:27 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/12/11 21:59:08 by danielseque      ###   ########.fr       */
+/*   Updated: 2022/12/11 22:51:22 by danielseque      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	minishellparser(char *input, t_data *data)
 		if (pid == 0)
 			redirect(cmds[0], data);
 		waitpid(pid, &g_exitvalue, 0);
-		g_exitvalue = EXIT_STATUS(g_exitvalue);
+		g_exitvalue = exit_status(g_exitvalue);
 	}
 	else
 		is_builtin(cmds[0], data);

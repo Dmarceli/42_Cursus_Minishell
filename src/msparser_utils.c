@@ -6,7 +6,7 @@
 /*   By: danielsequeira <danielsequeira@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 01:23:31 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/12/11 22:45:22 by danielseque      ###   ########.fr       */
+/*   Updated: 2022/12/11 22:52:28 by danielseque      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	norm_inquotes(char *tmp, int len)
 		return (0);
 }
 
-int EXIT_STATUS(int status)
+int	exit_status(int status)
 {
-	return(((status) & 0xff00) >> 8);
+	return (((status) & 0xff00) >> 8);
 }
