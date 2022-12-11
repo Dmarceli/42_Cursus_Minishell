@@ -6,31 +6,11 @@
 /*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 13:16:48 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/05 19:37:43 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/11 18:01:18 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/minishell.h"
-
-char	*justthevar(char *str)
-{
-	int		len;
-	char	*ret;
-	int		i;
-
-	len = 0;
-	i = 0;
-	while (str[len] != '=')
-		len++;
-	ret = malloc(sizeof(char) * len + 1);
-	ret[len] = '\0';
-	while (i < len)
-	{
-		ret[i] = str[i];
-		i++;
-	}
-	return (ret);
-}
 
 int	big_len(char **str)
 {
@@ -90,7 +70,8 @@ char	*trim_util(char *old)
 	else
 	{
 		safe = ft_substr(old, 0, special_index(old));
-		tmp = ft_substr(old, (trimmer(old, special_index(old)) + special_index(old)), ft_strlen(old));
+		tmp = ft_substr(old, (trimmer(old, special_index(old))
+					+ special_index(old)), ft_strlen(old));
 		trim = ft_strjoin(safe, tmp);
 		free(safe);
 		free(tmp);

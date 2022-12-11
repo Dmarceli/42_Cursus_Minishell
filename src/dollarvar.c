@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollarvar.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danielsequeira <danielsequeira@student.    +#+  +:+       +#+        */
+/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:44:01 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/10 17:56:32 by danielseque      ###   ########.fr       */
+/*   Updated: 2022/12/11 18:17:53 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*handle_dollar_in(char **j, int i, t_data *data)
 {
 	char	*value;
 
-	value = ft_itoa(exitvalue);
+	value = ft_itoa(g_exitvalue);
 	free(j[i]);
 	j[i] = ft_strdup(value);
 	free(value);

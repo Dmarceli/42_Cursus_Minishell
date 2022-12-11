@@ -6,7 +6,7 @@
 /*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 19:03:38 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/10 01:54:12 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/11 18:20:11 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	checkquotation(char *input)
 	while (input[++i])
 	{
 		if (input[i - 1] == '\\' && input[i - 2] != '\\')
-			continue;
+			continue ;
 		if (input[i] == '\"' && doublequote == 0 && onequote == 0)
 			doublequote = 1;
 		else if (input[i] == '\"' && doublequote == 1 && onequote == 0)
@@ -34,12 +34,9 @@ int	checkquotation(char *input)
 		else if (input[i] == '\'' && onequote == 1 && doublequote == 0)
 			onequote = 0;
 	}
-	if (onequote && !doublequote)
+	if ((onequote && !doublequote) || (!onequote && doublequote))
 		return (1);
-	if (!onequote && doublequote)
-		return (2);
-	else
-		return (0);
+	return (0);
 }
 
 char	*removesinglequotes(char *cmd)

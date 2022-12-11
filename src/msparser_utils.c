@@ -6,7 +6,7 @@
 /*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 01:23:31 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/12/11 17:34:33 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/11 18:01:56 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	check_inquotes(char *cmd)
 
 int	norm_inquotes(char *tmp, int len)
 {
-	int	counter;
+	int		counter;
 	char	quote;
 
 	counter = 1;

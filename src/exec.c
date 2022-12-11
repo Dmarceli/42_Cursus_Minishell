@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danielsequeira <danielsequeira@student.    +#+  +:+       +#+        */
+/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 17:45:42 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/10 18:38:16 by danielseque      ###   ########.fr       */
+/*   Updated: 2022/12/11 18:17:59 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ int	executecmd(char *cmd, t_data *data)
 	if (!a)
 		execprocess(cmd, data, path);
 	freearray(data->exec);
-	waitpid(a, &exitvalue, 0);
-	exitvalue = EXIT_STATUS(exitvalue);
+	waitpid(a, &g_exitvalue, 0);
+	g_exitvalue = EXIT_STATUS(g_exitvalue);
 	wait(0);
 	return (0);
 }

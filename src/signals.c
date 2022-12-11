@@ -6,7 +6,7 @@
 /*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 19:13:29 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/11 17:22:40 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/11 18:18:18 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	sighandler_i(int sig)
 		write(0, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
-		exitvalue = 130;
+		g_exitvalue = 130;
 	}
 	if (sig == SIGQUIT)
 	{
@@ -43,7 +43,7 @@ void	sighandler(int sig)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
-		exitvalue = 130;
+		g_exitvalue = 130;
 	}
 }
 
