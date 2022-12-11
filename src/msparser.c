@@ -6,7 +6,7 @@
 /*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 18:02:27 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/12/11 18:16:20 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/11 19:35:31 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,11 @@ void	minishellparser(char *input, t_data *data)
 		pid = fork();
 		if (pid == 0)
 			redirect(cmds[0], data);
-		waitpid(pid, NULL, 0);
+		waitpid(pid, &g_exitvalue, 0);
+		g_exitvalue = EXIT_STATUS(g_exitvalue);
 	}
-	else if (!is_builtin(cmds[0], data))
-		return ;
+	else
+		is_builtin(cmds[0], data);
 	freearray(cmds);
 }
 

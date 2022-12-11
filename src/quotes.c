@@ -6,7 +6,7 @@
 /*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 19:03:38 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/11 18:20:11 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/11 19:05:35 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	checkquotation(char *input)
 	doublequote = 0;
 	while (input[++i])
 	{
-		if (input[i - 1] == '\\' && input[i - 2] != '\\')
+		if (i >= 2 && input[i - 1] == '\\' && input[i - 2] != '\\')
 			continue ;
 		if (input[i] == '\"' && doublequote == 0 && onequote == 0)
 			doublequote = 1;

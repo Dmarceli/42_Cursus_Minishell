@@ -6,7 +6,7 @@
 /*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 20:21:08 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/12/05 19:38:45 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/11 19:28:35 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ int	input_red(char *cmd)
 		fd = heredoc(filename);
 	else
 		fd = open(filename, O_RDONLY);
+	if (fd == -1)
+		printf("%s\n", strerror(errno));
 	free(filename);
 	return (fd);
 }
@@ -102,6 +104,11 @@ void	redirect(char *cmd, t_data *data)
 	if (check_special(cmd, '<'))
 	{
 		fd_in = input_red(cmd);
+		if (fd_in <= -1)
+		{
+			g_exitvalue = errno;
+			exit(errno);
+		}
 		dup2(fd_in, STDIN_FILENO);
 		close(fd_in);
 	}
