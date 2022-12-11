@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmdhandler.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danielsequeira <danielsequeira@student.    +#+  +:+       +#+        */
+/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:35:28 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/10 17:55:02 by danielseque      ###   ########.fr       */
+/*   Updated: 2022/12/11 17:37:38 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 int	is_builtin(char *value, t_data *data)
 {
-
-	if ((value[0] == '\'' || value[0] == '\"') && 
-		(value[ft_strlen(value) - 1] == '\'' || value[ft_strlen(value) - 1] == '\"') && ft_strchr(value, ' '))
+	if (check_inquotes(value))
 		return (executecmd(value, data));
 	if (!check_emptyprompt(value))
 		return (printf("%s: command not found\n", value));

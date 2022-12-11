@@ -12,12 +12,6 @@ void minishellparser(char* input, t_data *data)
 		free(input);
 		return ;
 	}
-	if (check_inquotes(input))
-	{
-		printf("%s: command not found\n", input);
-		data->lastexec = 127;
-		return	;
-	}
 	if (checkquotation(input))
 		return((void)printf("Quotation incomplete\n"));
 	if (check_special(input, '|'))
