@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danielsequeira <danielsequeira@student.    +#+  +:+       +#+        */
+/*   By: dani <dani@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 18:21:32 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/12/11 22:50:56 by danielseque      ###   ########.fr       */
+/*   Updated: 2022/12/12 01:51:39 by dani             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # define CLEAR_SCREEN "\033[?1049h\033[H"
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 420
 # endif
 
 extern int	g_exitvalue;
@@ -125,6 +125,6 @@ char	*norm_findvar(char *cmd);
 int		norm_inquotes(char *tmp, int len);
 int		msparser_checks(char *input);
 char	**msparser_inits(char *input, t_data *data);
-int 	exit_status(int status);
+int		exit_status(int status);
 
 #endif

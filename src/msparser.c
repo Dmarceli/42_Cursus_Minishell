@@ -6,7 +6,7 @@
 /*   By: dani <dani@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 18:02:27 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/12/12 00:39:40 by dani             ###   ########.fr       */
+/*   Updated: 2022/12/12 01:50:06 by dani             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	minishellparser(char *input, t_data *data)
 	{
 		cmds = ft_split(input, '|');
 		handle_pipes(cmds, data);
+		free(input);
 		freearray(cmds);
 		return ;
 	}
