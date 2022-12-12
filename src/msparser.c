@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msparser.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danielsequeira <danielsequeira@student.    +#+  +:+       +#+        */
+/*   By: dani <dani@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 18:02:27 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/12/11 22:51:22 by danielseque      ###   ########.fr       */
+/*   Updated: 2022/12/12 00:39:40 by dani             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ void	minishellparser(char *input, t_data *data)
 
 int	msparser_checks(char *input)
 {
-	if (ft_strlen(input))
-		add_history(input);
 	if (!check_emptyprompt(input))
 	{
 		free(input);
 		return (1);
 	}
+	if (ft_strlen(input))
+		add_history(input);
 	if (checkquotation(input))
 	{
 		printf("Quotation incomplete\n");
