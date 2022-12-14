@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: duartebaeta <duartebaeta@student.42.fr>    +#+  +:+       +#+        */
+/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 17:45:42 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/14 04:37:55 by duartebaeta      ###   ########.fr       */
+/*   Updated: 2022/12/14 16:19:12 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ void	execprocess(char *cmd, t_data *data, char *path)
 		{
 			// if (ft_strchr(cmd, '\\'))
 			// 	cmd = remove_escape(cmd);
-			printf("%s: command not found\n", removequotes(cmd));
+			cmd = removequotes(cmd);
+			printf("%s: command not found\n", cmd);
 			exit (127);
 		}
 		data->exec[0] = ft_strjoin(path, data->exec[0]);

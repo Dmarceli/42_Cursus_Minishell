@@ -6,7 +6,7 @@
 /*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 19:14:46 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/11 18:01:42 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/14 17:05:35 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	remove_var(t_data *data, int pos)
 	int	i;
 
 	i = pos - 1;
+	free(data->env[pos]);
 	while (i++ < data->envlen - 1)
 		data->env[i] = data->env[i + 1];
 	data->env[i] = 0;

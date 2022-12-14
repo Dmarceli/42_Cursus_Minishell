@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msparser.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dani <dani@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 18:02:27 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/12/12 01:50:06 by dani             ###   ########.fr       */
+/*   Updated: 2022/12/14 16:27:51 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	minishellparser(char *input, t_data *data)
 	}
 	else
 		is_builtin(cmds[0], data);
+	//printf("%s\n", cmds[0]);
 	freearray(cmds);
 }
 

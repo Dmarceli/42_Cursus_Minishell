@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: duartebaeta <duartebaeta@student.42.fr>    +#+  +:+       +#+        */
+/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 19:03:38 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/14 04:42:22 by duartebaeta      ###   ########.fr       */
+/*   Updated: 2022/12/14 16:09:32 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	*removedoublequotes(char *cmd)
 		// 	if (cmd[i] == '\0')
 		// 		break ;
 		// }
-		if (cmd[i] != '\"' || (cmd[i] == '\"' && cmd[i - 1] == '\\'))
+		if (cmd[i] != '\"' || (i >= 1 && cmd[i] == '\"' && cmd[i - 1] == '\\'))
 			cmd[j++] = cmd[i];
 	}
 	cmd[j] = '\0';

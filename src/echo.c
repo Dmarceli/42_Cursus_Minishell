@@ -6,7 +6,7 @@
 /*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 17:33:02 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/09 18:32:48 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/14 16:48:11 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	*remove_escape(char *cmd)
 			continue ;
 		ret[++ret_counter] = cmd[counter];
 	}
-	free(cmd);
+	ret[ret_counter + 1] = '\0';
 	return (ret);
 }
 

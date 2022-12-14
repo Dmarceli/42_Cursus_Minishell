@@ -6,7 +6,7 @@
 /*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:27:16 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/10 01:22:18 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/14 16:58:53 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	export_new_var(t_data *data, char *var, char *tmp)
 	data->env[data->envlen - 1] = ft_strdup(var);
 	data->envlen++;
 	data->env[data->envlen - 1] = ft_strdup(tmp);
+	data->env[data->envlen] = NULL;
 }
 
 void	process_array(char **var, char *tmp, t_data *data)
@@ -73,6 +74,5 @@ int	ms_export(char *cmd, t_data *data)
 	}
 	else
 		add_new_var(cmd, data);
-	free(cmd);
 	return (0);
 }
