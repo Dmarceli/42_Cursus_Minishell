@@ -6,7 +6,7 @@
 /*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 19:03:38 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/14 16:09:32 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/14 18:46:10 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,25 +64,19 @@ char	*removesinglequotes(char *cmd)
 
 char	*removedoublequotes(char *cmd)
 {
-	int	j;
-	int	i;
+	int		j;
+	int		i;
 
 	j = 0;
 	i = -1;
 	while (++i < (int)ft_strlen(cmd))
 	{
-		// if (cmd[i] == '\\')
-		// {
-		// 	cmd[j++] = cmd[i++];
-		// 	cmd[j++] = cmd[i];
-		// 	if (cmd[i] == '\0')
-		// 		break ;
-		// }
-		if (cmd[i] != '\"' || (i >= 1 && cmd[i] == '\"' && cmd[i - 1] == '\\'))
+		if (cmd[i] == '\\' && i >= 1 && cmd[i - 1] == '\\')
+			cmd[j++] = cmd[i];
+		else if ((cmd[i] != '\"' && cmd[i] != '\\') || (i >= 1 && cmd[i] == '\"' && cmd[i - 1] == '\\'))
 			cmd[j++] = cmd[i];
 	}
 	cmd[j] = '\0';
-	cmd = remove_escape(cmd);
 	return (cmd);
 }
 

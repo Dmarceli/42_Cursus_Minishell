@@ -6,7 +6,7 @@
 /*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 13:16:48 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/11 18:01:18 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/14 19:49:39 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,34 @@ int	output_util(char *cmd, int outs, int counter)
 	free(filename);
 	close(fd);
 	return (counter * -1);
+}
+
+int	input_util(char *cmd, int ins, int counter)
+{
+	char	*filename;
+	int		fd;
+
+	if (cmd[counter + 1] == '<' && *ft_strrchr(cmd, '<') == cmd[counter + 1])
+	{
+		filename = get_outfilename(cmd, counter + 2);
+		fd = heredoc(filename);
+		ins = 1;
+	}
+	else
+	{
+		filename = get_outfilename(cmd, counter + 1);
+		fd = open(filename, O_RDONLY);
+		if (fd == -1)
+			counter = -1;
+	}
+	if (ins == 1)
+	{
+		free(filename);
+		return (fd);
+	}
+	free(filename);
+	close(fd);
+	return (counter + 1);
 }
 
 char	*trim_util(char *old)

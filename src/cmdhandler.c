@@ -6,7 +6,7 @@
 /*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:35:28 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/14 16:47:15 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/14 18:47:34 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_builtin(char *value, t_data *data)
 {
-	if (check_inquotes(value) && ft_strchr(value, ' '))
+	if (ft_strchr(value, ' ') && check_inquotes(value))
 		return (executecmd(value, data));
 	if (!check_emptyprompt(value))
 		return (printf("%s: command not found\n", value));

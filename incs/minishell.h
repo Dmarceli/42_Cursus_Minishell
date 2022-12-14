@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dani <dani@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 18:21:32 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/12/12 01:51:39 by dani             ###   ########.fr       */
+/*   Updated: 2022/12/14 19:34:48 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int		is_numeric(char *value);
 int		ft_exit(char *cmd, t_data *data);
 char	*get_infilename(char *cmd);
 int		output(char *cmd);
-int		count_output(char *cmd);
+int		count_redir(char *cmd, char red);
 char	*get_outfilename(char *cmd, int counter);
 int		special_index(char *str);
 int		trimmer(char *bush, int counter);
@@ -126,5 +126,7 @@ int		norm_inquotes(char *tmp, int len);
 int		msparser_checks(char *input);
 char	**msparser_inits(char *input, t_data *data);
 int		exit_status(int status);
+char	**ms_init_pipes(char *input, t_data *data);
+int	input_util(char *cmd, int ins, int counter);
 
 #endif

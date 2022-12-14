@@ -6,32 +6,32 @@
 /*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:50:07 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/12/05 19:38:56 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/14 19:33:33 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/minishell.h"
 
-int	count_output(char *cmd)
+int	count_redir(char *cmd, char red)
 {
 	int	counter;
-	int	out_counter;
+	int	red_counter;
 
 	counter = 0;
-	out_counter = 0;
+	red_counter = 0;
 	while (cmd[counter])
 	{
-		if (cmd[counter] == '>' && special_quote(cmd, counter) == 0)
+		if (cmd[counter] == red && special_quote(cmd, counter) == 0)
 		{
-			out_counter++;
+			red_counter++;
 			counter++;
-			if (cmd[counter] == '>')
+			if (cmd[counter] == red)
 				counter++;
 		}
 		else
 			counter++;
 	}
-	return (out_counter);
+	return (red_counter);
 }
 
 int	special_index(char *str)

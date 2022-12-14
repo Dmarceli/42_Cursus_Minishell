@@ -6,7 +6,7 @@
 /*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:44:01 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/11 18:17:53 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/14 18:07:42 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 char	*new_var(char **j, int i, int k, t_data *data)
 {
 	char	*value;
+	char	*new_value;
 
 	value = NULL;
 	if (k != -1)
@@ -30,9 +31,9 @@ char	*new_var(char **j, int i, int k, t_data *data)
 			return (value);
 		else
 		{
+			new_value = handle_dollar(value, data);
 			free(value);
-			value = handle_dollar(value, data);
-			return (value);
+			return (new_value);
 		}
 	}
 	else
@@ -42,6 +43,7 @@ char	*new_var(char **j, int i, int k, t_data *data)
 char	*handle_dollar_in(char **j, int i, t_data *data)
 {
 	char	*value;
+	char	*new_value;
 
 	value = ft_itoa(g_exitvalue);
 	free(j[i]);
@@ -53,8 +55,9 @@ char	*handle_dollar_in(char **j, int i, t_data *data)
 		return (value);
 	else
 	{
-		value = handle_dollar(value, data);
-		return (value);
+		new_value = handle_dollar(value, data);
+		free(value);
+		return (new_value);
 	}
 }
 

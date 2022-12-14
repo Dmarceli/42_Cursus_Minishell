@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danielsequeira <danielsequeira@student.    +#+  +:+       +#+        */
+/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 20:21:08 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/12/11 22:02:05 by danielseque      ###   ########.fr       */
+/*   Updated: 2022/12/14 19:47:41 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	output(char *cmd)
 	int		outs;
 	int		counter;
 
-	outs = count_output(cmd);
+	outs = count_redir(cmd, '>');
 	counter = 0;
 	while (outs && cmd[counter] != 0)
 	{
@@ -58,17 +58,30 @@ char	*get_outfilename(char *cmd, int counter)
 
 int	input_red(char *cmd)
 {
-	int		fd;
-	char	*filename;
+	int	fd;
+	int	counter;
+	int	ins;
 
-	filename = get_infilename(cmd);
-	if (*(ft_strrchr(cmd, '<') - 1) == '<')
-		fd = heredoc(filename);
-	else
-		fd = open(filename, O_RDONLY);
-	if (fd == -1)
+	counter = 0;
+	fd = -1;
+	ins = count_redir(cmd, '<');
+	while (ins && cmd[counter] != '\0')
+	{
+		if (cmd[counter] != '<')
+			counter++;
+		else
+		{
+			if (ins == 1)
+				fd = input_util(cmd, ins, counter);
+			else
+				counter = input_util(cmd, ins, counter);
+			if (counter < 0)
+				break ;
+			ins--;
+		}
+	}
+	if (fd == -1 || counter == -1)
 		printf("%s\n", strerror(errno));
-	free(filename);
 	return (fd);
 }
 
@@ -107,7 +120,7 @@ void	redirect(char *cmd, t_data *data)
 		if (fd_in <= -1)
 		{
 			g_exitvalue = errno;
-			exit(errno);
+			exit(g_exitvalue);
 		}
 		dup2(fd_in, STDIN_FILENO);
 		close(fd_in);
