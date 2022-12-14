@@ -6,7 +6,7 @@
 /*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 19:03:38 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/14 18:46:10 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/14 20:30:15 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ char	*removedoublequotes(char *cmd)
 	{
 		if (cmd[i] == '\\' && i >= 1 && cmd[i - 1] == '\\')
 			cmd[j++] = cmd[i];
-		else if ((cmd[i] != '\"' && cmd[i] != '\\') || (i >= 1 && cmd[i] == '\"' && cmd[i - 1] == '\\'))
+		else if ((cmd[i] != '\"' && cmd[i] != '\\') || (i >= 1
+				&& cmd[i] == '\"' && cmd[i - 1] == '\\'))
 			cmd[j++] = cmd[i];
 	}
 	cmd[j] = '\0';

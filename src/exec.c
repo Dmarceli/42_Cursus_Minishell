@@ -6,7 +6,7 @@
 /*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 17:45:42 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/14 16:19:12 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/14 20:06:47 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ void	execprocess(char *cmd, t_data *data, char *path)
 		path = handlepath(data->exec[0], data);
 		if (!path)
 		{
-			// if (ft_strchr(cmd, '\\'))
-			// 	cmd = remove_escape(cmd);
 			cmd = removequotes(cmd);
 			printf("%s: command not found\n", cmd);
 			exit (127);

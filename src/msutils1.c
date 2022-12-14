@@ -6,7 +6,7 @@
 /*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 13:16:48 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/14 19:49:39 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/14 20:29:27 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,18 +105,4 @@ char	*trim_util(char *old)
 		free(tmp);
 	}
 	return (trim);
-}
-
-int	ft_index(char *str, char ch)
-{
-	int	counter;
-
-	counter = 0;
-	while (str[counter])
-	{
-		if (str[counter] == ch)
-			return (counter);
-		counter++;
-	}
-	return (-1);
 }
