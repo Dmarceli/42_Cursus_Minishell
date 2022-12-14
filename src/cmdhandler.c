@@ -6,7 +6,7 @@
 /*   By: duartebaeta <duartebaeta@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:35:28 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/13 15:16:48 by duartebaeta      ###   ########.fr       */
+/*   Updated: 2022/12/14 04:25:09 by duartebaeta      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	is_builtin(char *value, t_data *data)
 {
-	//test
 	if (check_inquotes(value) && ft_strchr(value, ' '))
 		return (executecmd(value, data));
 	if (!check_emptyprompt(value))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: duartebaeta <duartebaeta@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 19:03:38 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/11 19:05:35 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/14 04:42:22 by duartebaeta      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,18 @@ char	*removedoublequotes(char *cmd)
 	i = -1;
 	while (++i < (int)ft_strlen(cmd))
 	{
-		if (cmd[i] == '\\')
-		{
-			cmd[j++] = cmd[i++];
-			cmd[j++] = cmd[i];
-			if (cmd[i] == '\0')
-				break ;
-		}
-		else if (cmd[i] != '"')
+		// if (cmd[i] == '\\')
+		// {
+		// 	cmd[j++] = cmd[i++];
+		// 	cmd[j++] = cmd[i];
+		// 	if (cmd[i] == '\0')
+		// 		break ;
+		// }
+		if (cmd[i] != '\"' || (cmd[i] == '\"' && cmd[i - 1] == '\\'))
 			cmd[j++] = cmd[i];
 	}
 	cmd[j] = '\0';
+	cmd = remove_escape(cmd);
 	return (cmd);
 }
 
