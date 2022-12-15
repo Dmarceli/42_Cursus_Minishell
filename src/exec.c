@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: duartebaeta <duartebaeta@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 17:45:42 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/14 20:06:47 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/15 21:26:43 by duartebaeta      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,16 @@ void	execprocess(char *cmd, t_data *data, char *path)
 	exit(126);
 }
 
-int	executecmd(char *cmd, t_data *data)
+int	executecmd(char *cmd_u, t_data *data)
 {
 	int		a;
+	int		e_value;
+	char	*cmd;
 	char	*path;
 
 	path = NULL;
+	cmd = ft_strtrim(cmd_u, " ");
+	e_value = 0;
 	if (ft_strchr(cmd, ' '))
 		data->exec = ft_split(cmd, ' ');
 	else
@@ -96,8 +100,9 @@ int	executecmd(char *cmd, t_data *data)
 	if (!a)
 		execprocess(cmd, data, path);
 	freearray(data->exec);
-	waitpid(a, &g_exitvalue, 0);
-	g_exitvalue = exit_status(g_exitvalue);
-	wait(0);
+	waitpid(a, &e_value, 0);
+	g_exitvalue = exit_status(e_value);
+	if (!ft_strncmp(cmd, "cat", ft_strlen(cmd)))
+		g_exitvalue = 130;
 	return (0);
 }
