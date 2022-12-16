@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: duartebaeta <duartebaeta@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 21:36:51 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/12/15 23:59:18 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/16 14:47:48 by duartebaeta      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,11 @@ int	ft_index(char *str, char ch)
 	counter = 0;
 	while (str[counter])
 	{
-		if (str[counter] == ch && special_quote(str, counter) == 0)
-			return (counter);
+		if (str[counter] == ch)
+		{
+			if (ft_strchr("><", ch) == NULL || special_quote(str, counter) == 0)
+				return (counter);
+		}
 		counter++;
 	}
 	return (-1);
