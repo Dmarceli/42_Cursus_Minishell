@@ -6,7 +6,7 @@
 /*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:27:16 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/16 01:44:03 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/16 13:57:33 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,13 @@ int	add_new_var(char *cmd, t_data *data)
 	return (0);
 }
 
-int	ms_export(char *cmd, t_data *data)
+int	ms_export(char *cmd_u, t_data *data)
 {
 	int	i;
+	char	*cmd;
 
 	i = -1;
+	cmd = ft_strtrim(cmd_u, "");
 	if (!ft_strncmp(cmd, "export\0", 8) || !ft_strncmp(cmd, "export \0", 9))
 	{
 		while (++i < data->envlen)
