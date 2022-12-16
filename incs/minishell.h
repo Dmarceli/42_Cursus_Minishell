@@ -6,7 +6,7 @@
 /*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 18:21:32 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/12/14 19:34:48 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/16 00:56:50 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ int		msparser_checks(char *input);
 char	**msparser_inits(char *input, t_data *data);
 int		exit_status(int status);
 char	**ms_init_pipes(char *input, t_data *data);
-int	input_util(char *cmd, int ins, int counter);
+int		input_util(char *cmd, int ins, int counter);
+int		has_redirect(char *cmd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 18:18:43 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/12/11 18:01:38 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/16 00:57:33 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	special_quote(char *input, int index)
 	d_q = 0;
 	s_q = 0;
 	counter = index;
-	while (counter > 0)
+	while (counter >= 0)
 	{
 		if (input[counter] == '\"')
 			d_q += 1;
@@ -63,4 +63,20 @@ int	give_inputfd(char *input)
 	filename = ft_strtrim(tmp, "< ");
 	fd = open(filename, O_RDONLY);
 	return (fd);
+}
+
+int	has_redirect(char *cmd)
+{
+	int	counter;
+	int	red;
+
+	counter = 0;
+	red = 0;
+	while (cmd[counter])
+	{
+		if (ft_strchr("<>", cmd[counter]) && special_quote(cmd, counter) == 0)
+			red++;
+		counter++;
+	}
+	return (red);
 }

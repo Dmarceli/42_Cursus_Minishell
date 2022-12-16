@@ -6,7 +6,7 @@
 /*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:50:07 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/12/14 19:33:33 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/16 01:00:43 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ int	trimmer(char *bush, int counter)
 	int	size;
 
 	size = 0;
-	while (ft_strchr("<> ", bush[counter]))
+	while (ft_strchr("<> ", bush[counter]) || special_quote(bush, counter))
 	{
 		counter++;
 		size++;
 	}
-	while (ft_strchr(">< ", bush[counter]) == NULL)
+	while (ft_strchr("<> ", bush[counter]) == NULL)
 	{
 		counter++;
 		size++;
@@ -76,12 +76,12 @@ char	*return_trim(char *bush)
 
 	old = ft_strdup(bush);
 	trim = ft_strdup(bush);
-	while (ft_strchr(trim, '<') || ft_strchr(trim, '>'))
+	while (has_redirect(trim))
 	{
 		free(trim);
 		trim = trim_util(old);
 		free(old);
-		old = strdup(trim);
+		old = ft_strdup(trim);
 	}
 	free(old);
 	free(bush);

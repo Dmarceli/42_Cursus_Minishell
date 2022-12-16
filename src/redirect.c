@@ -6,7 +6,7 @@
 /*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 20:21:08 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/12/14 19:47:41 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/16 00:26:31 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	output(char *cmd)
 	{
 		if (cmd[counter] != '>')
 			counter++;
-		else
+		else if (special_quote(cmd, counter) == 0)
 		{
 			fd = output_util(cmd, outs, counter);
 			if (fd <= 0)
@@ -33,6 +33,8 @@ int	output(char *cmd)
 				return (fd);
 			outs--;
 		}
+		else
+			counter++;
 	}
 	return (fd);
 }
