@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: duartebaeta <duartebaeta@student.42.fr>    +#+  +:+       +#+        */
+/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:27:16 by dmarceli          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/12/16 13:57:33 by dhomem-d         ###   ########.fr       */
-=======
-/*   Updated: 2022/12/16 14:48:06 by duartebaeta      ###   ########.fr       */
->>>>>>> 528f2faae5b8f417f6e33b9485931520d2fa9d6a
+/*   Updated: 2022/12/16 16:20:45 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +66,7 @@ int	ms_export(char *cmd_u, t_data *data)
 {
 	int	i;
 	char	*print;
+	char	*cmd;
 
 	i = -1;
 	cmd = ft_strtrim(cmd_u, "");
