@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: duartebaeta <duartebaeta@student.42.fr>    +#+  +:+       +#+        */
+/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:56:31 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/15 21:28:02 by duartebaeta      ###   ########.fr       */
+/*   Updated: 2022/12/16 16:27:20 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int ac, char **av, char **envs)
 	ignore_signal();
 	while (1)
 	{
-		input = readline(CYAN"minishell> "BLANK);
+		input = readline("minishell> ");
 		if (!input && write(0, "\n", 1))
 			ft_exit("exit", &data);
 		ignore_signal_i();

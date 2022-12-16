@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: duartebaeta <duartebaeta@student.42.fr>    +#+  +:+       +#+        */
+/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 17:45:42 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/16 15:19:06 by duartebaeta      ###   ########.fr       */
+/*   Updated: 2022/12/16 16:48:55 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ int	executecmd(char *cmd_u, t_data *data)
 	freearray(data->exec);
 	waitpid(a, &g_exitvalue, 0);
 	g_exitvalue = exit_status(g_exitvalue);
-	if (!ft_strncmp(cmd, "cat", ft_strlen(cmd)) || !ft_strncmp(cmd, "cat -e", ft_strlen(cmd)))
+	if (!ft_strncmp(cmd, "cat", ft_strlen(cmd))
+		|| !ft_strncmp(cmd, "cat -e", ft_strlen(cmd)))
 		g_exitvalue = 130;
 	free(cmd);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 18:18:43 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/12/16 01:38:39 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/16 16:49:24 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,11 @@ int	special_quote(char *input, int index)
 	counter = index;
 	while (counter >= 0)
 	{
-		if (input[counter] == '\"' && counter >= 1 && input[counter - 1] != '\\')
+		if (input[counter] == '\"' && counter >= 1
+			&& input[counter - 1] != '\\')
 			d_q += 1;
-		else if (input[counter] == '\'' && counter >= 1 && input[counter - 1] != '\\')
+		else if (input[counter] == '\'' && counter >= 1
+			&& input[counter - 1] != '\\')
 			s_q += 1;
 		counter -= 1;
 	}

@@ -6,17 +6,14 @@
 /*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:35:28 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/16 01:47:48 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/16 16:23:51 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/minishell.h"
 
-int	is_builtin(char *value_u, t_data *data)
+int	is_builtin(char *value, t_data *data)
 {
-	char	*value;
-
-	value = ft_strtrim(value_u, " ");
 	if (ft_strchr(value, ' ') && check_inquotes(value))
 		return (executecmd(value, data));
 	if (!check_emptyprompt(value))
