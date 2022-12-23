@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 17:33:02 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/14 18:49:24 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/23 15:50:11 by dmarceli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,16 @@ int	checkechoflag(char *cmd)
 {
 	int	i;
 
-	i = 0;
-	while (cmd[i])
-	{
-		if (cmd[i] == '-' && cmd[i + 1] == 'n' )
-			return (1);
-		i++;
+	i = 1;
+	if (cmd[0] == '-' && cmd[1] == 'n' )
+	{	
+		while (cmd[i])
+		{
+			if (cmd[i] != 'n' && cmd[i] != '\0')
+				return (0);
+			i++;
+		}
+		return (1);
 	}
 	return (0);
 }

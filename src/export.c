@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:27:16 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/16 16:49:11 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/23 16:58:01 by dmarceli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ void	process_array(char **var, char *tmp, t_data *data)
 				export_new_var(data, var[j], tmp);
 		}
 		else
-			continue ;
+			j++;
+			//continue ;
 	}
 	return ;
 }
