@@ -73,5 +73,7 @@ int	norm_inquotes(char *tmp, int len)
 
 int	exit_status(int status)
 {
+	if (status == 2)
+		return (130);
 	return (((status) & 0xff00) >> 8);
 }

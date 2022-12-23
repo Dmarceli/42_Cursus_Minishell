@@ -100,9 +100,6 @@ int	executecmd(char *cmd_u, t_data *data)
 	freearray(data->exec);
 	waitpid(a, &g_exitvalue, 0);
 	g_exitvalue = exit_status(g_exitvalue);
-	if (!ft_strncmp(cmd, "cat", ft_strlen(cmd))
-		|| !ft_strncmp(cmd, "cat -e", ft_strlen(cmd)))
-		g_exitvalue = 130;
 	free(cmd);
 	return (0);
 }
