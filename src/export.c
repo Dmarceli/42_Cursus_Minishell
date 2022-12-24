@@ -44,8 +44,8 @@ void	process_array(char **var, char *tmp, t_data *data)
 				export_new_var(data, var[j], tmp);
 		}
 		else
-			j++;
-			//continue ;
+			continue ;
+			//j++;
 	}
 	return ;
 }
@@ -74,7 +74,7 @@ int	ms_export(char *cmd, t_data *data)
 		while (++i < data->envlen)
 			printf("declare -x %s\n", data->env[i]);
 	}
-	else if (*(ft_strchr(cmd, '=') - 1) == ' ')
+	else if (ft_strchr(cmd,'=') && *(ft_strchr(cmd, '=') - 1) == ' ')
 	{
 		print = ft_substr(cmd, ft_index(cmd, '='), ft_strlen(cmd));
 		printf("export: \"%s\": not a valid identifier\n", print);
