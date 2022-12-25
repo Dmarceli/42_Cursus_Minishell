@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: danielsequeira <danielsequeira@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 20:21:08 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/12/16 00:26:31 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/25 12:40:49 by danielseque      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ int	heredoc(char *eof)
 	content = get_next_line(STDIN_FILENO);
 	while (1)
 	{
-		if (ft_strncmp(content, eof, ft_strlen(content) - 1) == 0)
-			break ;
+		if (ft_strncmp(content, eof, ft_strlen(content) - 1) == 0 && ft_strlen(content) > 1)
+			break;
 		write(tmp_fd, content, ft_strlen(content));
 		free(content);
 		write(1, "> ", 2);
