@@ -6,7 +6,7 @@
 /*   By: dani <dani@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:27:16 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/26 15:43:52 by dani             ###   ########.fr       */
+/*   Updated: 2022/12/26 16:16:28 by dani             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	process_array(char **var, char *tmp, t_data *data)
 		}
 		else
 			continue ;
-			//j++;
 	}
 	return ;
 }
@@ -84,6 +83,30 @@ int	add_new_var(char *cmd, t_data *data)
 	return (0);
 }
 
+void sortarray(char **strings, int numStrings) 
+{
+	int i;
+	int j;
+	char *temp;
+	i = 0;
+	while (i < numStrings) 
+	{
+		j = i + 1;
+		while (j < numStrings) 
+		{
+			if (ft_strcmp(strings[i], strings[j]) > 0) 
+			{
+				temp = strings[i];
+				strings[i] = strings[j];
+				strings[j] = temp;
+			}
+			j++;
+		}
+		i++;
+		}
+	}
+
+
 int	ms_export(char *cmd, t_data *data)
 {
 	int		i;
@@ -92,6 +115,7 @@ int	ms_export(char *cmd, t_data *data)
 	i = -1;
 	if (!ft_strncmp(cmd, "export\0", 8) || !ft_strncmp(cmd, "export \0", 9))
 	{
+		sortarray(data->env, data->envlen);
 		while (++i < data->envlen)
 			printf("declare -x %s\n", data->env[i]);
 	}
