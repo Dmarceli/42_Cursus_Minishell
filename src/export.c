@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dani <dani@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:27:16 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/23 16:58:01 by dmarceli         ###   ########.fr       */
+/*   Updated: 2022/12/26 15:43:52 by dani             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,27 @@ void	process_array(char **var, char *tmp, t_data *data)
 	return ;
 }
 
+int isvarnamevalid(char *str)
+{
+	char **arr;
+	unsigned int i;
+	arr = ft_split(str, '=');
+	i = 0;
+	while(arr[0][i])
+	{
+		if (arr[0][i] == ' ')
+			i++;
+		if (!ft_isalpha(arr[0][i]))
+		{
+			freearray(arr);
+			return(0);
+		}
+		i++;
+	}
+	freearray(arr);
+	return(1);
+}
+
 int	add_new_var(char *cmd, t_data *data)
 {
 	char	**var;
@@ -74,7 +95,9 @@ int	ms_export(char *cmd, t_data *data)
 		while (++i < data->envlen)
 			printf("declare -x %s\n", data->env[i]);
 	}
-	else if (ft_strchr(cmd,'=') && *(ft_strchr(cmd, '=') - 1) == ' ')
+	else if (!isvarnamevalid(cmd))
+		printf("export: \"%s\": not a valid identifier\n", ft_strchr(cmd, ' ') + 1);
+	else if ((ft_strchr(cmd,'=') && *(ft_strchr(cmd, '=') - 1) == ' ' ))
 	{
 		print = ft_substr(cmd, ft_index(cmd, '='), ft_strlen(cmd));
 		printf("export: \"%s\": not a valid identifier\n", print);
