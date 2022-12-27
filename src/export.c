@@ -6,7 +6,7 @@
 /*   By: dani <dani@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:27:16 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/27 16:14:06 by dani             ###   ########.fr       */
+/*   Updated: 2022/12/27 22:07:47 by dani             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,21 @@ void	process_array(char **var, char *tmp, t_data *data)
 	return ;
 }
 
-int isvarnamevalid(char *str)
+int	isvarnamevalid(char *str)
 {
-	char **arr;
+	char	**arr;
+
 	arr = ft_split(str, ' ');
-	if(arr[1][0])
+	if (arr[1][0])
 	{
 		if (!ft_isalpha(arr[1][0]))
 		{
 			freearray(arr);
-			return(0);
+			return (0);
 		}
 	}
 	freearray(arr);
-	return(1);
+	return (1);
 }
 
 int	add_new_var(char *cmd, t_data *data)
@@ -78,30 +79,6 @@ int	add_new_var(char *cmd, t_data *data)
 	return (0);
 }
 
-void sortarray(char **strings, int numStrings) 
-{
-	int i;
-	int j;
-	char *temp;
-	i = 0;
-	while (i < numStrings) 
-	{
-		j = i + 1;
-		while (j < numStrings) 
-		{
-			if (ft_strcmp(strings[i], strings[j]) > 0) 
-			{
-				temp = strings[i];
-				strings[i] = strings[j];
-				strings[j] = temp;
-			}
-			j++;
-		}
-		i++;
-		}
-	}
-
-
 int	ms_export(char *cmd, t_data *data)
 {
 	int		i;
@@ -115,8 +92,9 @@ int	ms_export(char *cmd, t_data *data)
 			printf("declare -x %s\n", data->env[i]);
 	}
 	else if (!isvarnamevalid(cmd))
-		printf("export: \"%s\": not a valid identifier\n", ft_strchr(cmd, ' ') + 1);
-	else if ((ft_strchr(cmd,'=') && *(ft_strchr(cmd, '=') - 1) == ' ' ))
+		printf("export: \"%s\": not a valid identifier\n",
+			ft_strchr(cmd, ' ') + 1);
+	else if ((ft_strchr(cmd, '=') && *(ft_strchr(cmd, '=') - 1) == ' ' ))
 	{
 		print = ft_substr(cmd, ft_index(cmd, '='), ft_strlen(cmd));
 		printf("export: \"%s\": not a valid identifier\n", print);

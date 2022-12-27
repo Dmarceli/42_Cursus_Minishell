@@ -6,7 +6,7 @@
 /*   By: dani <dani@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:44:01 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/26 15:18:44 by dani             ###   ########.fr       */
+/*   Updated: 2022/12/27 22:00:29 by dani             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ char	*handle_dollar(char *cmd, t_data *data)
 		i = 0;
 	}
 	if (ft_strchr(j[i], '\''))
-		return (handle_singlequotes(j, i));			
+		return (handle_singlequotes(j, i));
 	if (ft_strchr(j[i], '?'))
 		return (handle_dollar_in(j, i, data));
 	k = findvar(j[i], data);

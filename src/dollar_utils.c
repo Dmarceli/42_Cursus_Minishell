@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dani <dani@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 01:18:18 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/12/11 18:02:03 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/27 22:07:06 by dani             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,28 @@ char	*justthevar(char *str)
 		i++;
 	}
 	return (ret);
+}
+
+void	sortarray(char **strings, int len)
+{
+	int		i;
+	int		j;
+	char	*temp;
+
+	i = 0;
+	while (i < len)
+	{
+		j = i + 1;
+		while (j < len)
+		{
+			if (ft_strcmp(strings[i], strings[j]) > 0)
+			{
+				temp = strings[i];
+				strings[i] = strings[j];
+				strings[j] = temp;
+			}
+			j++;
+		}
+	i++;
+	}
 }
