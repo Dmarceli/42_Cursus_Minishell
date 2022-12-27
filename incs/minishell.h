@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: duartebaeta <duartebaeta@student.42.fr>    +#+  +:+       +#+        */
+/*   By: dani <dani@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 18:21:32 by dhomem-d          #+#    #+#             */
-/*   Updated: 2022/12/16 14:40:21 by duartebaeta      ###   ########.fr       */
+/*   Updated: 2022/12/26 18:01:35 by dani             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,6 @@ int		big_len(char **str);
 int		ft_index(char *str, char ch);
 int		is_numeric(char *value);
 int		norm_inquotes(char *tmp, int len);
-
 // Signals
 void	ignore_signal(void);
 void	ignore_signal_i(void);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dani <dani@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:56:31 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/16 16:27:20 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/26 17:58:21 by dani             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int ac, char **av, char **envs)
 	while (1)
 	{
 		input = readline("minishell> ");
-		if (!input && write(0, "\n", 1))
+		if (!input)
 			ft_exit("exit", &data);
 		ignore_signal_i();
 		data.lastexec = g_exitvalue;

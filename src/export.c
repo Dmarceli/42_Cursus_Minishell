@@ -6,7 +6,7 @@
 /*   By: dani <dani@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:27:16 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/26 16:16:28 by dani             ###   ########.fr       */
+/*   Updated: 2022/12/27 16:14:06 by dani             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,14 @@ void	process_array(char **var, char *tmp, t_data *data)
 int isvarnamevalid(char *str)
 {
 	char **arr;
-	unsigned int i;
-	arr = ft_split(str, '=');
-	i = 0;
-	while(arr[0][i])
+	arr = ft_split(str, ' ');
+	if(arr[1][0])
 	{
-		if (arr[0][i] == ' ')
-			i++;
-		if (!ft_isalpha(arr[0][i]))
+		if (!ft_isalpha(arr[1][0]))
 		{
 			freearray(arr);
 			return(0);
 		}
-		i++;
 	}
 	freearray(arr);
 	return(1);
