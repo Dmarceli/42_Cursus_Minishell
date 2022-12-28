@@ -6,7 +6,7 @@
 /*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:57:20 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/01 16:41:09 by dmarceli         ###   ########.fr       */
+/*   Updated: 2022/12/28 20:24:48 by dmarceli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	numeric_exit(char **value, t_data *data)
 {
-	printf("exit: %s:numeric argument required\n", value[1]);
+	printf("exit: %s: numeric argument required\n", value[1]);
 	freearray(value);
 	freearray(data->env);
 	exit(255);
@@ -25,12 +25,13 @@ int	ft_exit(char *cmd, t_data *data)
 	int		exit_status;
 	char	**value;
 
+	printf("exit\n");
 	if (ft_strchr(cmd, ' '))
 	{
 		value = ft_split(cmd, ' ');
 		exit_status = ft_atoi(value[1]);
 		if (value[2])
-			return (printf("exit: too many arguments"));
+			return (printf("exit: too many arguments\n"));
 		else if (!is_numeric(value[1]))
 			numeric_exit(value, data);
 		else

@@ -6,11 +6,27 @@
 /*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 17:33:02 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/28 18:08:42 by dmarceli         ###   ########.fr       */
+/*   Updated: 2022/12/28 18:43:36 by dmarceli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/minishell.h"
+
+void	printwithval(char **value)
+{
+	int	i;
+
+	i = 1;
+	while (value[++i])
+	{
+		if (ft_strcmp("-n", value[i]))
+		{
+			printf("%s", value[i]);
+			if (value[i + 1])
+				printf(" ");
+		}
+	}
+}
 
 int	exec_echo(char **value, int is_n)
 {
@@ -18,16 +34,7 @@ int	exec_echo(char **value, int is_n)
 
 	if (is_n)
 	{
-		i = 1;
-		while (value[++i])
-		{
-			if (ft_strcmp("-n", value[i]))
-			{
-				printf("%s", value[i]);
-				if (value[i + 1])
-					printf(" ");
-			}
-		}		
+		printwithval(value);
 		freearray(value);
 		return (0);
 	}
