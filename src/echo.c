@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 17:33:02 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/28 18:43:36 by dmarceli         ###   ########.fr       */
+/*   Updated: 2022/12/28 20:46:55 by dhomem-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,17 @@ void	printwithval(char **value)
 	i = 1;
 	while (value[++i])
 	{
-		if (ft_strcmp("-n", value[i]))
-		{
-			printf("%s", value[i]);
-			if (value[i + 1])
-				printf(" ");
-		}
+		if (!ft_strcmp("-n", value[i]))
+			i++;
+		else
+			break ;
+	}
+	while (value[i])
+	{
+		printf("%s", value[i]);
+		if (value[i + 1])
+			printf(" ");
+		i++;
 	}
 }
 
