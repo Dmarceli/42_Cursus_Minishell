@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dani <dani@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 17:33:02 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/27 22:00:01 by dani             ###   ########.fr       */
+/*   Updated: 2022/12/28 18:08:42 by dmarceli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,14 @@ int	exec_echo(char **value, int is_n)
 	{
 		i = 1;
 		while (value[++i])
+		{
 			if (ft_strcmp("-n", value[i]))
-				printf("%s ", value[i]);
+			{
+				printf("%s", value[i]);
+				if (value[i + 1])
+					printf(" ");
+			}
+		}		
 		freearray(value);
 		return (0);
 	}
@@ -29,7 +35,11 @@ int	exec_echo(char **value, int is_n)
 	{
 		i = 0;
 		while (value[++i])
-			printf("%s ", value[i]);
+		{
+			printf("%s", value[i]);
+			if (value[i + 1])
+				printf(" ");
+		}
 		printf("\n");
 		freearray(value);
 		return (0);

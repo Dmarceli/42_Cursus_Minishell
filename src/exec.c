@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhomem-d <dhomem-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 17:45:42 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/16 16:48:55 by dhomem-d         ###   ########.fr       */
+/*   Updated: 2022/12/28 15:25:07 by dmarceli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	execprocess(char *cmd, t_data *data, char *path)
 	if (execve(data->exec[0], data->exec, data->env) == -1)
 		printf("%s: command not found\n", cmd);
 	freearray(data->exec);
-	exit(126);
+	exit(127);
 }
 
 int	executecmd(char *cmd_u, t_data *data)
