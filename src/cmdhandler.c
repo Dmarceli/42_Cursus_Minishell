@@ -6,7 +6,7 @@
 /*   By: dmarceli <dmarceli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:35:28 by dmarceli          #+#    #+#             */
-/*   Updated: 2022/12/28 20:31:18 by dmarceli         ###   ########.fr       */
+/*   Updated: 2022/12/28 20:44:53 by dmarceli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ int	is_builtin(char *value, t_data *data)
 		return (g_exitvalue = ms_unset(removequotes(value), data));
 	else if (!(ft_strncmp(value, "env", 3)))
 		return (env(data));
-	else if (!(ft_strncmp(value, "exit", 4)))
+	else if (!(ft_strncmp(value, "exit", 4))
+		|| (!(ft_strncmp(value, "exit ", 5))))
 		return (ft_exit(removequotes(value), data));
 	else
 		return (executecmd(removequotes(value), data));
